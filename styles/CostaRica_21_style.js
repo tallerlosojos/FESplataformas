@@ -1,7 +1,7 @@
 var size = 0;
 var placement = 'point';
 
-var style_Brazil_1 = function(feature, resolution){
+var style_CostaRica_21 = function(feature, resolution){
     var context = {
         feature: feature,
         variables: {}
