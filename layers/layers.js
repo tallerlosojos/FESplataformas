@@ -370,7 +370,7 @@ var group_nortecentro = new ol.layer.Group({
                                 title: 'norte-centro'});
 var group_surnorte = new ol.layer.Group({
                                 layers: [lyr_Paraguay_5,lyr_Brazil_6,lyr_Colombia_7,lyr_Venezuela_8,lyr_Ecuador_9,],
-                                fold: 'close',
+                                fold: 'open',
                                 title: 'sur-norte'});
 var group_sursur = new ol.layer.Group({
                                 layers: [lyr_Argentina_0,lyr_Chile_1,lyr_Uruguay_2,lyr_Peru_3,lyr_Bolivia_4,],
