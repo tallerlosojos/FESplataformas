@@ -374,8 +374,12 @@ var group_surnorte = new ol.layer.Group({
                                 title: 'sur-norte'});
 var group_sursur = new ol.layer.Group({
                                 layers: [lyr_Argentina_0,lyr_Chile_1,lyr_Uruguay_2,lyr_Peru_3,lyr_Bolivia_4,],
-                                fold: 'close',
+                                fold: 'open',
                                 title: 'sur-sur'});
+var group_bg = new ol.layer.Group({
+                                layers: [],
+                                fold: 'close',
+                                title: 'bg'});
 
 lyr_Argentina_0.setVisible(false);lyr_Chile_1.setVisible(false);lyr_Uruguay_2.setVisible(false);lyr_Peru_3.setVisible(false);lyr_Bolivia_4.setVisible(false);lyr_Paraguay_5.setVisible(false);lyr_Brazil_6.setVisible(false);lyr_Colombia_7.setVisible(false);lyr_Venezuela_8.setVisible(false);lyr_Ecuador_9.setVisible(false);lyr_Cuba_10.setVisible(false);lyr_Nicaragua_11.setVisible(false);lyr_ElSalvador_12.setVisible(false);lyr_DominicanRepublic_13.setVisible(false);lyr_PuertoRico_14.setVisible(false);lyr_Belize_15.setVisible(false);lyr_Panama_16.setVisible(false);lyr_Mexico_17.setVisible(false);lyr_Honduras_18.setVisible(false);lyr_Guatemala_19.setVisible(false);lyr_CostaRica_20.setVisible(false);lyr_zona_sursur_21.setVisible(true);lyr_zona_surnorte_22.setVisible(true);lyr_zona_nortecentro_23.setVisible(true);
 var layersList = [group_sursur,group_surnorte,group_nortecentro,group_zonas];
@@ -400,9 +404,9 @@ lyr_Mexico_17.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'I
 lyr_Honduras_18.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'ISO', 'COUNTRYAFF': 'COUNTRYAFF', 'AFF_ISO': 'AFF_ISO', });
 lyr_Guatemala_19.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'ISO', 'COUNTRYAFF': 'COUNTRYAFF', 'AFF_ISO': 'AFF_ISO', });
 lyr_CostaRica_20.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'ISO', 'COUNTRYAFF': 'COUNTRYAFF', 'AFF_ISO': 'AFF_ISO', });
-lyr_zona_sursur_21.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'ISO', 'COUNTRYAFF': 'COUNTRYAFF', 'AFF_ISO': 'AFF_ISO', 'layer': 'layer', 'path': 'path', });
+lyr_zona_sursur_21.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'ISO', });
 lyr_zona_surnorte_22.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'ISO', 'COUNTRYAFF': 'COUNTRYAFF', 'AFF_ISO': 'AFF_ISO', 'layer': 'layer', 'path': 'path', });
-lyr_zona_nortecentro_23.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'ISO', 'COUNTRYAFF': 'COUNTRYAFF', 'AFF_ISO': 'AFF_ISO', 'layer': 'layer', 'path': 'path', });
+lyr_zona_nortecentro_23.set('fieldAliases', {'fid': 'fid', 'COUNTRY': 'COUNTRY', 'ISO': 'ISO', 'ZONA': 'ZONA', });
 lyr_Argentina_0.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', });
 lyr_Chile_1.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', });
 lyr_Uruguay_2.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', });
@@ -424,9 +428,9 @@ lyr_Mexico_17.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO
 lyr_Honduras_18.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', });
 lyr_Guatemala_19.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', });
 lyr_CostaRica_20.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', });
-lyr_zona_sursur_21.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', 'layer': 'TextEdit', 'path': 'TextEdit', });
+lyr_zona_sursur_21.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', });
 lyr_zona_surnorte_22.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', 'layer': 'TextEdit', 'path': 'TextEdit', });
-lyr_zona_nortecentro_23.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'COUNTRYAFF': 'TextEdit', 'AFF_ISO': 'TextEdit', 'layer': 'TextEdit', 'path': 'TextEdit', });
+lyr_zona_nortecentro_23.set('fieldImages', {'fid': 'TextEdit', 'COUNTRY': 'TextEdit', 'ISO': 'TextEdit', 'ZONA': 'TextEdit', });
 lyr_Argentina_0.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', });
 lyr_Chile_1.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', });
 lyr_Uruguay_2.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', });
@@ -448,9 +452,9 @@ lyr_Mexico_17.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO
 lyr_Honduras_18.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', });
 lyr_Guatemala_19.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', });
 lyr_CostaRica_20.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', });
-lyr_zona_sursur_21.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', 'layer': 'no label', 'path': 'no label', });
+lyr_zona_sursur_21.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', });
 lyr_zona_surnorte_22.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', 'layer': 'no label', 'path': 'no label', });
-lyr_zona_nortecentro_23.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'COUNTRYAFF': 'no label', 'AFF_ISO': 'no label', 'layer': 'no label', 'path': 'no label', });
+lyr_zona_nortecentro_23.set('fieldLabels', {'fid': 'no label', 'COUNTRY': 'no label', 'ISO': 'no label', 'ZONA': 'no label', });
 lyr_zona_nortecentro_23.on('precompose', function(evt) {
     evt.context.globalCompositeOperation = 'normal';
 });

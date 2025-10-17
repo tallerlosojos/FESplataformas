@@ -1,90 +1,128 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="./resources/ol.css">
-        <link rel="stylesheet" href="resources/fontawesome-all.min.css">
-        <link href="resources/photon-geocoder-autocomplete.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
-        <link rel="stylesheet" href="./resources/qgis2web.css">
-        <style>
-        html, body {
-            background-color: #ffffff;
-        }
-        .ol-control > * {
-            background-color: #f8f8f8!important;
-            color: #444444!important;
-            border-radius: 0px;
-        }
-        .ol-attribution a, .gcd-gl-input::placeholder, .search-layer-input-search::placeholder {
-            color: #444444!important;
-        }
-        .search-layer-input-search {
-            background-color: #f8f8f8!important;
-        }
-        .ol-control > *:focus, .ol-control >*:hover {
-            background-color: rgba(248, 248, 248, 0.7)!important;
-        } 
-        .ol-control {
-            background-color: rgba(255,255,255,.4) !important;
-            padding: 2px !important;
-        } 
-        html, body, #map {
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            margin: 0;
-        }
-        .ol-popup{
-            display: block;
-  background: black;
-  border-radius: 0;
-  color: white;
-        }
-        .ol-popup td{
-            color: white;
-        }
-        .ol-popup::before {
-  border-top-color: #000;
-  border-width: 11px;
-  left: 50%;
-  margin-left: -11px;
-}
-.ol-popup::after {
-  border-top-color: black;
-  border-width: 10px;
-  left: 50%;
-  margin-left: -10px;
-}
-#popup-content{
-    margin: 10px;
-}
-#popup-content > ul > li > a{
-    font-size: 18px;
-}
-        </style>
-        <title></title>
-    </head>
-    <body>
-        <div id="map">
-            <div id="popup" class="ol-popup">
-                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                <div id="popup-content"></div>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./resources/ol.css">
+    <link rel="stylesheet" href="resources/fontawesome-all.min.css">
+    <link href="resources/photon-geocoder-autocomplete.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
+
+    
+
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./resources/qgis2web.css">
+
+    <title>FESplataformas</title>
+</head>
+
+<body>
+
+    <button type="button" id="menuButton" class="button" data-toggle="offCanvas">Abrir Menu</button>
+
+    <div class="off-canvas position-bottom" id="offCanvas" data-off-canvas>
+        <div class="grid-x">
+            <div class="small-4 large-1 large-offset-11 cell">
+                <img src="images/logo-fes.png" alt="">
             </div>
         </div>
-        <script src="resources/qgis2web_expressions.js"></script>
-        <script src="./resources/functions.js"></script>
-        <script src="./resources/ol.js"></script>
-        <script src="./resources/ol-layerswitcher.js"></script>
-        <script src="resources/photon-geocoder-autocomplete.min.js"></script>
-        <script src="layers/Argentina_0.js"></script><script src="layers/Chile_1.js"></script><script src="layers/Uruguay_2.js"></script><script src="layers/Peru_3.js"></script><script src="layers/Bolivia_4.js"></script><script src="layers/Paraguay_5.js"></script><script src="layers/Brazil_6.js"></script><script src="layers/Colombia_7.js"></script><script src="layers/Venezuela_8.js"></script><script src="layers/Ecuador_9.js"></script><script src="layers/Cuba_10.js"></script><script src="layers/Nicaragua_11.js"></script><script src="layers/ElSalvador_12.js"></script><script src="layers/DominicanRepublic_13.js"></script><script src="layers/PuertoRico_14.js"></script><script src="layers/Belize_15.js"></script><script src="layers/Panama_16.js"></script><script src="layers/Mexico_17.js"></script><script src="layers/Honduras_18.js"></script><script src="layers/Guatemala_19.js"></script><script src="layers/CostaRica_20.js"></script><script src="layers/zona_sursur_21.js"></script><script src="layers/zona_surnorte_22.js"></script><script src="layers/zona_nortecentro_23.js"></script>
-        <script src="styles/Argentina_0_style.js"></script><script src="styles/Chile_1_style.js"></script><script src="styles/Uruguay_2_style.js"></script><script src="styles/Peru_3_style.js"></script><script src="styles/Bolivia_4_style.js"></script><script src="styles/Paraguay_5_style.js"></script><script src="styles/Brazil_6_style.js"></script><script src="styles/Colombia_7_style.js"></script><script src="styles/Venezuela_8_style.js"></script><script src="styles/Ecuador_9_style.js"></script><script src="styles/Cuba_10_style.js"></script><script src="styles/Nicaragua_11_style.js"></script><script src="styles/ElSalvador_12_style.js"></script><script src="styles/DominicanRepublic_13_style.js"></script><script src="styles/PuertoRico_14_style.js"></script><script src="styles/Belize_15_style.js"></script><script src="styles/Panama_16_style.js"></script><script src="styles/Mexico_17_style.js"></script><script src="styles/Honduras_18_style.js"></script><script src="styles/Guatemala_19_style.js"></script><script src="styles/CostaRica_20_style.js"></script><script src="styles/zona_sursur_21_style.js"></script><script src="styles/zona_surnorte_22_style.js"></script><script src="styles/zona_nortecentro_23_style.js"></script>
-        <script src="./layers/layers.js" type="text/javascript"></script> 
-        <script src="./resources/Autolinker.min.js"></script>
-        <script src="./resources/qgis2web.js"></script>        
-    </body>
+    </div>
+
+    <div class="off-canvas-content" data-off-canvas-content></div>
+    <div id="map">
+        <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+        </div>
+    </div>
+    <script src="resources/qgis2web_expressions.js"></script>
+    <script src="./resources/functions.js"></script>
+    <script src="./resources/ol.js"></script>
+    <script src="./resources/ol-layerswitcher.js"></script>
+    <script src="resources/photon-geocoder-autocomplete.min.js"></script>
+    <script src="layers/Argentina_0.js"></script>
+    <script src="layers/Chile_1.js"></script>
+    <script src="layers/Uruguay_2.js"></script>
+    <script src="layers/Peru_3.js"></script>
+    <script src="layers/Bolivia_4.js"></script>
+    <script src="layers/Paraguay_5.js"></script>
+    <script src="layers/Brazil_6.js"></script>
+    <script src="layers/Colombia_7.js"></script>
+    <script src="layers/Venezuela_8.js"></script>
+    <script src="layers/Ecuador_9.js"></script>
+    <script src="layers/Cuba_10.js"></script>
+    <script src="layers/Nicaragua_11.js"></script>
+    <script src="layers/ElSalvador_12.js"></script>
+    <script src="layers/DominicanRepublic_13.js"></script>
+    <script src="layers/PuertoRico_14.js"></script>
+    <script src="layers/Belize_15.js"></script>
+    <script src="layers/Panama_16.js"></script>
+    <script src="layers/Mexico_17.js"></script>
+    <script src="layers/Honduras_18.js"></script>
+    <script src="layers/Guatemala_19.js"></script>
+    <script src="layers/CostaRica_20.js"></script>
+    <script src="layers/zona_sursur_21.js"></script>
+    <script src="layers/zona_surnorte_22.js"></script>
+    <script src="layers/zona_nortecentro_23.js"></script>
+    <script src="styles/Argentina_0_style.js"></script>
+    <script src="styles/Chile_1_style.js"></script>
+    <script src="styles/Uruguay_2_style.js"></script>
+    <script src="styles/Peru_3_style.js"></script>
+    <script src="styles/Bolivia_4_style.js"></script>
+    <script src="styles/Paraguay_5_style.js"></script>
+    <script src="styles/Brazil_6_style.js"></script>
+    <script src="styles/Colombia_7_style.js"></script>
+    <script src="styles/Venezuela_8_style.js"></script>
+    <script src="styles/Ecuador_9_style.js"></script>
+    <script src="styles/Cuba_10_style.js"></script>
+    <script src="styles/Nicaragua_11_style.js"></script>
+    <script src="styles/ElSalvador_12_style.js"></script>
+    <script src="styles/DominicanRepublic_13_style.js"></script>
+    <script src="styles/PuertoRico_14_style.js"></script>
+    <script src="styles/Belize_15_style.js"></script>
+    <script src="styles/Panama_16_style.js"></script>
+    <script src="styles/Mexico_17_style.js"></script>
+    <script src="styles/Honduras_18_style.js"></script>
+    <script src="styles/Guatemala_19_style.js"></script>
+    <script src="styles/CostaRica_20_style.js"></script>
+    <script src="styles/zona_sursur_21_style.js"></script>
+    <script src="styles/zona_surnorte_22_style.js"></script>
+    <script src="styles/zona_nortecentro_23_style.js"></script>
+    <script src="./layers/layers.js" type="text/javascript"></script>
+    <script src="./resources/Autolinker.min.js"></script>
+    <script src="./resources/qgis2web.js"></script>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).foundation();
+    </script>
+    <script>
+        const myButton = document.getElementById('menuButton');
+
+        myButton.addEventListener('click', () => {
+            if (myButton.textContent === 'Abrir Menu') {
+                myButton.textContent = 'Cerrar Menu';
+            } else {
+                myButton.textContent = 'Abrir Menu';
+            }
+        });
+    </script>
+</body>
+
 </html>

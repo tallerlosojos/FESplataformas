@@ -425,3 +425,83 @@ td video {
     color: orangered;
 	font-size: 15px;
 }
+
+
+/* INTEGRAR EN EL CODIGO */
+html,
+        body,
+        #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        #map{
+            z-index: 0;
+  position: relative;
+        }
+  html,
+        body {
+            background-color: #8d8d8d;
+        }
+
+        .ol-control>* {
+            background-color: #f8f8f8 !important;
+            color: #444444 !important;
+            border-radius: 0px;
+        }
+
+        .ol-attribution a,
+        .gcd-gl-input::placeholder,
+        .search-layer-input-search::placeholder {
+            color: #444444 !important;
+        }
+
+        .search-layer-input-search {
+            background-color: #f8f8f8 !important;
+        }
+
+        .ol-control>*:focus,
+        .ol-control>*:hover {
+            background-color: rgba(248, 248, 248, 0.7) !important;
+        }
+
+        .ol-control {
+            background-color: rgba(255, 255, 255, .4) !important;
+            padding: 2px !important;
+        }
+#offCanvas{
+    background: none;
+  box-shadow: none;
+  border-top: 1px solid #d70000;
+  background: rgba(0,0,0,0.4);
+}
+   .offCanvas{
+            position: relative;
+            z-index: 1;
+            
+        }
+        .js-off-canvas-overlay{
+            background: none;
+        }
+        .button-1{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+
+        #menuButton{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+  transform: translate(-50%, 0%);
+            z-index: 2;
+            text-align: center;
+            border-radius: 3px 3px 0 0 ;
+            background: #000;
+            z-index: 13;
+            margin: 0;
+        }
+        #menuButton:hover, #menuButton:focus{
+            background: #000;
+        }

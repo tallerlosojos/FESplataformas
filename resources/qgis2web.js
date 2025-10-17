@@ -9,7 +9,7 @@ var map = new ol.Map({
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit([-12135107.618638, -3885266.899418, -606842.997585, 2640536.773540], map.getSize());
+map.getView().fit([-13180693.000000, -7538976.500000, -3873129.895914, 3857993.250000], map.getSize());
 
 //full zooms only
 map.getView().setProperties({constrainResolution: true});
@@ -268,7 +268,7 @@ function onPointerMove(evt) {
                     highlightStyle = new ol.style.Style({
                         image: new ol.style.Circle({
                             fill: new ol.style.Fill({
-                                color: "#393939"
+                                color: "#303030"
                             }),
                             radius: radius
                         })
@@ -279,7 +279,7 @@ function onPointerMove(evt) {
 
                     highlightStyle = new ol.style.Style({
                         stroke: new ol.style.Stroke({
-                            color: '#393939',
+                            color: '#303030',
                             lineDash: null,
                             width: featureWidth
                         })
@@ -288,7 +288,7 @@ function onPointerMove(evt) {
                 } else {
                     highlightStyle = new ol.style.Style({
                         fill: new ol.style.Fill({
-                            color: '#393939'
+                            color: '#303030'
                         })
                     })
                 }
