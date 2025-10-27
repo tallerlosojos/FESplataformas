@@ -9,7 +9,7 @@ var map = new ol.Map({
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit([-13180693.000000, -7538976.500000, -3873129.895914, 3857993.250000], map.getSize());
+map.getView().fit([-16951675.533494, -10461024.547417, -2728249.803235, 1442993.629707], map.getSize());
 
 //full zooms only
 map.getView().setProperties({constrainResolution: true});
@@ -219,8 +219,8 @@ function onPointerMove(evt) {
                 for(var n=0; n<clusteredFeatures.length; n++) {
                     currentFeature = clusteredFeatures[n];
                     currentFeatureKeys = currentFeature.getKeys();
-                    popupText += '<li><table>'
-                    popupText += '<a>' + '<b>' + layer.get('popuplayertitle') + '</b>' + '</a>';
+                    popupText += '<li id="envelope-table"><table class="popup-table">'
+                    popupText += '<a class="title-link"' + '<b>' + layer.get('popuplayertitle') + '</b>' + '</a>';
                     popupText += createPopupField(currentFeature, currentFeatureKeys, layer);
                     popupText += '</table></li>';    
                 }
@@ -228,8 +228,8 @@ function onPointerMove(evt) {
         } else {
             currentFeatureKeys = currentFeature.getKeys();
             if (doPopup) {
-                popupText += '<li><table>';
-                popupText += '<a>' + '<b>' + layer.get('popuplayertitle') + '</b>' + '</a>';
+                popupText += '<li id="envelope-table"><table class="popup-table">';
+                popupText += '<a class="title-link">' + '<b>' + layer.get('popuplayertitle') + '</b>' + '</a>';
                 popupText += createPopupField(currentFeature, currentFeatureKeys, layer);
                 popupText += '</table></li>';
             }
@@ -268,7 +268,7 @@ function onPointerMove(evt) {
                     highlightStyle = new ol.style.Style({
                         image: new ol.style.Circle({
                             fill: new ol.style.Fill({
-                                color: "#303030"
+                                color: "#d70000"
                             }),
                             radius: radius
                         })
@@ -279,7 +279,7 @@ function onPointerMove(evt) {
 
                     highlightStyle = new ol.style.Style({
                         stroke: new ol.style.Stroke({
-                            color: '#303030',
+                            color: '#d70000',
                             lineDash: null,
                             width: featureWidth
                         })
@@ -288,7 +288,7 @@ function onPointerMove(evt) {
                 } else {
                     highlightStyle = new ol.style.Style({
                         fill: new ol.style.Fill({
-                            color: '#303030'
+                            color: '#d70000'
                         })
                     })
                 }
@@ -358,7 +358,7 @@ function onSingleClickFeatures(evt) {
                     for(var n = 0; n < clusteredFeatures.length; n++) {
                         currentFeature = clusteredFeatures[n];
                         currentFeatureKeys = currentFeature.getKeys();
-                        popupText += '<li><table>';
+                        popupText += '<li id="envelope-table"><table class="popup-table">';
                         popupText += '<a><b>' + layer.get('popuplayertitle') + '</b></a>';
                         popupText += createPopupField(currentFeature, currentFeatureKeys, layer);
                         popupText += '</table></li>';    
@@ -367,8 +367,8 @@ function onSingleClickFeatures(evt) {
             } else {
                 currentFeatureKeys = currentFeature.getKeys();
                 if (doPopup) {
-                    popupText += '<li><table>';
-                    popupText += '<a><b>' + layer.get('popuplayertitle') + '</b></a>';
+                    popupText += '<li class="envelope-table"><table class="popup-table">';
+                    popupText += '<a class="title-link"><b>' + layer.get('popuplayertitle') + '</b></a>';
                     popupText += createPopupField(currentFeature, currentFeatureKeys, layer);
                     popupText += '</table>';
                 }
