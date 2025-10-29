@@ -13398,6 +13398,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Argentina",
                 ZONA: "Sur/Sur",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "<a href='https://www.cta.org.ar/' target='_blank '>Central de Trabajadoras y Trabajadores de la Argentina (CTA-T)</a>",
                 CENTRAL2: "Central de Trabajadores de la Argentina (CTA)",
                 CENTRAL3: "Central de Trabajadores de la Argentina Autónoma (CTA-A)",
