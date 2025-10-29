@@ -40,11 +40,6 @@
             padding: 0;
         }
 
-        .lorem {
-            font-style: italic;
-            color: #AAA;
-        }
-
         /* Estilos para contenido de media en sidebar si aplica */
         .sidebar-pane .media img,
         .sidebar-pane .media video {
@@ -85,10 +80,10 @@
                 <li><a href="#home" role="tab"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                 <li><a href="#messages" role="tab"><i class="fa fa-bookmark" aria-hidden="true"></i></a></li>
-                <li><a href="https://github.com/" role="tab" target="_blank" rel="noopener"><i class="fa fa-globe"
-                            aria-hidden="true"></i></a></li>
                 <!-- Nueva pestaña para info de feature -->
                 <li><a href="#feature-info" role="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                <li><a href="https://github.com/" role="tab" target="_blank" rel="noopener"><i class="fa fa-globe"
+                            aria-hidden="true"></i></a></li>
             </ul>
 
             <ul role="tablist">
@@ -143,7 +138,7 @@
                 <h1 class="sidebar-header">Información del país <span class="sidebar-close"><i class="fa fa-caret-left"
                             aria-hidden="true"></i></span></h1>
                 <div class="sidebar-content">
-                    <p class="lorem">Haz clic sobre un país en el mapa para ver aquí la información.</p>
+                    <p>Haz clic sobre un país en el mapa para ver aquí la información.</p>
                 </div>
             </div>
 
@@ -193,7 +188,7 @@
             const map = L.map('map', {
                 zoomControl: false,
                 maxZoom: 28,
-                minZoom: 1
+                minZoom: 2
             });
 
             // Ajuste inicial de vista por bounds conocidos

@@ -104,7 +104,7 @@ small {
 
 .sidebar-tabs>li,
 .sidebar-tabs>ul>li  .fa {
-  color: #333 !important;
+  color: white !important;
 }
 .sidebar-tabs>li,
 .sidebar-tabs>ul>li  .fa:hover, .fa:focus {
