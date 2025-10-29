@@ -5840,7 +5840,7 @@ var json_FESplataformas_0 = {
         {
             type: "Feature",
             properties: {
-                COUNTRY: "Brazil",
+                COUNTRY: "Brasil",
                 ZONA: "Sur/Norte",
                 CENTRAL1: "Central dos Sindicatos Brasileiros (CSB)",
                 CENTRAL2: "Central dos Trabalhadores e Trabalhadoras do Brasil (CTB)",
