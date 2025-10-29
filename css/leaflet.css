@@ -772,34 +772,43 @@ svg.leaflet-image-layer.leaflet-interactive path {
   }
 }
 
-.buttonOffCanvas, .buttonOffCanvas:hover, .buttonOffCanvas:focus{
-            color: white;
-            background: black;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            z-index: 10001;
-            margin-bottom: 0;
-        }
+.buttonOffCanvas,
+.buttonOffCanvas:hover,
+.buttonOffCanvas:focus {
+  color: white;
+  background: black;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 10001;
+  margin-bottom: 0;
+  transform: translate(-50%, 0);
+}
 
-        .off-canvas.is-open {
-  -webkit-transform: translate(0,0);
-  transform: translate(0,0);
-  background: rgba(0,0,0,0.3);
+.off-canvas.is-open {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+  background: rgba(0, 0, 0, 0.75);
   z-index: 10000;
 }
 
 .position-bottom {
-  height: 100vh;
-  -webkit-transform: translateY(100vh);
-  transform: translateY(100vh);
+  height: 23vh;
+  -webkit-transform: translateY(23vh);
+  transform: translateY(23vh);
 }
 
 .position-bottom.is-transition-push {
   -webkit-box-shadow: inset 0 13px 20px -13px red;
-  box-shadow: inset 0 13px 20px -13px rgba(0,0,0,0.34);
+  box-shadow: inset 0 13px 20px -13px rgba(0, 0, 0, 0.34);
 }
+
 .off-canvas {
-  background: rgba(0,0,0,0.3);
-  box-shadow: inset 0 13px 20px -13px rgba(0,0,0,0.34);
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 13px 20px -13px rgba(0, 0, 0, 0.34);
+}
+
+#fes-logo{
+  right: 0;
+  position: absolute;
 }

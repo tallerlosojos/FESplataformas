@@ -13423,7 +13423,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
-                URLPAIS: "<a href='paises/argentina.html' target='_blank '>ir al archivo</a>",
+                URLPAIS: "<a class='button' href='paises/argentina.html' target='_blank '>ir al archivo</a>",
             },
             geometry: {
                 type: "MultiPolygon",
