@@ -11,14 +11,15 @@
     <title>Mapa con sidebar optimizado</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
-<!-- Iconos y framework (CDN) -->
+    <!-- Iconos y framework (CDN) -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css"
         crossorigin="anonymous" />
-        
+
     <!-- Estilos principales (locales primero para poder personalizar sobre los de terceros) -->
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/L.Control.Layers.Tree.css" />
@@ -26,7 +27,7 @@
     <link rel="stylesheet" href="css/leaflet.photon.css" />
     <link rel="stylesheet" href="css/leaflet-sidebar.css" />
 
-    
+
 
     <style>
         /* CSS mínimo y específico para el layout */
@@ -59,9 +60,9 @@
          */
         .leaflet-container .leaflet-interactive {
             transition: fill 300ms ease-in-out, fill-opacity 300ms ease-in-out,
-                        stroke 300ms ease-in-out, stroke-opacity 300ms ease-in-out;
+                stroke 300ms ease-in-out, stroke-opacity 300ms ease-in-out;
             -webkit-transition: fill 300ms ease-in-out, fill-opacity 300ms ease-in-out,
-                                stroke 300ms ease-in-out, stroke-opacity 300ms ease-in-out;
+                stroke 300ms ease-in-out, stroke-opacity 300ms ease-in-out;
         }
 
         /* Si quieres un efecto más suave o más rápido, ajusta el tiempo (p. ej. 150ms o 500ms) y la curva de easing */
@@ -69,6 +70,14 @@
 </head>
 
 <body>
+
+    <button type="button" class="button small buttonOffCanvas" data-toggle="offCanvas">Open Menu</button>
+
+    <div class="off-canvas position-bottom" id="offCanvas" data-off-canvas>
+        <!-- Your menu or Off-canvas content goes here -->
+    </div>
+
+    <div class="off-canvas-content" data-off-canvas-content></div>
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar collapsed" aria-hidden="false">
         <div class="sidebar-tabs" role="tablist" aria-label="Paneles">
@@ -147,7 +156,7 @@
 
     <!-- Contenedor del mapa -->
     <div id="map" role="application" aria-label="Mapa interactivo"></div>
-
+    </div>
     <!-- Scripts: mantener el orden de dependencias (leaflet antes de plugins que lo usan) -->
     <script src="js/qgis2web_expressions.js"></script>
     <script src="js/leaflet.js"></script>
