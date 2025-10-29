@@ -128,39 +128,76 @@
             <div class="grid-content">
                 <div class="grid-x grid-margin-x">
                     <div class="small-12 cell">
-                        <div class="audio-pais">
-                            <audio controls>
-  <source src="mi_audio.mp3" type="audio/mpeg">
-  Tu navegador no soporta el formato de audio.
-</audio>
-                        </div>
-                        
-                        <h5>Entrevista #1</h5>
+
+                        <ul class="playlist">
+                            <li>
+                                <div class="track">
+                                    <span class="controls" id="playToggle"></span>
+                                    <span class="title">Flu Gi — Mum</span>
+                                    <span class="minus">-</span>
+                                    <span id="timeleft">3:17</span>
+                                </div>
+                                <audio>
+                                    <source src="../audio/mum.mp3" type="audio/mp3" />
+                                    <source src="../audio/mum.ogg" type="audio/ogg" />
+                                    Your browser does not support the <code>audio</code> element.
+                                </audio>
+                            </li>
+                            <li>
+                                <div class="track">
+                                    <span class="controls" id="playToggle"></span>
+                                    <span class="title">Flu Gi — Speed</span>
+                                    <span class="minus">-</span>
+                                    <span id="timeleft">2:35</span>
+                                </div>
+                                <audio>
+                                    <source src="../audio/speed.mp3" type="audio/mp3" />
+                                    <source src="../audio/speed.ogg" type="audio/ogg" />
+                                    Your browser does not support the <code>audio</code> element.
+                                </audio>
+                            </li>
+                            <li>
+                                <div class="track">
+                                    <span class="controls" id="playToggle"></span>
+                                    <span class="title">Flu Gi — TOP90 (radio)</span>
+                                    <span class="minus">-</span>
+                                    <span id="timeleft">2:50</span>
+                                </div>
+                                <audio>
+                                    <source src="../audio/top90(radio).mp3" type="audio/mp3" />
+                                    <source src="../audio/top90(radio).ogg" type="audio/ogg" />
+                                    Your browser does not support the <code>audio</code> element.
+                                </audio>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="small-12 cell">
-                        <img src="https://placehold.co/600x400/EEE/31343C" alt="">
-                        <h5>Entrevista #2</h5>
-                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="small-12 medium-3 cell">
+        <div class="grid-x">
+            <div class="small-12 cell">
+                <div class="grid-content">
+                    <h2>Repositorio Proyecto</h2>
                 </div>
             </div>
         </div>
-        <div class="small-12 medium-3 cell">
-            <div class="grid-x">
-                <div class="small-12 cell">
-                    <div class="grid-content">
-                        <h2>Repositorio Proyecto</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
     </div>
     <!-- jQuery antes de Foundation (Foundation usa jQuery) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js"
         crossorigin="anonymous"></script>
+    <script src="../js/simpleplaylist.js"></script>
     <script>
-        $(document).foundation();
+        $(document).ready(function () {
+            $(document).foundation();
+            $(".playlist").playlist();
+        });
     </script>
 </body>
 
