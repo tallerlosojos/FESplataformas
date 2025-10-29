@@ -425,15 +425,16 @@
                     // Usamos linkifySafe en lugar de propStr para evitar HTML escapado
                     const popupContent = `
                         <table>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['COUNTRY'])}</td></tr>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['ZONA'])}</td></tr>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['CENTRAL1'])}</td></tr>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['CENTRAL2'])}</td></tr>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['CENTRAL3'])}</td></tr>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['CENTRAL4'])}</td></tr>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['CENTRAL5'])}</td></tr>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['CENTRAL6'])}</td></tr>
-                            <tr><td colspan="2">${linkifySafe(feature.properties['CENTRAL7'])}</td></tr>
+                            <tr id='cell-pais'><td colspan="2">${linkifySafe(feature.properties['COUNTRY'])}</td></tr>
+                            <tr id='cell-zona'><td colspan="2">${linkifySafe(feature.properties['ZONA'])}</td></tr>
+                            <tr id='cell-central1'><td colspan="2">${linkifySafe(feature.properties['CENTRAL1'])}</td></tr>
+                            <tr id='cell-central2'><td colspan="2">${linkifySafe(feature.properties['CENTRAL2'])}</td></tr>
+                            <tr id='cell-central3'><td colspan="2">${linkifySafe(feature.properties['CENTRAL3'])}</td></tr>
+                            <tr id='cell-central4'><td colspan="2">${linkifySafe(feature.properties['CENTRAL4'])}</td></tr>
+                            <tr id='cell-central5'><td colspan="2">${linkifySafe(feature.properties['CENTRAL5'])}</td></tr>
+                            <tr id='cell-central6'><td colspan="2">${linkifySafe(feature.properties['CENTRAL6'])}</td></tr>
+                            <tr id='cell-central7'><td colspan="2">${linkifySafe(feature.properties['CENTRAL7'])}</td></tr>
+                            <tr id='cell-urlpais'><td colspan="2">${linkifySafe(feature.properties['URLPAIS'])}</td></tr>
                         </table>
                     `;
                     const content = removeEmptyRowsFromPopupContent(popupContent, feature);

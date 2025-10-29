@@ -16,6 +16,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -352,6 +353,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: "Confederación de Trabajadores Rerum Novarum (CTRN)",
                 CENTRAL6: "Confederación de Trabajadores Unidad en la Acción Sindical (UAS)",
                 CENTRAL7: "Confederación Unitaria de Trabajadores (CUT)",
+                URLPAIS: "https://google.cl",
 
             },
             geometry: {
@@ -595,6 +597,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -1422,6 +1425,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -1784,6 +1788,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -2079,6 +2084,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -2536,6 +2542,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -2655,6 +2662,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -2807,6 +2815,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: "Confederación Unitaria de Trabjadores Salvadoreños (CUTS)",
                 CENTRAL6: "Confederación General del Trabajo (CGT)",
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -2976,6 +2985,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -3192,6 +3202,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -3569,6 +3580,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -5849,6 +5861,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: "Nova Central Sindical de Trabalhadores (NCST)",
                 CENTRAL6: "União Geral dos Trabalhadores (UGT)",
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -10033,6 +10046,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -11049,6 +11063,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -11709,6 +11724,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: "Central General de Trabajadores (CGT) Paraguay",
                 CENTRAL6: "Central Obrera y Transporte del Paraguay (COTP)",
                 CENTRAL7: "Central Nacional de Trabajadores (CNT)",
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -12137,6 +12153,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -13406,6 +13423,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "<a href='paises/argentina.html' target='_blank '>ir al archivo</a>",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -15580,6 +15598,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: "Federación Sindical de Trabajadores Mineros de Bolivia (FSTMB)",
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -16222,6 +16241,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: "Central Unitaria de Trabajadores y Trabajadoras (CUT)",
                 CENTRAL6: "Confederación General de Trabajadores (CGT)",
                 CENTRAL7: "Unión Nacional de Trabajadores de Chile (UNT)",
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -23104,6 +23124,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -24102,6 +24123,7 @@ var json_FESplataformas_0 = {
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
+                URLPAIS: "https://google.cl",
             },
             geometry: {
                 type: "MultiPolygon",

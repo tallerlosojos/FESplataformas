@@ -778,7 +778,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
             position: absolute;
             bottom: 0;
             left: 50%;
-            z-index: 900;
+            z-index: 10001;
             margin-bottom: 0;
         }
 
@@ -786,7 +786,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   -webkit-transform: translate(0,0);
   transform: translate(0,0);
   background: rgba(0,0,0,0.3);
-  z-index: 899;
+  z-index: 10000;
 }
 
 .position-bottom {

@@ -274,6 +274,23 @@ small {
 table{
     background: none;
 }
+table #cell-pais{
+  display: none;
+}
+table #cell-zona{
+  margin: 1rem 0;
+  display: block;
+}
+table #cell-central1, table #cell-central2, table #cell-central3, table #cell-central4, table #cell-central5, table #cell-central6, table #cell-central7{
+  font-size: .9rem;
+}
+table #cell-urlpais{
+  display: block;
+  margin: 1rem 0;
+}
+tbody td, tbody th {
+  padding: 0;
+}
 tbody tr:nth-child(2n){
     background: none;
 }
