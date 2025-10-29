@@ -14,6 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+<!-- Iconos y framework (CDN) -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css"
+        crossorigin="anonymous" />
+        
     <!-- Estilos principales (locales primero para poder personalizar sobre los de terceros) -->
     <link rel="stylesheet" href="css/leaflet.css" />
     <link rel="stylesheet" href="css/L.Control.Layers.Tree.css" />
@@ -21,10 +26,7 @@
     <link rel="stylesheet" href="css/leaflet.photon.css" />
     <link rel="stylesheet" href="css/leaflet-sidebar.css" />
 
-    <!-- Iconos y framework (CDN) -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css"
-        crossorigin="anonymous" />
+    
 
     <style>
         /* CSS mínimo y específico para el layout */
@@ -216,16 +218,65 @@
                 }
             }
 
-            // Highlight sencillo reutilizable
-            let highlightLayer = null;
-            function highlightFeature(e) {
-                highlightLayer = e.target;
-                const geomType = e.target.feature && e.target.feature.geometry && e.target.feature.geometry.type;
+            // Estado para la capa seleccionada (fijada) — se mantiene hasta cerrar sidebar o seleccionar otra
+            let selectedLayer = null;
+            // Estado para la capa actualmente en hover (temporal)
+            let hoverLayer = null;
+
+            // Aplicar estilo de "highlight/fijado" a una capa
+            function applyHighlightStyle(layer) {
+                if (!layer || !layer.feature) return;
+                const geomType = layer.feature.geometry && layer.feature.geometry.type;
                 if (geomType === 'LineString' || geomType === 'MultiLineString') {
-                    highlightLayer.setStyle({ color: '#d70000' });
+                    layer.setStyle({ color: '#d70000' });
                 } else {
-                    highlightLayer.setStyle({ fillColor: '#d70000', fillOpacity: 1 });
+                    layer.setStyle({ fillColor: '#d70000', fillOpacity: 1 });
                 }
+            }
+
+            // Resetear una capa al estilo por defecto usando resetStyle del parent GeoJSON (si existe)
+            function resetLayerStyle(layer) {
+                if (!layer) return;
+                const parents = Object.values(layer._eventParents || {});
+                parents.forEach(parent => {
+                    if (typeof parent.resetStyle === 'function') parent.resetStyle(layer);
+                });
+            }
+
+            // Seleccionar (fijar) una capa: resetea la anterior y aplica el highlight a la nueva
+            function setSelectedLayer(layer) {
+                if (!layer) return;
+                if (selectedLayer && selectedLayer !== layer) {
+                    try { resetLayerStyle(selectedLayer); } catch (e) { /* noop */ }
+                }
+                selectedLayer = layer;
+                applyHighlightStyle(layer);
+            }
+
+            // Limpiar la selección actual (restaurar estilo y quitar referencia)
+            function clearSelectedLayer() {
+                if (selectedLayer) {
+                    try { resetLayerStyle(selectedLayer); } catch (e) { /* noop */ }
+                    selectedLayer = null;
+                }
+            }
+
+            // Highlight durante hover (temporal). No fija la selección.
+            function highlightFeature(e) {
+                const layer = e.target;
+
+                // Si había otro hover distinto, y no era la selección fija, reseteamos su estilo
+                if (hoverLayer && hoverLayer !== layer && hoverLayer !== selectedLayer) {
+                    try { resetLayerStyle(hoverLayer); } catch (err) { /* noop */ }
+                }
+
+                // Ocultar temporalmente la selección fija (para evitar ver dos rojos)
+                if (selectedLayer && selectedLayer !== layer) {
+                    try { resetLayerStyle(selectedLayer); } catch (err) { /* noop */ }
+                }
+
+                hoverLayer = layer;
+                applyHighlightStyle(layer);
             }
 
             // Eliminar filas vacías de popups basadas en clase 'visible-with-data'
@@ -347,12 +398,24 @@
                 // popup por feature
                 function pop_FESplataformas_0(feature, layer) {
                     layer.on({
+                        mouseover: highlightFeature,
                         mouseout(e) {
-                            Object.values(e.target._eventParents || {}).forEach(parent => {
-                                if (typeof parent.resetStyle === 'function') parent.resetStyle(e.target);
-                            });
-                        },
-                        mouseover: highlightFeature
+                            const layer = e.target;
+
+                            // Si este layer era el hover actual, quitar su estilo temporal
+                            if (hoverLayer === layer) {
+                                // Sólo resetear si no es la selección fija
+                                if (selectedLayer !== layer) {
+                                    try { resetLayerStyle(layer); } catch (err) { /* noop */ }
+                                }
+                                hoverLayer = null;
+                            }
+
+                            // Si hay una selección persistente, reaplicamos su estilo (vuelve a rojo)
+                            if (selectedLayer) {
+                                try { applyHighlightStyle(selectedLayer); } catch (err) { /* noop */ }
+                            }
+                        }
                     });
 
                     // Usamos linkifySafe en lugar de propStr para evitar HTML escapado
@@ -381,6 +444,15 @@
                             // cerrar popup para evitar solapamiento (si se abrió)
                             if (e.target && typeof e.target.closePopup === 'function') e.target.closePopup();
                         } catch (err) { /* noop */ }
+
+                        // Al hacer click, fijamos la capa (cambia selección)
+                        setSelectedLayer(e.target);
+
+                        // Si había un hover distinto, resetearlo porque ahora la selección debe prevalecer
+                        if (hoverLayer && hoverLayer !== selectedLayer) {
+                            try { resetLayerStyle(hoverLayer); } catch (err) { /* noop */ }
+                        }
+                        hoverLayer = null;
 
                         // Preparar contenido para el panel del sidebar
                         const paneEl = document.getElementById('feature-info');
@@ -412,6 +484,9 @@
                                     sb.setAttribute('aria-hidden', 'true');
                                 }
                                 paneEl.classList.remove('active');
+
+                                // Al cerrar el panel feature-info, limpiar la selección fijada
+                                clearSelectedLayer();
                             });
                             // evitar añadir múltiples listeners
                             closeBtn._listenerAdded = true;
@@ -521,6 +596,9 @@
                     content.innerHTML = '<p class="lorem">Haz clic sobre un país en el mapa para ver aquí la información.</p>';
                     content.classList.remove('media');
                 }
+
+                // Al cerrar el panel feature-info limpiamos la selección fijada
+                clearSelectedLayer();
             }
 
             // Cerrar feature-info cuando se pinche en cualquier pestaña del tablist
@@ -574,6 +652,9 @@
 
                 // cerrar cualquier popup del mapa
                 try { if (map && typeof map.closePopup === 'function') map.closePopup(); } catch (e) { /* noop */ }
+
+                // limpiar selección fijada
+                clearSelectedLayer();
             }
 
             // Conectar el botón del tablist (si ya existe)

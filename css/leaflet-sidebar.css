@@ -271,6 +271,18 @@ small {
   }
 }
 
+table{
+    background: none;
+}
+tbody tr:nth-child(2n){
+    background: none;
+}
+
+tbody, tfoot, thead {
+  border: none;
+  background-color: none;
+}
+
 .sidebar {
   .sidebar.leaflet-touch {
     box-shadow: none;
