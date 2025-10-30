@@ -83,7 +83,7 @@ p.small{
     border-bottom: 0;
 }
 .grid-content{
-    padding: 0 1rem;
+    padding: 0 2rem;
 }
 ul.order-content{
     padding: 2rem 0 1rem 0;
@@ -175,4 +175,8 @@ div.progress {
   -o-border-radius: 3px;
   border-radius: 3px;
   background: red;
+}
+
+#pais-sidebar-left{
+  background: rgba(0,0,0,.1);
 }
