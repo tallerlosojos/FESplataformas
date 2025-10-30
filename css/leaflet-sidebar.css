@@ -289,7 +289,9 @@ table #cell-zona td:before{
   content: "Zona ";
 }
 table #cell-central1, table #cell-central2, table #cell-central3, table #cell-central4, table #cell-central5, table #cell-central6, table #cell-central7{
-  font-size: .9rem;
+  font-size: .8rem;
+  margin-bottom: 0.25rem;
+  display: block;
 }
 table #cell-urlpais{
   display: block;

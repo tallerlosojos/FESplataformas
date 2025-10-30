@@ -8,7 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    <title>Mapa con sidebar optimizado</title>
+    <title>Single País</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,9 @@
         rel="stylesheet">
 
     <!-- Iconos y framework (CDN) -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css"
         crossorigin="anonymous" />
 
@@ -96,21 +98,26 @@
                     <div class="grid-content">
                         <ul class="order-content">
                             <li>
-                                <h5>Ley de Contrato de Trabajo / 20.744</h5>
+                                <h5>
+                                    <a href="">
+                                        Ley de Contrato de Trabajo / 20.744<i class="fa-solid fa-up-right-from-square"></i>
+                                    </a>
+                                </h5>
                                 <p><small>descriptivo ley Lorem ipsum dolor, sit amet consectetur adipisicing
                                         elit. Eius assumenda amet voluptas natus totam quod, dicta hic ex fugiat officia
                                         et velit, provident earum minima cumque aspernatur magnam beatae nihil.</small>
                                 </p>
                             </li>
                             <li>
-                                <h5>Ley de Riesgos del Trabajo / 24.557</h5>
+                                <h5>
+                                    <a href="">Ley de Riesgos del Trabajo / 24.557<i class="fa-solid fa-up-right-from-square"></i></a></h5>
                                 <p><small>descriptivo ley Lorem ipsum dolor, sit amet consectetur adipisicing
                                         elit. Eius assumenda amet voluptas natus totam quod, dicta hic ex fugiat officia
                                         et velit, provident earum minima cumque aspernatur magnam beatae nihil.</small>
                                 </p>
                             </li>
                             <li>
-                                <h5> Ley de Empleo / 24.013</h5>
+                                <h5> <a href="">Ley de Empleo / 24.013<i class="fa-solid fa-up-right-from-square"></i></a></h5>
                                 <p><small>descriptivo ley Lorem ipsum dolor, sit amet consectetur adipisicing
                                         elit. Eius assumenda amet voluptas natus totam quod, dicta hic ex fugiat officia
                                         et velit, provident earum minima cumque aspernatur magnam beatae nihil.</small>
@@ -177,26 +184,43 @@
             </div>
         </div>
         <div class="small-12 medium-3 cell" id="column-right">
+            <img src="https://placehold.co/600x800/d70000/ffffff" alt="">
+
             <div class="grid-x">
                 <div class="small-12 cell">
                     <div class="grid-content">
-                        <h2>Repositorio Proyecto</h2>
+                        <h4>Data complementaria</h4>
+                        <ul>
+                            <li><b>Trabajo de Campo</b> <i>Nombre Apellido</i></li>
+                            <li><b>Fecha de realización</b> <i>Primavera de 2024</i></li>
+                            <li><b>Agradecimientos</b> <i>Ayrton Glass
+                                    Shania Villanueva
+                                    Zaki Farmer
+                                    Katrina Hayden
+                                    Jennifer Tanner
+                                    Inaaya Gibbs
+                                    Eric Butler
+                                    Martha Bonilla
+                                    Kiara Charles
+                                    Heather Atkins</i></li>
+                            <li><b>Licencia de contenidos</b> <i>Creative Commons Attribution-NoDerivatives 4.0 International</i></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    <!-- jQuery antes de Foundation (Foundation usa jQuery) -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js"
-        crossorigin="anonymous"></script>
-    <script src="../js/simpleplaylist.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-            $(".playlist").playlist();
-        });
-    </script>
+        <!-- jQuery antes de Foundation (Foundation usa jQuery) -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js"
+            crossorigin="anonymous"></script>
+        <script src="../js/simpleplaylist.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(document).foundation();
+                $(".playlist").playlist();
+            });
+        </script>
 </body>
 
 </html>
