@@ -14,6 +14,7 @@ h1{
   font-weight: 600;
   margin-bottom: 2rem;
   display: inline-block;
+  border-left: 3px solid #d70000;
 }
 h2{
     font-size: 1.2rem;
@@ -30,6 +31,7 @@ h3{
   letter-spacing: 1px;
   font-weight: 600;
   display: inline-block;
+  border-left: 3px solid #d70000;
 }
 h3.title-centrales{
 margin-top: 2rem;
@@ -43,6 +45,7 @@ h4{
   letter-spacing: 1px;
   font-weight: 600;
   display: inline-block;
+  border-left: 3px solid #d70000;
 }
 h5{
   font-size: 1em;
@@ -226,6 +229,7 @@ div.progress {
   letter-spacing: 1px;
   font-weight: 600;
   display: inline-block;
+  border-left: 0;
 }
 }
 
@@ -236,7 +240,7 @@ div.progress {
 /* Medium and up */
 @media screen and (min-width: 40em) {
     #column-center{
-        border-left: 1px solid rgba(0,0,0,0.3);
+        border-left: 1px solid rgba(0,0,0,0.5);
     }
 }
 
