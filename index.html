@@ -54,22 +54,38 @@
          * hace que los cambios realizados por setStyle() se animen.
          */
         .leaflet-container .leaflet-interactive {
-            transition: fill 300ms ease-in-out, fill-opacity 300ms ease-in-out,
-                stroke 300ms ease-in-out, stroke-opacity 300ms ease-in-out;
-            -webkit-transition: fill 300ms ease-in-out, fill-opacity 300ms ease-in-out,
-                stroke 300ms ease-in-out, stroke-opacity 300ms ease-in-out;
+            transition: fill 500ms ease-in-out, fill-opacity 500ms ease-in-out,
+                stroke 500ms ease-in-out, stroke-opacity 500ms ease-in-out;
+            -webkit-transition: fill 500ms ease-in-out, fill-opacity 500ms ease-in-out,
+                stroke 500ms ease-in-out, stroke-opacity 500ms ease-in-out;
         }
 
-        /* Si quieres un efecto más suave o más rápido, ajusta el tiempo (p. ej. 150ms o 500ms) y la curva de easing */
+        /* Para un efecto más suave o más rápido, ajusta tiempo (p. ej. 150ms o 500ms) y la curva de easing */
     </style>
 </head>
 
 <body>
 
-    <button type="button" class="button small buttonOffCanvas" data-toggle="offCanvas">créditos</button>
+    <button type="button" class="button small buttonOffCanvas" data-toggle="offCanvas">créditos / derechos</button>
 
     <div class="off-canvas position-bottom" id="offCanvas" data-off-canvas>
-        <img id="fes-logo" src="images/logo-fes.svg" alt="">
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="small-12 medium-8 medium-offset-1 cell">
+                    <div class="offCanvas-content">
+                        <p><small><b>CRÉDITOS</b> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum est,
+                                mollitia ipsa perspiciatis amet unde alias nostrum voluptates? Illum nostrum inventore
+                                corporis tempore necessitatibus rerum itaque vitae ducimus maxime nemo. Lorem ipsum
+                                dolor sit amet consectetur adipisicing elit. Magnam laborum et nisi reprehenderit aut
+                                dolorum commodi rem facere ducimus. Veritatis deleniti quo quaerat consectetur iure
+                                quidem itaque libero facere voluptas.</small></p>
+                    </div>
+                </div>
+                <div class="small-12 medium-1 medium-offset-1 cell">
+                    <img id="fes-logo" src="images/logo-fes.svg" alt="">
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="off-canvas-content" data-off-canvas-content></div>
@@ -94,7 +110,7 @@
         <div class="sidebar-content" role="document">
             <div class="sidebar-pane" id="home">
                 <h1 class="sidebar-header">
-                    FESplataformas
+                    plataformas
                     <span class="sidebar-close"><i class="fa fa-caret-left" aria-hidden="true"></i></span>
                 </h1>
 
@@ -129,7 +145,9 @@
                 <div class="sidebar-content">
                     <div class="grid-x grid-margin-x grid-margin-y">
                         <div class="small-12 cell">
-                                <p><small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque commodi reiciendis iste earum voluptates possimus voluptas eos quibusdam doloribus obcaecati delectus culpa facilis sed reprehenderit rerum, excepturi, mollitia ab neque.</small></p>
+                            <p><small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque commodi reiciendis
+                                    iste earum voluptates possimus voluptas eos quibusdam doloribus obcaecati delectus
+                                    culpa facilis sed reprehenderit rerum, excepturi, mollitia ab neque.</small></p>
                             <ul class="accordion" data-accordion data-allow-all-closed="true">
                                 <li class="accordion-item" data-accordion-item>
                                     <a href="#" class="accordion-title">María Leonela Artavia Jiménez</a>
@@ -255,8 +273,8 @@
                         <b>Co1 – Centro y Norteamérica:</b> México —donde hay más volumen de información— y experiencias
                         relevantes en Centroamérica. (Guatemala, Honduras, El Salvador, Nicaragua, Costa Rica, República
                         Dominicana y Panamá).
-                    <b>Co2 – Cono Sur-Norte:</b> Colombia, Venezuela, Ecuador, Brasil y Paraguay.
-                            <b>Co3 – Cono Sur-Sur:</b> Uruguay, Bolivia, Perú, Argentina y Chile.</small></p>
+                        <b>Co2 – Cono Sur-Norte:</b> Colombia, Venezuela, Ecuador, Brasil y Paraguay.
+                        <b>Co3 – Cono Sur-Sur:</b> Uruguay, Bolivia, Perú, Argentina y Chile.</small></p>
             </div>
 
             <!-- Nuevo panel para mostrar la información del feature (país) -->
@@ -305,7 +323,7 @@
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js"
         crossorigin="anonymous"></script>
 
-    <!-- Código de inicialización optimizado -->
+    <!-- Código de inicialización  -->
     <script>
         (function () {
             'use strict';
@@ -313,8 +331,8 @@
             // Creación del mapa: opciones iniciales ligeras
             const map = L.map('map', {
                 zoomControl: false,
-                maxZoom: 28,
-                minZoom: 2
+                maxZoom: 12,
+                minZoom: 1
             });
 
             // Ajuste inicial de vista por bounds conocidos
@@ -358,9 +376,9 @@
                 if (!layer || !layer.feature) return;
                 const geomType = layer.feature.geometry && layer.feature.geometry.type;
                 if (geomType === 'LineString' || geomType === 'MultiLineString') {
-                    layer.setStyle({ color: '#d70000' });
+                    layer.setStyle({ color: 'IndianRed' });
                 } else {
-                    layer.setStyle({ fillColor: '#d70000', fillOpacity: 1 });
+                    layer.setStyle({ fillColor: 'IndianRed', fillOpacity: 1 });
                 }
             }
 
@@ -395,12 +413,12 @@
             function highlightFeature(e) {
                 const layer = e.target;
 
-                // Si había otro hover distinto, y no era la selección fija, reseteamos su estilo
+                // Si había otro hover distinto, y no era la selección fija, resetea estilo
                 if (hoverLayer && hoverLayer !== layer && hoverLayer !== selectedLayer) {
                     try { resetLayerStyle(hoverLayer); } catch (err) { /* noop */ }
                 }
 
-                // Ocultar temporalmente la selección fija (para evitar ver dos rojos)
+                // Ocultar temporalmente la selección fija (evitar dos rojos)
                 if (selectedLayer && selectedLayer !== layer) {
                     try { resetLayerStyle(selectedLayer); } catch (err) { /* noop */ }
                 }
@@ -473,11 +491,6 @@
             }
 
             // ---------- FIX PARA ENLACES ROTOS / ESCAPADOS ----------
-            // Nueva función que:
-            //  - NO escapa el texto antes de linkificar (autolinker espera texto crudo)
-            //  - Usa Autolinker para linkificar
-            //  - Se asegura de que los <a> resultantes abran en _blank con rel seguro
-            //  - Si Autolinker no detecta url, busca URLs por regex y crea anchors manualmente
             function linkifySafe(value) {
                 if (value == null || value === '') return '';
 
@@ -491,7 +504,7 @@
                     linked = text;
                 }
 
-                // Si Autolinker no generó anchors (no hay <a>), hacemos un fallback con regex
+                // Si Autolinker no genera anchors (no hay <a>), hacemos un fallback con regex
                 if (!/<a\s/i.test(linked)) {
                     // regex simple para URLs (http/https/www)
                     const urlRegex = /((https?:\/\/|www\.)[^\s<]+)/gi;
@@ -515,7 +528,6 @@
 
                 return tmp.innerHTML;
             }
-            // ---------- FIN FIX PARA ENLACES ----------
 
             // Manejo y renderizado de la capa geojson (si existe la variable generada por qgis2web)
             if (typeof json_FESplataformas_0 !== 'undefined') {
@@ -553,6 +565,7 @@
                         <table>
                             <tr id='cell-pais'><td colspan="2">${linkifySafe(feature.properties['COUNTRY'])}</td></tr>
                             <tr id='cell-zona'><td colspan="2">${linkifySafe(feature.properties['ZONA'])}</td></tr>
+                            <tr id='cell-descripcion'><td colspan="2">${linkifySafe(feature.properties['DESCRIPCION'])}</td></tr>
                             <tr id='cell-central1'><td colspan="2">${linkifySafe(feature.properties['CENTRAL1'])}</td></tr>
                             <tr id='cell-central2'><td colspan="2">${linkifySafe(feature.properties['CENTRAL2'])}</td></tr>
                             <tr id='cell-central3'><td colspan="2">${linkifySafe(feature.properties['CENTRAL3'])}</td></tr>
@@ -690,7 +703,7 @@
                 // Árbol de overlays para el control
                 const overlaysTree = [
                     {
-                        label: 'FESplataformas<br /><table><tr><td style="text-align: center;"><img src="legend/FESplataformas_0_NorteCentro0.png" /></td><td>Norte/Centro</td></tr><tr><td style="text-align: center;"><img src="legend/FESplataformas_0_SurNorte1.png" /></td><td>Sur/Norte</td></tr><tr><td style="text-align: center;"><img src="legend/FESplataformas_0_SurSur2.png" /></td><td>Sur/Sur</td></tr></table>',
+                        label: '<h5>Zonas</h5> <br /><table><tr><td style="text-align: center;"><img src="legend/FESplataformas_0_NorteCentro0.png" /></td><td>Norte/Centro</td></tr><tr><td style="text-align: center;"><img src="legend/FESplataformas_0_SurNorte1.png" /></td><td>Sur/Norte</td></tr><tr><td style="text-align: center;"><img src="legend/FESplataformas_0_SurSur2.png" /></td><td>Sur/Sur</td></tr></table>',
                         layer: layer_FESplataformas_0
                     }
                 ];
@@ -811,16 +824,12 @@
                     }
                 }
             }
-
-
-
             // Inicializar Foundation (si jQuery + Foundation están cargados)
             if (window.jQuery && typeof jQuery.fn.foundation === 'function') {
                 jQuery(document).ready(function () {
                     jQuery(document).foundation();
                 });
             }
-
         })();
     </script>
 </body>

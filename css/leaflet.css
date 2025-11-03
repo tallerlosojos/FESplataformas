@@ -1,8 +1,8 @@
-/* Integrated, optimized and ordered Leaflet + custom styles
+/* Integrated, optimized and ordeIndianRed Leaflet + custom styles
    - Grouped related rules
    - Removed duplicates and stray braces
    - Added CSS variables for easy theming
-   - Kept required Leaflet base rules intact (minor cleanup)
+   - Kept requiIndianRed Leaflet base rules intact (minor cleanup)
 */
 
 /* ========== Theme variables ========== */
@@ -36,7 +36,7 @@ body,
   overflow: auto;
 }
 
-/* ========== Shared UI components ========== */
+/* ========== ShaIndianRed UI components ========== */
 .info,
 .abstractUncollapsed {
   padding: 6px 8px;
@@ -221,13 +221,13 @@ a {
 }
 
 td a {
-  color: red !important;
+  color: IndianRed !important;
   text-decoration: underline;
 }
 
 td a:hover,
 td a:focus {
-  color: red !important;
+  color: IndianRed !important;
   text-decoration: none;
 }
 
@@ -282,9 +282,9 @@ td a:focus {
   color: white;
 }
 
-/* ========== Required Leaflet base styles (kept largely unchanged) ========== */
+/* ========== RequiIndianRed Leaflet base styles (kept largely unchanged) ========== */
 /* These are necessary for Leaflet's UI and map rendering.
-   Kept in a compact, ordered form (visual tweaks and z-index ordering preserved).
+   Kept in a compact, ordeIndianRed form (visual tweaks and z-index ordering preserved).
 */
 
 .leaflet-pane,
@@ -772,9 +772,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   }
 }
 
-.buttonOffCanvas,
-.buttonOffCanvas:hover,
-.buttonOffCanvas:focus {
+.buttonOffCanvas {
   color: white;
   background: black;
   position: absolute;
@@ -783,6 +781,30 @@ svg.leaflet-image-layer.leaflet-interactive path {
   z-index: 10001;
   margin-bottom: 0;
   transform: translate(-50%, 0);
+  border-radius: 5px 5px 0 0 !important;
+}
+
+.buttonOffCanvas:hover,
+.buttonOffCanvas:focus {
+  color: black !important;
+  background: indianred;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 10001;
+  margin-bottom: 0;
+  transform: translate(-50%, 0);
+  border-radius: 5px 5px 0 0 !important;
+}
+
+.offCanvas-content{
+  padding: 2rem 0;
+  p{
+    color: rgba(255,255,255,0.5);
+    b{
+      color: white;
+    }
+  }
 }
 
 .off-canvas.is-open {
@@ -799,16 +821,31 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 .position-bottom.is-transition-push {
-  -webkit-box-shadow: inset 0 13px 20px -13px red;
+  -webkit-box-shadow: inset 0 13px 20px -13px IndianRed;
   box-shadow: inset 0 13px 20px -13px rgba(0, 0, 0, 0.75);
+  z-index: 10000;
 }
 
 .off-canvas {
   background: rgba(0, 0, 0, 0.75);
   box-shadow: inset 0 13px 20px -13px rgba(0, 0, 0, 0.34);
 }
-
-#fes-logo{
-  right: 0;
+.leaflet-top.leaflet-left{
   position: absolute;
+  left: initial;
+  right: 10px;
+  top: 150px;
+}
+.leaflet-layerstree-header-name{
+  font-family: "Noto Sans", sans-serif !important;
+}
+.leaflet-layerstree-header-name td{
+  margin-left: 5px;
+  display: inline-block;
+}
+h5{
+  display: inline-block;
+  font-size: .8rem !important;
+  text-transform: uppercase;
+  font-weight: 600;
 }

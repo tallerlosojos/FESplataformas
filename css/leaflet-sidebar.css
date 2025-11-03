@@ -116,13 +116,13 @@ small {
 .sidebar-tabs>li:hover .fa,
 .sidebar-tabs>ul>li:hover .fa{
   color: #fff !important;
-  background-color: red;
+  background-color: IndianRed;
 }
 
 .sidebar-tabs>li.active,
 .sidebar-tabs>ul>li.active {
   color: #fff !important;
-  background-color: red;
+  background-color: IndianRed;
 }
 
 .sidebar-tabs>li.disabled,
@@ -169,13 +169,21 @@ small {
   overflow-x: hidden;
   overflow-y: auto;
 }
+.sidebar-content .sidebar-content, .sidebar-content .active .sidebar-content{
 
+  background: none !important;
+}
+
+.sidebar-content:target-text{
+  background: none;
+}
 
 
 .sidebar-left .sidebar-content {
   left: 40px;
   right: 0;
   position: inherit;
+  border-radius: 0 5px 0 0;
 }
 
 .sidebar-right .sidebar-content {
@@ -222,13 +230,12 @@ small {
   height: 40px;
   padding: 0 20px;
   line-height: 40px;
-font-size: .9rem;
+font-size: 1.2rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bolder;
+  font-weight: 600;
   color: #fff;
-  background-color: red;
-  margin-bottom: 2rem;
+  background-color: IndianRed;
+  margin-bottom: 1rem;
 }
 
 .sidebar-right .sidebar-header {
@@ -279,11 +286,15 @@ table #cell-pais{
   display: none;
 }
 table #cell-zona{
-  margin: 1rem 0;
-  display: block;
+ margin: 0rem 0 2rem;
+  display: inline-block;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  color: #666;
+  font-size: 0.65rem;
+  color: white;
+  background: indianred;
+  font-weight: bolder;
+  padding: .5rem 1rem;
+  border-radius: 25px;
 }
 table #cell-zona td:before{
   content: "Zona ";
@@ -293,9 +304,25 @@ table #cell-central1, table #cell-central2, table #cell-central3, table #cell-ce
   margin-bottom: 0.25rem;
   display: block;
 }
+table #cell-central1:before{
+content: "Centrales Sindicales";
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  border: 1px dotted gray;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
 table #cell-urlpais{
-  display: block;
+display: block;
   margin: 1rem 0;
+  padding-top: 3rem;
+  border-top: 1px dotted gray;
+}
+table #cell-descripcion{
+  margin-bottom: 1rem;
+  display: block;
 }
 tbody td, tbody th {
   padding: 0;
@@ -306,7 +333,7 @@ tbody tr:nth-child(2n){
 
 tbody, tfoot, thead {
   border: none;
-  background-color: none;
+  background: none !important;
 }
 .accordion{
     margin: 1rem 0;
@@ -321,17 +348,21 @@ tbody, tfoot, thead {
 .button {
   color: white !important;
   background: black;
-
+font-weight: 600;
   text-decoration: none;
+  border-radius: 5px;
 
 }
 .button:hover, .button:focus {
   color: white !important;
-  background: red;
+  background: gray;
 
   text-decoration: none;
-
 }
+#feature-info .sidebar-content{
+  background: none;
+}
+
 .sidebar {
   .sidebar.leaflet-touch {
     box-shadow: none;
