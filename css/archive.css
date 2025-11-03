@@ -1,5 +1,6 @@
 body {
-  background: #cfebea;
+  background: white;
+   /* #cfebea; */
 }
 
 body,
@@ -27,10 +28,16 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2rem;
-  color: #444;
-  font-style: italic;
-  letter-spacing: -0.2px;
+  margin: 0rem 0 1rem;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  color: white;
+  background: indianred;
+  font-weight: bolder;
+  padding: .5rem 1rem;
+  border-radius: 25px;
+  font-style: normal;
 }
 
 h3 {

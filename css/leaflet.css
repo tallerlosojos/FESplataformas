@@ -9,7 +9,7 @@
 :root {
   --bg-light: #f8f8f8;
   --text: #444444;
-  --map-bg: #cfebea;
+  --map-bg: white;
   --control-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
   --popup-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
 }
@@ -24,6 +24,7 @@ body,
 
 #map {
   background-color: var(--map-bg);
+  /* background: url(https://www.toptal.com/designers/subtlepatterns/uploads/criss-cross.png) repeat center center; */
 }
 
 /* Column helpers used in your layout */
@@ -74,7 +75,7 @@ a {
 
 /* ========== Leaflet control overrides / plugin-styling ========== */
 .leaflet-control {
-  box-shadow: var(--control-shadow) !important;
+  /* box-shadow: var(--control-shadow) !important; */
   border-radius: 4px;
   pointer-events: auto;
 }
@@ -584,6 +585,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
   text-indent: 1px;
 }
 
+.leaflet-control-zoom-in span,
+.leaflet-control-zoom-out span{
+  color: black;
+}
+
+
+
 .leaflet-touch .leaflet-control-zoom-in,
 .leaflet-touch .leaflet-control-zoom-out {
   font-size: 22px;
@@ -702,7 +710,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .leaflet-touch .leaflet-control-layers,
 .leaflet-touch .leaflet-bar {
-  border: 2px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background-clip: padding-box;
 }
 
@@ -848,4 +856,21 @@ h5{
   font-size: .8rem !important;
   text-transform: uppercase;
   font-weight: 600;
+}
+.p5Canvas{
+
+  width: 1440px;
+  height: 790px;
+  touch-action: none;
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+.accordion{
+  background: none;
+}
+.leaflet-control-locate{
+  display: none;
 }

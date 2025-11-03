@@ -165,7 +165,7 @@ small {
   top: 0;
   bottom: 0;
   left: 37px;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.9);
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -176,6 +176,10 @@ small {
 
 .sidebar-content:target-text{
   background: none;
+}
+
+.sidebar-content p, .sidebar-content li{
+  text-shadow: 0 -1px 0 rgb(255, 255, 255);
 }
 
 
@@ -236,6 +240,7 @@ font-size: 1.2rem;
   color: #fff;
   background-color: IndianRed;
   margin-bottom: 1rem;
+  letter-spacing: -0.3px;
 }
 
 .sidebar-right .sidebar-header {
@@ -309,7 +314,7 @@ content: "Centrales Sindicales";
   font-size: 0.8rem;
   display: inline-block;
   margin-bottom: 1rem;
-  border: 1px dotted gray;
+  border: 1px dotted #969696;
   padding: 0.5rem 1rem;
   text-transform: uppercase;
   font-weight: 600;
@@ -318,7 +323,7 @@ table #cell-urlpais{
 display: block;
   margin: 1rem 0;
   padding-top: 3rem;
-  border-top: 1px dotted gray;
+  border-top: 1px dotted #969696;
 }
 table #cell-descripcion{
   margin-bottom: 1rem;
@@ -355,7 +360,7 @@ font-weight: 600;
 }
 .button:hover, .button:focus {
   color: white !important;
-  background: gray;
+  background: #969696;
 
   text-decoration: none;
 }
