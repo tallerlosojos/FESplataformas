@@ -807,12 +807,37 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .offCanvas-content {
   padding: 2rem 0;
-
   p {
     color: rgba(255, 255, 255, 0.5);
-
+    line-height: 1.2rem;
     b {
       color: white;
+    }
+  }
+  li{
+    color: white;
+    font-size: .8rem;
+    list-style-type: disclosure-closed;
+    margin-bottom: 1rem;
+    p{
+      color: white;
+    }
+    .menu{
+      li{
+        list-style-type: none;
+        color: white;
+        margin-right: 1rem;
+        a{
+          color: white !important;
+          border: 1px solid white;
+          padding: .7rem 1rem .9rem;
+        }
+        a:hover, a:focus{
+          background: white;
+          color: indianred;
+          border: 1px solid indianred;
+        }
+      }
     }
   }
 }
@@ -934,8 +959,16 @@ h5 {
     border-radius: 5px;
   }
 }
-
+.indian-red{
+  color: indianred;
+}
 #index-mobile {
+  h1{
+    font-size: 1.6rem; 
+    font-weight: 800;
+    line-height: 1; 
+    padding: 2rem 0;
+  }
   .button:focus, .button:hover{
     background: IndianRed;
   }
@@ -951,6 +984,7 @@ h5 {
     transform: translateY(100%);
     /* Default transition */
     height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
   }
 
   /* State when open (visible) */
@@ -959,8 +993,8 @@ h5 {
   }
 
   /* If pushing content (v6) */
-  .off-canvas-content {
-    transition: transform 0.25s ease-out;
+  .offCanvas-content {
+    background: none;
   }
 
 }
