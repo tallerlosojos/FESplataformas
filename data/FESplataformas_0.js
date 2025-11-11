@@ -7,7 +7,7 @@ var json_FESplataformas_0 = {
         {
             type: "Feature",
             properties: {
-                COUNTRY: "Haiti",
+                COUNTRY: "Haití",
                 ZONA: "Norte/Centro",
                 DESCRIPCION: "<p><small>Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes, lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado. El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires, se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada, el icónico palacio presidencial.</small></p>",
                 CENTRAL1: "Confédération des Travailleurs Haïtiens (CTH)",
@@ -1419,7 +1419,7 @@ var json_FESplataformas_0 = {
         {
             type: "Feature",
             properties: {
-                COUNTRY: "Dominican Republic",
+                COUNTRY: "República Dominicana",
                 ZONA: "Norte/Centro",
                 DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Confederación Autónoma Sindical Clasista (CASC)",
@@ -2080,7 +2080,7 @@ var json_FESplataformas_0 = {
         {
             type: "Feature",
             properties: {
-                COUNTRY: "Panama",
+                COUNTRY: "Panamá",
                 ZONA: "Norte/Centro",
                 DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central General Autónoma de Trabajadores de Panamá (CGTP)",
@@ -3582,7 +3582,7 @@ var json_FESplataformas_0 = {
         {
             type: "Feature",
             properties: {
-                COUNTRY: "Mexico",
+                COUNTRY: "México",
                 ZONA: "Norte/Centro",
                 DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Confederación de Trabajadores de México (CTM)",
@@ -13432,7 +13432,6 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Argentina",
                 ZONA: "Sur/Sur",
-                INDICADOR: "<div class='grid-x grid-margin-y grid-atributos align-middle'><div class='small-3 cell'>etiqueta 1</div><div class='small-9 cell'><div class='progress alert' role='progressbar' aria-valuenow='50' aria-valuemin='0' aria-valuetext='50 percent' aria-valuemax='100'><div class='progress-meter' style='width: 25%'><span class='progress-meter-text'>Baja</span></div></div></div><div class='small-3 cell'>etiqueta 2</div><div class='small-9 cell'><div class='progress alert' role='progressbar' aria-valuenow='50' aria-valuemin='0' aria-valuetext='50 percent' aria-valuemax='100'><div class='progress-meter' style='width: 50%'><span class='progress-meter-text'>Media</span></div></div></div><div class='small-3 cell'>etiqueta 3</div><div class='small-9 cell'><div class='progress alert' role='progressbar' aria-valuenow='50' aria-valuemin='0' aria-valuetext='50 percent' aria-valuemax='100'><div class='progress-meter' style='width: 80%'><span class='progress-meter-text'>Alta</span></div></div></div></div>",
                 DESCRIPCION: "<p><small>Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes, lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado. El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires, se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada, el icónico palacio presidencial.</small></p>",
                 CENTRAL1: "<a href='https://www.cta.org.ar/' target='_blank'>Central de Trabajadoras y Trabajadores de la Argentina (CTA-T)</a>",
                 CENTRAL2: "<a href='https://ctaa.org.ar/' target='_blank'>Central de Trabajadores de la Argentina (CTA)</a>",
@@ -23135,7 +23134,7 @@ var json_FESplataformas_0 = {
         {
             type: "Feature",
             properties: {
-                COUNTRY: "Peru",
+                COUNTRY: "Perú",
                 ZONA: "Sur/Sur",
                 DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Confederación General de Trabajadores del Perú (CGTP)",

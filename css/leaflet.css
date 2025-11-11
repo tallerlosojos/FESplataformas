@@ -936,15 +936,31 @@ h5 {
 }
 
 #index-mobile {
-  .position-bottom {
+  .button:focus, .button:hover{
+    background: IndianRed;
+  }
+  .grid-bordered {
+    & .cell {
+      padding: 0;
+    }
+  }
+
+  /* Initial state (hidden) */
+  .off-canvas {
+    /* This is a simplified example, Foundation uses transform: translate3d */
+    transform: translateY(100%);
+    /* Default transition */
     height: 100vh;
   }
 
+  /* State when open (visible) */
   .off-canvas.is-open {
-    background: rgba(0, 0, 0, 0.85);
+    transform: translateY(0);
   }
-  .grid-bordered {
-  & .cell{
-    padding: 0;
+
+  /* If pushing content (v6) */
+  .off-canvas-content {
+    transition: transform 0.25s ease-out;
   }
+
 }
