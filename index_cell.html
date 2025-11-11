@@ -77,8 +77,9 @@
                     <span class="shuffle">FES</span><br />
                     <span class="shuffle">plataformas</span>
                 </h1>
-                <h2 class="subheader">Conoce la información sobre las centrales sindicales y su relación con el trabajo de plataformas por paises</h2>
-                <br/>
+                <h2 class="subheader">Conoce la información sobre las centrales sindicales y su relación con el trabajo
+                    de plataformas por paises</h2>
+                <br />
             </div>
         </div>
     </div>
@@ -107,76 +108,39 @@
     </div>
 
 
-    <div class="grid-x grid-bordered text-center align-middle">
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Argentina</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Belice</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Bolivia</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Brasil</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Chile</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Colombia</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Costa Rica</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Ecuador</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>El Salvador</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Haití</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Honduras</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>México</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Nicaragua</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Paraguay</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Perú</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Puerto Rico</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>República Dominicana</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Uruguay</span>
-        </div>
-        <div class="button small-6 medium-4 large-3 cell">
-            <span>Venezuela</span>
-        </div>
-        <div class="button alert small-6 medium-4 large-3 cell">
-            <span>otro importante</span>
-        </div>
+
+    <div class="grid-x grid-bordered text-center align-middle" id="pais-container"></div>
+
+
+
+    <div id="info-container">
+        <!-- Aquí se mostrarán los datos usando JavaScript -->
     </div>
-
-
-
-
 
 
     </div>
 
+
+    <!-- Scripts: mantener el orden de dependencias (leaflet antes de plugins que lo usan) -->
+    <script src="js/qgis2web_expressions.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/L.Control.Layers.Tree.min.js"></script>
+    <script src="js/L.Control.Locate.min.js"></script>
+    <script src="js/leaflet.rotatedMarker.js"></script>
+    <script src="js/leaflet.pattern.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/Autolinker.min.js"></script>
+
+    <!-- Utilidades para etiquetas y rendimiento -->
+    <script src="js/rbush.min.js"></script>
+    <script src="js/labelgun.min.js"></script>
+    <script src="js/labels.js"></script>
+
+    <script src="js/leaflet.photon.js"></script>
+
+    <!-- Datos y control del sidebar (locales) -->
+    <script src="data/FESplataformas_0.js"></script>
+    <script src="js/leaflet-sidebar.js"></script>
 
     <!-- jQuery antes de Foundation (Foundation usa jQuery) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -250,6 +214,48 @@
             }
             return result;
         };
+    </script>
+    <script>
+
+        // app.js
+
+        function displayCountryNames() {
+            // Accedemos a la variable global definida en data.js
+            const data = json_FESplataformas_0;
+            const container = document.getElementById('pais-container');
+
+            // Verificamos que los datos existan
+            if (data && data.features && data.features.length > 0) {
+                let htmlContent = '';
+
+                // Iteramos sobre cada "feature" (cada país) en el array
+                data.features.forEach(feature => {
+                    const properties = feature.properties;
+
+                    // Concatenamos un elemento de lista (li) para cada nombre de país
+                    htmlContent += `
+                <div class="small-6 medium-4 large-3 cell"><span class="button expanded">
+                    ${properties.COUNTRY}
+                </span></div>
+            `;
+                });
+
+                htmlContent += ''; // Cerramos la lista
+
+                // Insertamos todo el HTML generado en el contenedor principal
+                container.innerHTML = htmlContent;
+
+            } else {
+                container.innerHTML = '<p>No se encontraron datos de países.</p>';
+            }
+        }
+
+        // Llama a la función cuando el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', (event) => {
+            displayCountryNames();
+        });
+
+
     </script>
 
 </body>
