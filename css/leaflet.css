@@ -874,3 +874,57 @@ h5{
 .leaflet-control-locate{
   display: none;
 }
+.grid-atributos{
+  margin-bottom: 2rem;
+  font-size: .6rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #666;
+  .progress{
+    margin: 0;
+    height: 20px;
+  }
+}
+.grid-margin-y > .cell{
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+}
+.grid-atributos::before{
+  border-top: 1px dotted black;
+  display: block;
+}
+.grid-atributos:after{
+
+}
+.progress-meter-text{
+  font-size: .6rem;
+}
+
+@media screen and (max-width: 39.9375em) {
+
+}
+
+
+.grid-bordered {
+  border-top:  2px solid #ddd;
+  border-bottom:  2px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+ .cell{
+   border: 2px solid #ddd; /* Add your desired border weight and style */
+  padding: 1rem; /* Add padding for content spacing inside the border */
+ }
+ .button{
+  margin: 0;
+  border-radius: 5px;
+ }
+}
+
+#index-mobile{
+  .position-bottom{
+    height: 100vh;
+  }
+  .off-canvas.is-open {
+  background: rgba(0, 0, 0, 0.85);
+}
+}

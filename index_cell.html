@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>plataformas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Iconos y framework (CDN) -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css"
+        crossorigin="anonymous" />
+
+    <!-- Estilos principales (locales primero para poder personalizar sobre los de terceros) -->
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/L.Control.Layers.Tree.css" />
+    <link rel="stylesheet" href="css/L.Control.Locate.min.css" />
+    <link rel="stylesheet" href="css/leaflet.photon.css" />
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+
+
+
+
+    <style>
+        /* CSS mínimo y específico para el layout */
+        html,
+        body,
+        #map {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background: #ddd;
+        }
+
+        body {}
+
+        /* Estilos para contenido de media en sidebar si aplica */
+        .sidebar-pane .media img,
+        .sidebar-pane .media video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /*
+         * Suavizar la transición cuando un feature cambia de color/estado.
+         * Leaflet dibuja los polígonos/lineas como elementos SVG con la clase
+         * .leaflet-interactive, así que aplicar transition sobre fill/stroke
+         * hace que los cambios realizados por setStyle() se animen.
+         */
+        .leaflet-container .leaflet-interactive {
+            transition: fill 500ms ease-in-out, fill-opacity 500ms ease-in-out,
+                stroke 500ms ease-in-out, stroke-opacity 500ms ease-in-out;
+            -webkit-transition: fill 500ms ease-in-out, fill-opacity 500ms ease-in-out,
+                stroke 500ms ease-in-out, stroke-opacity 500ms ease-in-out;
+        }
+
+        /* Para un efecto más suave o más rápido, ajusta tiempo (p. ej. 150ms o 500ms) y la curva de easing */
+    </style>
+</head>
+
+<body id="index-mobile">
+
+    <div class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="small-12 cell">
+                <h1 style="font-size: 1rem; font-weight: 800;line-height: 1; padding: 2rem 0;">
+                    <span class="shuffle">FES</span><br />
+                    <span class="shuffle">plataformas</span>
+                </h1>
+                <h2 class="subheader">Conoce la información sobre las centrales sindicales y su relación con el trabajo de plataformas por paises</h2>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+
+    <button type="button" class="button small buttonOffCanvas" data-toggle="offCanvas">Saber más</button>
+
+    <div class="off-canvas position-bottom" id="offCanvas" data-off-canvas>
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="small-12 medium-8 medium-offset-1 cell">
+                    <div class="offCanvas-content">
+                        <p><small><b>CRÉDITOS</b> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum est,
+                                mollitia ipsa perspiciatis amet unde alias nostrum voluptates? Illum nostrum inventore
+                                corporis tempore necessitatibus rerum itaque vitae ducimus maxime nemo. Lorem ipsum
+                                dolor sit amet consectetur adipisicing elit. Magnam laborum et nisi reprehenderit aut
+                                dolorum commodi rem facere ducimus. Veritatis deleniti quo quaerat consectetur iure
+                                quidem itaque libero facere voluptas.</small></p>
+                    </div>
+                </div>
+                <div class="small-12 medium-1 medium-offset-1 cell">
+                    <img id="fes-logo" src="images/logo-fes.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="grid-x grid-bordered text-center align-middle">
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Argentina</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Belice</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Bolivia</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Brasil</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Chile</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Colombia</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Costa Rica</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Ecuador</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>El Salvador</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Haití</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Honduras</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>México</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Nicaragua</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Paraguay</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Perú</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Puerto Rico</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>República Dominicana</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Uruguay</span>
+        </div>
+        <div class="button small-6 medium-4 large-3 cell">
+            <span>Venezuela</span>
+        </div>
+        <div class="button alert small-6 medium-4 large-3 cell">
+            <span>otro importante</span>
+        </div>
+    </div>
+
+
+
+
+
+
+    </div>
+
+
+    <!-- jQuery antes de Foundation (Foundation usa jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js"
+        crossorigin="anonymous"></script>
+
+    <!-- P5js -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/2.0.5/p5.min.js"
+        integrity="sha512-jOTg6ikYiHx1LvbSOucnvZi4shXbaovZ91+rfViIiUFLgAJK+k1oQtGEaLvDB8rsZwEfUksTgmhrxdvEDykuzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(document).foundation();
+        var origin = [];
+
+        $(".shuffle").each(function () {
+            let el = $(this);
+            let word = el.html();
+            origin.push(word);
+            el.html(shuffleRnd(word.length));
+        });
+
+        setTimeout(function () {
+
+            let elements = $(".shuffle");
+            let interaction = 0;
+            let letter = 0;
+
+            var anim = setInterval(function () {
+                console.log("Interval 1 " + interaction);
+                if (interaction >= elements.length - 1 || interaction > 100) {
+                    clearInterval(anim);
+                }
+                $(elements[interaction]).html(function () {
+                    shuffleWords(elements[interaction], origin[interaction]);
+                });
+
+                interaction++;
+            }, 10);
+
+        }, 50);
+
+        function shuffleWords(elem, orig) {
+            let j = 0;
+            let el = $(elem);
+            let word = el.html();
+            let decrypt = 0;
+            let animWord = setInterval(function () {
+                console.log("Interval X " + j);
+                if (j % 3 == 0) {
+                    decrypt++;
+                }
+                if (j > 100) {
+                    clearInterval(animWord);
+                }
+                $(".shuffle").each(function () {
+                    el.html(orig.substring(0, decrypt) + shuffleRnd(word.length - decrypt));
+                });
+                j++
+            }, 100);
+        }
+
+        function shuffleRnd(num) {
+            let result = "";
+            let randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXY0123456789*#@§¬¢|+ç%&/()=!^~¨[]{}$£<>;:.-_";
+
+            for (let i = 0; i < num; i++) {
+                result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+            }
+            return result;
+        };
+    </script>
+
+</body>
+
+</html>

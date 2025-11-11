@@ -39,7 +39,10 @@
             width: 100%;
             margin: 0;
             padding: 0;
+            background: #ddd;
         }
+
+        body {}
 
         /* Estilos para contenido de media en sidebar si aplica */
         .sidebar-pane .media img,
@@ -283,7 +286,7 @@
                 <h1 class="sidebar-header">Información del país <span class="sidebar-close"><i class="fa fa-caret-left"
                             aria-hidden="true"></i></span></h1>
                 <div class="sidebar-content">
-                    <p><small>  <i>Haz clic sobre un país en el mapa para ver aquí la información.</i></small></p>
+                    <p><small> <i>Haz clic sobre un país en el mapa para ver aquí la información.</i></small></p>
                 </div>
             </div>
 
@@ -326,7 +329,9 @@
 
     <!-- P5js -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/2.0.5/p5.min.js" integrity="sha512-jOTg6ikYiHx1LvbSOucnvZi4shXbaovZ91+rfViIiUFLgAJK+k1oQtGEaLvDB8rsZwEfUksTgmhrxdvEDykuzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/2.0.5/p5.min.js"
+        integrity="sha512-jOTg6ikYiHx1LvbSOucnvZi4shXbaovZ91+rfViIiUFLgAJK+k1oQtGEaLvDB8rsZwEfUksTgmhrxdvEDykuzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Código de inicialización  -->
     <script>
@@ -570,6 +575,7 @@
                         <table>
                             <tr id='cell-pais'><td colspan="2">${linkifySafe(feature.properties['COUNTRY'])}</td></tr>
                             <tr id='cell-zona'><td colspan="2">${linkifySafe(feature.properties['ZONA'])}</td></tr>
+                            <tr id='cell-indicador'><td colspan="2">${linkifySafe(feature.properties['INDICADOR'])}</td></tr>
                             <tr id='cell-descripcion'><td colspan="2">${linkifySafe(feature.properties['DESCRIPCION'])}</td></tr>
                             <tr id='cell-central1'><td colspan="2">${linkifySafe(feature.properties['CENTRAL1'])}</td></tr>
                             <tr id='cell-central2'><td colspan="2">${linkifySafe(feature.properties['CENTRAL2'])}</td></tr>

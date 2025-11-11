@@ -110,6 +110,17 @@ ul {
   }
 }
 
+#button-volver{
+  position: absolute; right: 0; background: black;
+  border-radius: 0 0 0 5px;
+  position: fixed;
+  z-index: 10000;
+}
+#button-volver:hover, #button-volver:focus{
+  position: absolute; right: 0; background: #969696;
+  border-radius: 0 0 0 5px;
+}
+
 .accordion {
   background: none;
 }

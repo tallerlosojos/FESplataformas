@@ -4,12 +4,12 @@ var json_FESplataformas_0 = {
     crs: { type: "name", properties: { name: "urn:ogc:def:crs:OGC:1.3:CRS84" } },
     features: [
 
-         {
+        {
             type: "Feature",
             properties: {
                 COUNTRY: "Haiti",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "<p><small>Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes, lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado. El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires, se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada, el icónico palacio presidencial.</small></p>",
+                DESCRIPCION: "<p><small>Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes, lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado. El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires, se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada, el icónico palacio presidencial.</small></p>",
                 CENTRAL1: "Confédération des Travailleurs Haïtiens (CTH)",
                 CENTRAL2: null,
                 CENTRAL3: null,
@@ -347,7 +347,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Costa Rica",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central de Trabajadores de Costa Rica (CTCR)",
                 CENTRAL2: "Central del Movimiento de Trabajadores Costarricenses (CMTC)",
                 CENTRAL3: "Central General de Trabajadores (CGT) Costa Rica",
@@ -592,7 +592,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Cuba",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central de Trabajadores de Cuba (CTC)",
                 CENTRAL2: null,
                 CENTRAL3: null,
@@ -1421,7 +1421,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Dominican Republic",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Confederación Autónoma Sindical Clasista (CASC)",
                 CENTRAL2: "Confederación Nacional de Unidad Sindical (CNUS)",
                 CENTRAL3: null,
@@ -1785,7 +1785,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Nicaragua",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central Sandinista de Trabajadores (CST)",
                 CENTRAL2: null,
                 CENTRAL3: null,
@@ -2082,7 +2082,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Panama",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central General Autónoma de Trabajadores de Panamá (CGTP)",
                 CENTRAL2: "Central Nacional de Trabajadores de Panamá (CNTP)",
                 CENTRAL3: "Confederación de Trabajadores de la República de Panamá (CTRP)",
@@ -2541,7 +2541,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Puerto Rico",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central Puertoriqueña de Trabajadores (CPT)",
                 CENTRAL2: null,
                 CENTRAL3: null,
@@ -2662,7 +2662,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Belize",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Congreso Nacional Sindical de Belice (National Trade Union Congress of Belize)",
                 CENTRAL2: null,
                 CENTRAL3: null,
@@ -2816,7 +2816,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "El Salvador",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Federación Nacional Sindical de Trabajadores Salvadoreños (FENATRAS)",
                 CENTRAL2: "Central de Tabajadires democráticos (CTD)",
                 CENTRAL3: "Unidad Nacional de los Trabajadores Salvadoreños (UNTS)",
@@ -2987,7 +2987,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Guatemala",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central General de Trabajadores de Guatemala (CGTG)",
                 CENTRAL2: "Confederación de Unidad Sindical de Guatemala (CUSG)",
                 CENTRAL3: "Unión Sindical de Trabajadores de Guatemala (UNSITRAGUA)",
@@ -3205,7 +3205,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Honduras",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central General de Trabajadores (CGT Honduras)",
                 CENTRAL2: "Confederación de Trabajadores de Honduras (CTH)",
                 CENTRAL3: "Confederación Unitaria de Trabajadores de Honduras (CUTH)",
@@ -3584,7 +3584,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Mexico",
                 ZONA: "Norte/Centro",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Confederación de Trabajadores de México (CTM)",
                 CENTRAL2: "Confederación Revolucionaria de Obreros y Campesinos (CROC)",
                 CENTRAL3: "Unión Nacional de Trabajadores (UNT)",
@@ -5866,7 +5866,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Brasil",
                 ZONA: "Sur/Norte",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central dos Sindicatos Brasileiros (CSB)",
                 CENTRAL2: "Central dos Trabalhadores e Trabalhadoras do Brasil (CTB)",
                 CENTRAL3: "Central Única dos Trabalhadores (CUT)",
@@ -10052,7 +10052,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Colombia",
                 ZONA: "Sur/Norte",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Unión de Trabajadores Colombianos (UTC)",
                 CENTRAL2: "Confederación de Trabajadores de Colombia (CTC)",
                 CENTRAL3: "Central Unitaria de Trabajadores de Colombia (CUT)",
@@ -11070,7 +11070,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Ecuador",
                 ZONA: "Sur/Norte",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Frente Unitário de los trabajadores",
                 CENTRAL2: "Confederaión de trabajadores del Ecuador  (CTE)",
                 CENTRAL3: "Confederación Ecuatoriana de Organizaciones Clasistas Unitarias de Trabajadores (CEDOCUT)",
@@ -11732,7 +11732,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Paraguay",
                 ZONA: "Sur/Norte",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central Sindical de Trabajadores del Paraguay (CESITP)",
                 CENTRAL2: "Central Unitaria de Trabajadores (CUT)",
                 CENTRAL3: "Central Unitaria de Trabajadores Auténtica (CUT-A)",
@@ -12160,7 +12160,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Venezuela",
                 ZONA: "Sur/Norte",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1:
                     "Central de Trabajadores y Trabajadoras Alianza Sindical Independiente de Venezuela. Central ASI ",
                 CENTRAL2:
@@ -13432,15 +13432,16 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Argentina",
                 ZONA: "Sur/Sur",
+                INDICADOR: "<div class='grid-x grid-margin-y grid-atributos align-middle'><div class='small-3 cell'>etiqueta 1</div><div class='small-9 cell'><div class='progress alert' role='progressbar' aria-valuenow='50' aria-valuemin='0' aria-valuetext='50 percent' aria-valuemax='100'><div class='progress-meter' style='width: 25%'><span class='progress-meter-text'>Baja</span></div></div></div><div class='small-3 cell'>etiqueta 2</div><div class='small-9 cell'><div class='progress alert' role='progressbar' aria-valuenow='50' aria-valuemin='0' aria-valuetext='50 percent' aria-valuemax='100'><div class='progress-meter' style='width: 50%'><span class='progress-meter-text'>Media</span></div></div></div><div class='small-3 cell'>etiqueta 3</div><div class='small-9 cell'><div class='progress alert' role='progressbar' aria-valuenow='50' aria-valuemin='0' aria-valuetext='50 percent' aria-valuemax='100'><div class='progress-meter' style='width: 80%'><span class='progress-meter-text'>Alta</span></div></div></div></div>",
                 DESCRIPCION: "<p><small>Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes, lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado. El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires, se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada, el icónico palacio presidencial.</small></p>",
                 CENTRAL1: "<a href='https://www.cta.org.ar/' target='_blank'>Central de Trabajadoras y Trabajadores de la Argentina (CTA-T)</a>",
-                CENTRAL2: "<a href='https://ctaa.org.ar/' target='_blank'>Central de Trabajadores de la Argentina (CTA)</a>", 
+                CENTRAL2: "<a href='https://ctaa.org.ar/' target='_blank'>Central de Trabajadores de la Argentina (CTA)</a>",
                 CENTRAL3: "Central de Trabajadores de la Argentina Autónoma (CTA-A)",
                 CENTRAL4: "Confederación General del Trabajo (CGT)",
                 CENTRAL5: null,
                 CENTRAL6: null,
                 CENTRAL7: null,
-                URLPAIS: "<a class='button' href='paises/argentina.html'>ir al repositorio</a>",
+                URLPAIS: "<a class='button' href='paises/argentina.html' target='_self'>ir al repositorio</a>",
             },
             geometry: {
                 type: "MultiPolygon",
@@ -15607,7 +15608,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Bolivia",
                 ZONA: "Sur/Sur",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central Obrera Boliviana (COB)",
                 CENTRAL2: "Confederación Sindical Única de Trabajadores Campesinos de Bolivia (CSUTCB)",
                 CENTRAL3: "Confederación Sindical de Comunidades Interculturales Originarios de Bolivia (CSCIOB)",
@@ -16252,7 +16253,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Chile",
                 ZONA: "Sur/Sur",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Central Autónoma de Trabajadores de Chile (CAT)",
                 CENTRAL2: "Central Clasista de Trabajadores y Trabajadoras (CCTT)",
                 CENTRAL3: "Central Clasista de Trabajadores y Trabajadoras (CCTT)",
@@ -23136,7 +23137,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Peru",
                 ZONA: "Sur/Sur",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Confederación General de Trabajadores del Perú (CGTP)",
                 CENTRAL2: "Central Unitaria de Trabajadores del Perú (CUT Perú)",
                 CENTRAL3: "Central Autónoma de Trabajadores del Perú (CATP)",
@@ -24136,7 +24137,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Uruguay",
                 ZONA: "Sur/Sur",
-               DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Hola mundo",
                 CENTRAL1: "Plenario Intersindical de Trabajadores – Convención Nacional de Trabajadores (PIT-CNT)",
                 CENTRAL2: null,
                 CENTRAL3: null,
