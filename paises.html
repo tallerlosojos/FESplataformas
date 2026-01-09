@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataformas Sindicales - América Latina</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #ffffff; /* Fondo blanco */
+        color: #000000; /* Texto general negro */
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    header {
+        background: #ffffff; /* Fondo blanco */
+        color: #000000; /* Texto negro */
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-bottom: 3px solid #ff0000; /* Línea roja de acento */
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+        color: #000000; /* Negro */
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+        color: #666666; /* Gris para subtítulos */
+    }
+
+    .stats-card {
+        background: #f0f0f0; /* Gris claro */
+        padding: 1rem 1.5rem;
+        border-left: 4px solid #ff0000; /* Rojo de acento */
+    }
+
+    .stats-card h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        color: #000000; /* Negro */
+    }
+
+    .filters-section {
+        background-color: #ffffff; /* Blanco */
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+        border: 1px solid #e0e0e0; /* Borde gris claro */
+    }
+
+    .filters-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        color: #000000; /* Negro */
+    }
+
+    .filters-title i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+        color: #ff0000; /* Rojo */
+    }
+
+    .filter-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-group label {
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #000000; /* Negro */
+    }
+
+    .filter-select {
+        padding: 10px 15px;
+        border: 2px solid #cccccc; /* Gris */
+        font-size: 1rem;
+        transition: border-color 0.3s;
+        background-color: #ffffff; /* Blanco */
+        color: #000000; /* Negro */
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: #ff0000; /* Rojo al enfocar */
+    }
+
+    .countries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .country-card {
+        background-color: #ffffff; /* Blanco */
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+        border-left: 5px solid #ff0000; /* Rojo de resalte */
+        border: 1px solid #e0e0e0; /* Borde gris */
+    }
+
+    .country-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(255, 0, 0, 0.15); /* Sombra rojiza */
+        border-color: #ff0000; /* Borde rojo al hover */
+    }
+
+    .country-header {
+        padding: 1.5rem;
+        background-color: #f8f8f8; /* Gris muy claro */
+        border-bottom: 1px solid #e0e0e0; /* Gris */
+    }
+
+    .country-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #000000; /* Negro */
+        margin-bottom: 5px;
+    }
+
+    .country-zone {
+        display: inline-block;
+        padding: 4px 10px;
+        background-color: #f0f0f0; /* Gris claro */
+        color: #666666; /* Gris oscuro */
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .country-body {
+        padding: 1.5rem;
+    }
+
+    .centrales-count {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .centrales-count i {
+        color: #ff0000; /* Rojo */
+        margin-right: 8px;
+        font-size: 1.2rem;
+    }
+
+    .centrales-list {
+        list-style-type: none;
+        margin-bottom: 1.5rem;
+        max-height: 150px;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+
+    .centrales-list li {
+        padding: 8px 0;
+        border-bottom: 1px dashed #e0e0e0; /* Gris */
+        color: #333333; /* Gris oscuro */
+    }
+
+    .centrales-list li:last-child {
+        border-bottom: none;
+    }
+
+    .country-footer {
+        padding: 1rem 1.5rem;
+        background-color: #f8f8f8; /* Gris muy claro */
+        border-top: 1px solid #e0e0e0; /* Gris */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .btn-view {
+        background-color: #ff0000; /* Rojo */
+        color: #ffffff; /* Blanco */
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-view:hover {
+        background-color: #cc0000; /* Rojo más oscuro */
+    }
+
+    .stats-section {
+        background-color: #ffffff; /* Blanco */
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+        border: 1px solid #e0e0e0; /* Gris */
+    }
+
+    .stats-title {
+        color: #000000; /* Negro */
+        margin-bottom: 1.5rem;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f0f0f0; /* Gris claro */
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 1.5rem;
+        background-color: #f8f8f8; /* Gris muy claro */
+        transition: transform 0.3s;
+        border: 1px solid #e0e0e0; /* Gris */
+    }
+
+    .stat-item:hover {
+        transform: translateY(-5px);
+        border-color: #ff0000; /* Rojo al hover */
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ff0000; /* Rojo */
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: #666666; /* Gris */
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 2rem 0;
+        color: #666666; /* Gris */
+        border-top: 1px solid #e0e0e0; /* Gris */
+        margin-top: 2rem;
+        background-color: #f8f8f8; /* Gris muy claro */
+    }
+
+    .no-results {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        background-color: #ffffff; /* Blanco */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e0e0e0; /* Gris */
+    }
+
+    .no-results i {
+        font-size: 3rem;
+        color: #cccccc; /* Gris claro */
+        margin-bottom: 1rem;
+    }
+
+    .reset-filters {
+        background-color: #f0f0f0; /* Gris claro */
+        color: #666666; /* Gris oscuro */
+        border: 1px solid #cccccc; /* Gris */
+        padding: 8px 16px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .reset-filters:hover {
+        background-color: #ff0000; /* Rojo */
+        color: #ffffff; /* Blanco */
+        border-color: #ff0000; /* Rojo */
+    }
+
+    @media (max-width: 768px) {
+        .header-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .stats-card {
+            margin-top: 1rem;
+            width: 100%;
+        }
+        
+        .countries-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>Plataformas Sindicales</h1>
+                    <p class="subtitle">Centrales sindicales en América Latina y el Caribe</p>
+                </div>
+                <div class="stats-card">
+                    <h3><i class="fas fa-chart-line"></i> Estadísticas Generales</h3>
+                    <p id="total-countries">Cargando datos...</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="filters-section">
+            <h2 class="filters-title"><i class="fas fa-filter"></i> Filtros de Búsqueda</h2>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="zone-filter"><i class="fas fa-globe-americas"></i> Zona Geográfica</label>
+                    <select id="zone-filter" class="filter-select">
+                        <option value="all">Todas las zonas</option>
+                        <!-- Las opciones se llenarán con JavaScript -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="central-filter"><i class="fas fa-users"></i> Centrales por país</label>
+                    <select id="central-filter" class="filter-select">
+                        <option value="all">Cualquier número de centrales</option>
+                        <option value="1">1 central</option>
+                        <option value="2">2 centrales</option>
+                        <option value="3">3 centrales</option>
+                        <option value="4">4 o más centrales</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort-filter"><i class="fas fa-sort-amount-down"></i> Ordenar por</label>
+                    <select id="sort-filter" class="filter-select">
+                        <option value="name-asc">Nombre (A-Z)</option>
+                        <option value="name-desc">Nombre (Z-A)</option>
+                        <option value="centrales-desc">Más centrales primero</option>
+                        <option value="centrales-asc">Menos centrales primero</option>
+                    </select>
+                </div>
+                <div class="filter-group" style="align-items: flex-end;">
+                    <button id="reset-filters" class="reset-filters">
+                        <i class="fas fa-redo"></i> Restablecer filtros
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h2 class="stats-title">Estadísticas por Zona</h2>
+            <div class="stats-grid" id="zone-stats">
+                <!-- Las estadísticas por zona se generarán con JavaScript -->
+            </div>
+        </section>
+
+        <section>
+            <h2 style="color: #000000; margin-bottom: 1.5rem;">Países <span id="results-count"></span></h2>
+            <div class="countries-grid" id="countries-container">
+                <!-- Las tarjetas de países se generarán con JavaScript -->
+            </div>
+        </section>
+
+        <footer>
+            <p>Plataforma de información sindical &copy; <span id="current-year"></span></p>
+            <p style="margin-top: 5px; font-size: 0.9rem;">Datos geoespaciales de centrales sindicales en América Latina y el Caribe</p>
+        </footer>
+    </div>
+
+    <script>
+        // Cargar los datos del archivo externo
+let countriesData = [];
+let zones = new Set();
+
+// Cargar datos desde el archivo externo
+console.log("Intentando cargar datos desde: ./data/FESplataformas_0.js");
+fetch('./data/FESplataformas_0.js')
+    .then(response => {
+        console.log("Respuesta recibida, status:", response.status);
+        if (!response.ok) {
+            throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log("Archivo cargado exitosamente. Longitud:", data.length, "caracteres");
+        
+        // Extraer el objeto JSON del archivo JS con un regex más robusto
+        const jsonMatch = data.match(/var json_FESplataformas_0 = (\{[\s\S]*?\});/);
+        
+        if (jsonMatch && jsonMatch[1]) {
+            console.log("✅ JSON encontrado en el archivo");
+            
+            // Limpiar el JSON antes de parsear
+            let jsonString = jsonMatch[1];
+            
+            // 1. Reemplazar comillas curvadas por comillas rectas (problema común de copy-paste)
+            jsonString = jsonString.replace(/[“”]/g, '"');
+            
+            // 2. Escapar caracteres especiales en strings
+            jsonString = jsonString.replace(/\n/g, '\\n')
+                                   .replace(/\r/g, '\\r')
+                                   .replace(/\t/g, '\\t');
+            
+            // 3. Asegurar que los strings estén correctamente formados
+            // Esto maneja caracteres especiales dentro de las propiedades
+            jsonString = jsonString.replace(/(\w+):\s*"([^"]*)"/g, function(match, key, value) {
+                // Escapar caracteres problemáticos en el valor
+                const escapedValue = value.replace(/\\/g, '\\\\')
+                                          .replace(/"/g, '\\"')
+                                          .replace(/\n/g, '\\n')
+                                          .replace(/\r/g, '\\r')
+                                          .replace(/\t/g, '\\t');
+                return key + ': "' + escapedValue + '"';
+            });
+            
+            console.log("JSON limpiado, primeros 500 chars:", jsonString.substring(0, 500));
+            
+            try {
+                const jsonData = JSON.parse(jsonString);
+                console.log("✅ JSON parseado correctamente");
+                console.log("Número de países (features):", jsonData.features.length);
+                
+                // Procesar los datos
+                processData(jsonData.features);
+                initializePage();
+            } catch (parseError) {
+                console.error('❌ Error al parsear JSON después de limpiar:', parseError);
+                console.error('Línea del error aproximada:', parseError.message);
+                
+                // Intentar un enfoque alternativo: evaluar como JavaScript
+                console.log("Intentando evaluación como JavaScript...");
+                try {
+                    // Crear una función que evalúe el contenido
+                    const jsonData = eval('(' + jsonMatch[1] + ')');
+                    console.log("✅ JSON evaluado como JavaScript exitosamente");
+                    processData(jsonData.features);
+                    initializePage();
+                } catch (evalError) {
+                    console.error('❌ Error al evaluar como JS:', evalError);
+                    showError('No se pudo procesar el archivo de datos. El formato contiene caracteres inválidos.');
+                }
+            }
+        } else {
+            console.error('❌ No se pudo extraer JSON del archivo');
+            showError('Formato de archivo incorrecto. El archivo debe contener "var json_FESplataformas_0 = {...};"');
+        }
+    })
+    .catch(error => {
+        console.error('❌ Error al cargar el archivo:', error);
+        showError(`Error al cargar el archivo de datos: ${error.message}`);
+    });
+
+// Función para mostrar errores en la página
+function showError(message) {
+    document.getElementById('countries-container').innerHTML = `
+        <div class="no-results">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Error al cargar datos</h3>
+            <p>${message}</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                <strong>Solución alternativa:</strong><br>
+                1. Abre el archivo FESplataformas_0.js en un editor de texto<br>
+                2. Guarda como UTF-8 sin BOM<br>
+                3. Reemplaza todas las comillas curvadas por rectas<br>
+            </p>
+        </div>
+    `;
+    document.getElementById('total-countries').innerHTML = `<strong>Error</strong>`;
+}
+
+function processData(features) {
+    console.log("Procesando", features.length, "países...");
+    
+    countriesData = features.map((feature, index) => {
+        const props = feature.properties;
+        
+        // Contar centrales no nulas
+        const centralesCount = [
+            props.CENTRAL1, 
+            props.CENTRAL2, 
+            props.CENTRAL3, 
+            props.CENTRAL4,
+            props.CENTRAL5, 
+            props.CENTRAL6, 
+            props.CENTRAL7
+        ].filter(central => central && central.trim() !== '').length;
+        
+        // Obtener lista de centrales
+        const centralesList = [
+            props.CENTRAL1, 
+            props.CENTRAL2, 
+            props.CENTRAL3, 
+            props.CENTRAL4,
+            props.CENTRAL5, 
+            props.CENTRAL6, 
+            props.CENTRAL7
+        ].filter(central => central && central.trim() !== '');
+        
+        // Añadir zona al conjunto de zonas únicas
+        if (props.ZONA) {
+            zones.add(props.ZONA);
+        } else {
+            console.warn(`País ${props.COUNTRY} no tiene ZONA definida`);
+        }
+        
+        const countryData = {
+            id: props.COUNTRY ? props.COUNTRY.toLowerCase().replace(/\s+/g, '-') : `pais-${index}`,
+            name: props.COUNTRY || `País ${index + 1}`,
+            zone: props.ZONA || 'Sin zona',
+            description: props.DESCRIPCION || '',
+            centralesCount: centralesCount,
+            centralesList: centralesList,
+            entrevistas: props.ENTREVISTAS || '',
+            legislacion: props.LEGISLACION || '',
+            otros: props.OTROS || '',
+            urlpais: props.URLPAIS || '',
+            allProperties: props
+        };
+        
+        console.log(`Procesado: ${countryData.name} (${centralesCount} centrales)`);
+        return countryData;
+    });
+    
+    console.log("Procesamiento completado. Total países:", countriesData.length);
+    console.log("Zonas encontradas:", Array.from(zones));
+}
+
+function initializePage() {
+    console.log("Inicializando página...");
+    
+    // Establecer el año actual en el footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Actualizar contador total de países
+    document.getElementById('total-countries').innerHTML = `
+        <strong>${countriesData.length}</strong> países registrados
+    `;
+    
+    // Llenar opciones de filtro de zona
+    const zoneFilter = document.getElementById('zone-filter');
+    zones.forEach(zone => {
+        const option = document.createElement('option');
+        option.value = zone;
+        option.textContent = zone;
+        zoneFilter.appendChild(option);
+    });
+    
+    console.log("Filtros de zona creados:", zones.size, "zonas");
+    
+    // Generar estadísticas por zona
+    generateZoneStats();
+    
+    // Mostrar todos los países inicialmente
+    renderCountries(countriesData);
+    
+    // Añadir event listeners a los filtros
+    document.getElementById('zone-filter').addEventListener('change', applyFilters);
+    document.getElementById('central-filter').addEventListener('change', applyFilters);
+    document.getElementById('sort-filter').addEventListener('change', applyFilters);
+    document.getElementById('reset-filters').addEventListener('click', resetFilters);
+    
+    console.log("Página inicializada correctamente");
+}
+
+// Las funciones generateZoneStats, applyFilters, renderCountries y resetFilters
+// se mantienen igual que en tu código original
+        
+        function processData(features) {
+            countriesData = features.map(feature => {
+                const props = feature.properties;
+                
+                // Contar centrales no nulas
+                const centralesCount = [
+                    props.CENTRAL1, 
+                    props.CENTRAL2, 
+                    props.CENTRAL3, 
+                    props.CENTRAL4,
+                    props.CENTRAL5, 
+                    props.CENTRAL6, 
+                    props.CENTRAL7
+                ].filter(central => central && central.trim() !== '').length;
+                
+                // Obtener lista de centrales
+                const centralesList = [
+                    props.CENTRAL1, 
+                    props.CENTRAL2, 
+                    props.CENTRAL3, 
+                    props.CENTRAL4,
+                    props.CENTRAL5, 
+                    props.CENTRAL6, 
+                    props.CENTRAL7
+                ].filter(central => central && central.trim() !== '');
+                
+                // Añadir zona al conjunto de zonas únicas
+                zones.add(props.ZONA);
+                
+                return {
+                    id: props.COUNTRY.toLowerCase().replace(/\s+/g, '-'),
+                    name: props.COUNTRY,
+                    zone: props.ZONA,
+                    description: props.DESCRIPCION,
+                    centralesCount: centralesCount,
+                    centralesList: centralesList,
+                    entrevistas: props.ENTREVISTAS,
+                    legislacion: props.LEGISLACION,
+                    otros: props.OTROS,
+                    urlpais: props.URLPAIS,
+                    // Guardar todas las propiedades para el viewer
+                    allProperties: props
+                };
+            });
+        }
+        
+        function initializePage() {
+            // Establecer el año actual en el footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Actualizar contador total de países
+            document.getElementById('total-countries').innerHTML = `
+                <strong>${countriesData.length}</strong> países registrados
+            `;
+            
+            // Llenar opciones de filtro de zona
+            const zoneFilter = document.getElementById('zone-filter');
+            zones.forEach(zone => {
+                const option = document.createElement('option');
+                option.value = zone;
+                option.textContent = zone;
+                zoneFilter.appendChild(option);
+            });
+            
+            // Generar estadísticas por zona
+            generateZoneStats();
+            
+            // Mostrar todos los países inicialmente
+            renderCountries(countriesData);
+            
+            // Añadir event listeners a los filtros
+            document.getElementById('zone-filter').addEventListener('change', applyFilters);
+            document.getElementById('central-filter').addEventListener('change', applyFilters);
+            document.getElementById('sort-filter').addEventListener('change', applyFilters);
+            document.getElementById('reset-filters').addEventListener('click', resetFilters);
+        }
+        
+        function generateZoneStats() {
+            const zoneStatsContainer = document.getElementById('zone-stats');
+            const statsByZone = {};
+            
+            // Calcular estadísticas por zona
+            countriesData.forEach(country => {
+                if (!statsByZone[country.zone]) {
+                    statsByZone[country.zone] = {
+                        count: 0,
+                        totalCentrales: 0
+                    };
+                }
+                
+                statsByZone[country.zone].count++;
+                statsByZone[country.zone].totalCentrales += country.centralesCount;
+            });
+            
+            // Generar HTML de estadísticas
+            let statsHTML = '';
+            Object.keys(statsByZone).forEach(zone => {
+                const avgCentrales = (statsByZone[zone].totalCentrales / statsByZone[zone].count).toFixed(1);
+                
+                statsHTML += `
+                    <div class="stat-item">
+                        <div class="stat-value">${statsByZone[zone].count}</div>
+                        <div class="stat-label">Países en</div>
+                        <div class="stat-zone" style="margin-top: 5px; font-weight: 600;">${zone}</div>
+                        <div style="margin-top: 10px; font-size: 0.9rem; color: #4caf50;">
+                            <i class="fas fa-users"></i> ${avgCentrales} centrales/promedio
+                        </div>
+                    </div>
+                `;
+            });
+            
+            zoneStatsContainer.innerHTML = statsHTML;
+        }
+        
+        function applyFilters() {
+            const selectedZone = document.getElementById('zone-filter').value;
+            const selectedCentralFilter = document.getElementById('central-filter').value;
+            const sortOption = document.getElementById('sort-filter').value;
+            
+            // Filtrar países
+            let filteredCountries = countriesData.filter(country => {
+                // Filtrar por zona
+                if (selectedZone !== 'all' && country.zone !== selectedZone) {
+                    return false;
+                }
+                
+                // Filtrar por número de centrales
+                if (selectedCentralFilter !== 'all') {
+                    const centralFilterValue = parseInt(selectedCentralFilter);
+                    
+                    if (centralFilterValue === 4) {
+                        // 4 o más centrales
+                        if (country.centralesCount < 4) return false;
+                    } else {
+                        // Número exacto de centrales
+                        if (country.centralesCount !== centralFilterValue) return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            // Ordenar países
+            filteredCountries.sort((a, b) => {
+                switch (sortOption) {
+                    case 'name-asc':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    case 'centrales-desc':
+                        return b.centralesCount - a.centralesCount;
+                    case 'centrales-asc':
+                        return a.centralesCount - b.centralesCount;
+                    default:
+                        return 0;
+                }
+            });
+            
+            // Mostrar resultados
+            renderCountries(filteredCountries);
+        }
+        
+        function renderCountries(countries) {
+            const container = document.getElementById('countries-container');
+            const resultsCount = document.getElementById('results-count');
+            
+            // Actualizar contador de resultados
+            if (countries.length === 0) {
+                resultsCount.innerHTML = '<span style="color: #666; font-weight: normal;">(0 países)</span>';
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No se encontraron países</h3>
+                        <p>Intenta ajustar los filtros de búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            resultsCount.innerHTML = `<span style="color: #666; font-weight: normal;">(${countries.length} países)</span>`;
+            
+            // Generar tarjetas de países
+            let countriesHTML = '';
+            
+            countries.forEach(country => {
+                // Determinar color de la zona
+                let zoneColor = '#ff0000'; // Color por defecto
+                if (country.zone === 'Norte/Centro') zoneColor = '#000000';
+                
+                // Generar lista de centrales
+                let centralesHTML = '';
+                country.centralesList.forEach((central, index) => {
+                    if (index < 3) { // Mostrar máximo 3 centrales en la vista previa
+                        centralesHTML += `<li>${central}</li>`;
+                    }
+                });
+                
+                // Si hay más de 3 centrales, añadir indicador
+                if (country.centralesList.length > 3) {
+                    centralesHTML += `<li style="color: #888; font-style: italic;">+${country.centralesList.length - 3} más</li>`;
+                }
+                
+                // Si no hay centrales
+                if (country.centralesList.length === 0) {
+                    centralesHTML = '<li style="color: #888; font-style: italic;">No se registran centrales</li>';
+                }
+                
+                countriesHTML += `
+                    <div class="country-card">
+                        <div class="country-header">
+                            <h3 class="country-name">${country.name}</h3>
+                            <span class="country-zone" style="background-color: ${zoneColor}20; color: ${zoneColor};">${country.zone}</span>
+                        </div>
+                        <div class="country-body">
+                            <div class="centrales-count">
+                                <i class="fas fa-users"></i>
+                                <span><strong>${country.centralesCount}</strong> centrales sindicales registradas</span>
+                            </div>
+                            <ul class="centrales-list">
+                                ${centralesHTML}
+                            </ul>
+                        </div>
+                        <div class="country-footer">
+                            <span style="color: #666; font-size: 0.9rem;">
+                                <i class="fas fa-info-circle"></i> Haz clic para ver detalles
+                            </span>
+                            <a href="viewer.html?country=${country.id}" class="btn-view">
+                                <i class="fas fa-external-link-alt"></i> Ver más
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = countriesHTML;
+        }
+        
+        function resetFilters() {
+            document.getElementById('zone-filter').value = 'all';
+            document.getElementById('central-filter').value = 'all';
+            document.getElementById('sort-filter').value = 'name-asc';
+            applyFilters();
+        }
+    </script>
+</body>
+</html>

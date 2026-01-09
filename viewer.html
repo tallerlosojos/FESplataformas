@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del País - Plataformas Sindicales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .country-info-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .country-header {
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .country-title {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .country-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a237e;
+            margin-right: 15px;
+        }
+
+        .country-zone {
+            display: inline-block;
+            padding: 6px 15px;
+            background-color: #e8eaf6;
+            color: #3949ab;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .centrales-count-badge {
+            background-color: #4caf50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .centrales-count-badge i {
+            margin-right: 8px;
+        }
+
+        .country-content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            color: #1a237e;
+            margin-bottom: 1.2rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8eaf6;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .centrales-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .central-card {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #3949ab;
+            transition: transform 0.3s;
+        }
+
+        .central-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .central-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #3949ab;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .central-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .info-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-label i {
+            margin-right: 8px;
+            color: #3949ab;
+        }
+
+        .info-value {
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .html-content {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .action-button i {
+            margin-right: 8px;
+        }
+
+        .btn-primary {
+            background-color: #3949ab;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #283593;
+        }
+
+        .btn-secondary {
+            background-color: #f5f5f5;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .error {
+            text-align: center;
+            padding: 3rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            color: #d32f2f;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .back-button {
+                margin-top: 1rem;
+            }
+            
+            .country-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .centrales-count-badge {
+                margin-top: 1rem;
+            }
+            
+            .centrales-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>Plataformas Sindicales</h1>
+                    <p>Detalles del país</p>
+                </div>
+                <a href="paises.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Volver al listado
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="country-container">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin fa-2x" style="color: #3949ab; margin-bottom: 1rem;"></i>
+                <h3>Cargando información del país...</h3>
+            </div>
+        </div>
+
+        <footer>
+            <p>Plataforma de información sindical &copy; <span id="current-year"></span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Obtener parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const countryId = urlParams.get('country');
+        
+        // Establecer el año actual en el footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Cargar datos del país
+        if (countryId) {
+            loadCountryData(countryId);
+        } else {
+            showError('No se especificó un país para mostrar');
+        }
+        
+        function loadCountryData(countryId) {
+            console.log("Cargando datos para país ID:", countryId);
+            
+            // Cargar datos desde el archivo externo
+            fetch('./data/FESplataformas_0.js')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    console.log("Archivo de datos cargado");
+                    
+                    // Extraer el objeto JSON del archivo JS
+                    const jsonMatch = data.match(/var json_FESplataformas_0 = (\{[\s\S]*?\});/);
+                    
+                    if (jsonMatch && jsonMatch[1]) {
+                        // Limpiar el JSON antes de parsear (igual que en paises.html)
+                        let jsonString = jsonMatch[1];
+                        
+                        // 1. Reemplazar comillas curvadas por comillas rectas
+                        jsonString = jsonString.replace(/[“”]/g, '"');
+                        
+                        // 2. Escapar caracteres especiales en strings
+                        jsonString = jsonString.replace(/\n/g, '\\n')
+                                               .replace(/\r/g, '\\r')
+                                               .replace(/\t/g, '\\t');
+                        
+                        // 3. Asegurar que los strings estén correctamente formados
+                        jsonString = jsonString.replace(/(\w+):\s*"([^"]*)"/g, function(match, key, value) {
+                            const escapedValue = value.replace(/\\/g, '\\\\')
+                                                      .replace(/"/g, '\\"')
+                                                      .replace(/\n/g, '\\n')
+                                                      .replace(/\r/g, '\\r')
+                                                      .replace(/\t/g, '\\t');
+                            return key + ': "' + escapedValue + '"';
+                        });
+                        
+                        try {
+                            const jsonData = JSON.parse(jsonString);
+                            console.log("JSON parseado correctamente");
+                            
+                            // Buscar el país por ID
+                            const countryFeature = jsonData.features.find(feature => {
+                                const countryName = feature.properties.COUNTRY;
+                                if (!countryName) return false;
+                                const normalizedId = countryName.toLowerCase().replace(/\s+/g, '-');
+                                return normalizedId === countryId;
+                            });
+                            
+                            if (countryFeature) {
+                                console.log("País encontrado:", countryFeature.properties.COUNTRY);
+                                displayCountry(countryFeature);
+                            } else {
+                                console.error("País no encontrado con ID:", countryId);
+                                showError('País no encontrado');
+                            }
+                        } catch (parseError) {
+                            console.error('Error al parsear JSON:', parseError);
+                            
+                            // Intentar evaluación como JavaScript
+                            try {
+                                const jsonData = eval('(' + jsonMatch[1] + ')');
+                                console.log("JSON evaluado como JavaScript");
+                                
+                                // Buscar el país por ID
+                                const countryFeature = jsonData.features.find(feature => {
+                                    const countryName = feature.properties.COUNTRY;
+                                    if (!countryName) return false;
+                                    const normalizedId = countryName.toLowerCase().replace(/\s+/g, '-');
+                                    return normalizedId === countryId;
+                                });
+                                
+                                if (countryFeature) {
+                                    displayCountry(countryFeature);
+                                } else {
+                                    showError('País no encontrado');
+                                }
+                            } catch (evalError) {
+                                console.error('Error al evaluar como JS:', evalError);
+                                showError('Error al procesar los datos del país');
+                            }
+                        }
+                    } else {
+                        showError('Error al cargar datos');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar el archivo:', error);
+                    showError('Error al cargar los datos del país: ' + error.message);
+                });
+        }
+        
+        function displayCountry(feature) {
+            const props = feature.properties;
+            console.log("Mostrando país:", props.COUNTRY);
+            
+            // Obtener lista de centrales
+            const centrales = [
+                {num: 1, name: props.CENTRAL1},
+                {num: 2, name: props.CENTRAL2},
+                {num: 3, name: props.CENTRAL3},
+                {num: 4, name: props.CENTRAL4},
+                {num: 5, name: props.CENTRAL5},
+                {num: 6, name: props.CENTRAL6},
+                {num: 7, name: props.CENTRAL7}
+            ].filter(central => central.name && central.name.trim() !== '');
+            
+            // Contar centrales
+            const centralesCount = centrales.length;
+            
+            // Determinar color de la zona
+            let zoneColor = '#3949ab';
+            if (props.ZONA === 'Norte/Centro') zoneColor = '#1a237e';
+            
+            // Generar HTML para las centrales
+            let centralesHTML = '';
+            if (centrales.length > 0) {
+                centrales.forEach(central => {
+                    centralesHTML += `
+                        <div class="central-card">
+                            <div>
+                                <span class="central-number">${central.num}</span>
+                                <span class="central-name">${central.name}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                centralesHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #888;">
+                        <i class="fas fa-users fa-2x" style="margin-bottom: 1rem;"></i>
+                        <h3>No se registran centrales sindicales</h3>
+                    </div>
+                `;
+            }
+            
+            // Procesar la descripción HTML (si existe)
+            let descripcionHTML = props.DESCRIPCION || '<p style="color: #888; font-style: italic;">No hay descripción disponible</p>';
+            
+            // Crear HTML del país
+            const countryHTML = `
+                <div class="country-info-card">
+                    <div class="country-header">
+                        <div class="country-title">
+                            <h2 class="country-name">${props.COUNTRY || 'País sin nombre'}</h2>
+                            <span class="country-zone" style="background-color: ${zoneColor}20; color: ${zoneColor};">${props.ZONA || 'Sin zona'}</span>
+                        </div>
+                        <div class="centrales-count-badge">
+                            <i class="fas fa-users"></i>
+                            <span>${centralesCount} centrales sindicales</span>
+                        </div>
+                    </div>
+                    
+                    <div class="country-content">
+                        <div class="section">
+                            <h3 class="section-title"><i class="fas fa-info-circle"></i> Descripción</h3>
+                            <div class="info-item">
+                                <div class="html-content">${descripcionHTML}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title"><i class="fas fa-users"></i> Centrales Sindicales</h3>
+                            <div class="centrales-grid">
+                                ${centralesHTML}
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title"><i class="fas fa-link"></i> Recursos Adicionales</h3>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-file-alt"></i> Entrevistas asociadas</div>
+                                <div class="info-value">${props.ENTREVISTAS || 'No disponible'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-gavel"></i> Legislación asociada</div>
+                                <div class="info-value">${props.LEGISLACION || 'No disponible'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label"><i class="fas fa-info"></i> Más información</div>
+                                <div class="info-value">${props.OTROS || 'No disponible'}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <h3 class="section-title"><i class="fas fa-external-link-alt"></i> Acciones</h3>
+                            <div class="button-group">
+                                ${props.URLPAIS || '<a href="paises.html" class="action-button btn-primary"><i class="fas fa-arrow-left"></i> Volver al listado</a>'}
+                                <a href="paises.html" class="action-button btn-secondary">
+                                    <i class="fas fa-list"></i> Ver todos los países
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Mostrar en la página
+            document.getElementById('country-container').innerHTML = countryHTML;
+        }
+        
+        function showError(message) {
+            document.getElementById('country-container').innerHTML = `
+                <div class="error">
+                    <i class="fas fa-exclamation-triangle fa-2x" style="margin-bottom: 1rem;"></i>
+                    <h3>${message}</h3>
+                    <p style="margin-top: 1rem;">
+                        <a href="paises.html" class="action-button btn-primary" style="display: inline-flex;">
+                            <i class="fas fa-arrow-left"></i> Volver al listado
+                        </a>
+                    </p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

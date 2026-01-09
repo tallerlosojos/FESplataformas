@@ -304,7 +304,8 @@ table #cell-zona{
 table #cell-zona td:before{
   content: "Zona ";
 }
-table #cell-central1, table #cell-central2, table #cell-central3, table #cell-central4, table #cell-central5, table #cell-central6, table #cell-central7{
+
+table #cell-otros, table #cell-legislacion, table #cell-entrevistas, table #cell-central1, table #cell-central2, table #cell-central3, table #cell-central4, table #cell-central5, table #cell-central6, table #cell-central7{
   font-size: .8rem;
   margin-bottom: 0.25rem;
   display: block;
@@ -313,6 +314,36 @@ table #cell-central1:before{
 content: "Centrales Sindicales";
   font-size: 0.8rem;
   display: inline-block;
+  margin-bottom: 1rem;
+  border: 1px dotted #969696;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+table #cell-entrevistas td:before{
+  content: "Entrevistas ";
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px dotted #969696;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+table #cell-legislacion td:before{
+  content: "Legislación ";
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px dotted #969696;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+table #cell-otros td:before{
+  content: "Otros ";
+  display: block;
+  font-size: 0.8rem;
   margin-bottom: 1rem;
   border: 1px dotted #969696;
   padding: 0.5rem 1rem;
