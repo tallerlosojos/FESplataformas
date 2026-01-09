@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Visor de país — FESplataformas</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:16px;background:#f7f7f7;color:#111}
+    h1{font-size:1.25rem;margin:0 0 12px}
+    #main{max-width:1100px;margin:0 auto}
+    .note{margin-bottom:12px;color:#444}
+    .controls{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+    select{padding:6px;border-radius:4px}
+    .card{background:#fff;border:1px solid #e0e0e0;padding:12px;margin-bottom:12px;border-radius:6px;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:6px 8px;border-bottom:1px solid #eee;text-align:left;vertical-align:top;font-size:0.95rem}
+    th{width:160px;color:#333;background:#fafafa}
+    pre{background:#111;color:#dcdcdc;padding:10px;border-radius:4px;overflow:auto;font-size:0.85rem}
+    details summary{cursor:pointer;font-weight:600}
+    .missing{color:#a00}
+    .meta{color:#666;font-size:0.9rem;margin-bottom:8px}
+    .small{font-size:0.9rem;color:#444}
+    a.smalllink{color:#0077cc;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div id="main">
+    <h1>Visor dinámico de países — FESplataformas</h1>
+    <div class="note">
+      Usa el selector o añade <code>?country=Nombre</code> en la URL (case-insensitive). Ejemplo: <code>viewer.html?country=Chile</code>.
+    </div>
+
+    <div class="controls">
+      <label for="countrySelect">Seleccionar país:</label>
+      <select id="countrySelect"><option>Cargando…</option></select>
+      <a id="openIndex" class="smalllink" href="index.html">Índice de países</a>
+    </div>
+
+    <div id="content">Cargando datos…</div>
+  </div>
+
+  <script src="../data/FESplataformas_0.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const content = document.getElementById('content');
+      const sel = document.getElementById('countrySelect');
+
+      if (typeof json_FESplataformas_0 === 'undefined') {
+        content.innerHTML = '<p class="missing">No se encontró <code>json_FESplataformas_0</code>. Verifica la ruta <code>../data/FESplataformas_0.js</code>.</p>';
+        sel.innerHTML = '<option>Sin datos</option>';
+        return;
+      }
+
+      const features = Array.isArray(json_FESplataformas_0.features) ? json_FESplataformas_0.features : [];
+
+      // obtener lista de países únicos (normalizados)
+      const countryMap = {};
+      features.forEach((f, idx) => {
+        const c = f && f.properties && f.properties.COUNTRY;
+        if (typeof c === 'string' && c.trim()) {
+          const key = c.trim();
+          if (!countryMap[key]) countryMap[key] = [];
+          countryMap[key].push({ feature: f, index: idx });
+        }
+      });
+
+      const countries = Object.keys(countryMap).sort((a,b)=> a.localeCompare(b,'es'));
+
+      // poblar selector
+      sel.innerHTML = '';
+      countries.forEach(c => {
+        const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o);
+      });
+
+      // seleccionar por query param
+      const queryCountry = getQueryParam('country');
+      if (queryCountry) {
+        // buscar coincidencia case-insensitive
+        const found = countries.find(x => x.toLowerCase() === queryCountry.toLowerCase()) || countries.find(x => x.toLowerCase().includes(queryCountry.toLowerCase()));
+        if (found) sel.value = found;
+      }
+
+      sel.addEventListener('change', () => {
+        const v = sel.value;
+        // actualizar url sin recargar
+        const u = new URL(window.location.href);
+        u.searchParams.set('country', v);
+        window.history.replaceState({}, '', u);
+        renderCountry(v);
+      });
+
+      // si hay un valor seleccionado por defecto, renderizar
+      if (sel.value) renderCountry(sel.value);
+
+      function renderCountry(countryName) {
+        const list = countryMap[countryName] || [];
+        if (!list.length) {
+          content.innerHTML = '<p class="missing">No se encontraron features para: ' + escapeHtml(countryName) + '</p>';
+          return;
+        }
+        content.innerHTML = '';
+        list.forEach((entry, i) => {
+          const f = entry.feature;
+          const card = document.createElement('div'); card.className = 'card';
+          const title = (f.properties && (f.properties.COUNTRY || `Feature ${entry.index}`)) || `Feature ${entry.index}`;
+          const subtitle = f.properties && f.properties.ZONA ? `Zona: ${escapeHtml(f.properties.ZONA)}` : '';
+          card.innerHTML = `<h2>${escapeHtml(title)} ${subtitle ? ' — ' + escapeHtml(subtitle) : ''}</h2>`;
+
+          const props = f.properties || {};
+          const keys = Object.keys(props);
+
+          if (keys.length) {
+            const table = document.createElement('table');
+            const tbody = document.createElement('tbody');
+            keys.forEach(k => {
+              const tr = document.createElement('tr');
+              const th = document.createElement('th'); th.textContent = k;
+              const td = document.createElement('td'); td.appendChild(renderValueNode(props[k]));
+              tr.appendChild(th); tr.appendChild(td); tbody.appendChild(tr);
+            });
+            table.appendChild(tbody); card.appendChild(table);
+          } else {
+            const empty = document.createElement('div'); empty.className='small'; empty.textContent='No hay propiedades'; card.appendChild(empty);
+          }
+
+          const preTitle = document.createElement('div'); preTitle.style.margin='10px 0 6px'; preTitle.style.color='#333'; preTitle.textContent = 'JSON completo de properties:';
+          const pre = document.createElement('pre'); pre.textContent = JSON.stringify(props, null, 2);
+          card.appendChild(preTitle); card.appendChild(pre);
+
+          content.appendChild(card);
+        });
+      }
+
+      // helpers (reutilizan la lógica del viewer previo)
+      function renderValueNode(v) {
+        if (v === null) { const em = document.createElement('em'); em.textContent='null'; return em; }
+        if (v === undefined) { const em = document.createElement('em'); em.textContent='undefined'; return em; }
+        const t = typeof v;
+        if (t === 'string') {
+          const s = v.trim();
+          if (/^https?:\/\//i.test(s)) {
+            const a = document.createElement('a'); a.href = s; a.target='_blank'; a.rel='noopener'; a.textContent=s; return a;
+          }
+          const span = document.createElement('span'); span.textContent = v; return span;
+        }
+        if (t === 'number' || t === 'boolean') { const span = document.createElement('span'); span.textContent=String(v); return span; }
+        if (Array.isArray(v)) return renderDetailsForCollection(v,'Array');
+        if (t === 'object') return renderDetailsForCollection(v,'Object');
+        const span = document.createElement('span'); span.textContent=String(v); return span;
+      }
+
+      function renderDetailsForCollection(col,label){
+        const details = document.createElement('details'); details.open=false; const summary=document.createElement('summary'); summary.textContent=label; details.appendChild(summary);
+        const info = document.createElement('div'); info.className='small'; info.style.margin='6px 0 8px'; info.textContent = Array.isArray(col) ? `Longitud: ${col.length}` : `Propiedades: ${Object.keys(col).length}`; details.appendChild(info);
+        const innerTable = document.createElement('table'); const tbody=document.createElement('tbody');
+        if (Array.isArray(col)) { col.forEach((item,i)=>{ const tr=document.createElement('tr'); const th=document.createElement('th'); th.textContent=`[${i}]`; const td=document.createElement('td'); td.appendChild(renderValueNode(item)); tr.appendChild(th); tr.appendChild(td); tbody.appendChild(tr); }); }
+        else { Object.keys(col).forEach(k=>{ const tr=document.createElement('tr'); const th=document.createElement('th'); th.textContent=k; const td=document.createElement('td'); td.appendChild(renderValueNode(col[k])); tr.appendChild(th); tr.appendChild(td); tbody.appendChild(tr); }); }
+        innerTable.appendChild(tbody); details.appendChild(innerTable);
+        const jsonPreviewBtn=document.createElement('button'); jsonPreviewBtn.textContent='Ver JSON (compacto)'; jsonPreviewBtn.style.marginTop='8px'; jsonPreviewBtn.type='button'; const pre=document.createElement('pre'); pre.style.display='none'; pre.textContent=JSON.stringify(col,null,2); jsonPreviewBtn.addEventListener('click',()=>{ pre.style.display = pre.style.display==='none' ? 'block' : 'none'; }); details.appendChild(jsonPreviewBtn); details.appendChild(pre);
+        return details;
+      }
+
+      function escapeHtml(s){ if (s===null||s===undefined) return ''; return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[m]); }
+      function getQueryParam(name){ const u=new URL(window.location.href); return u.searchParams.get(name); }
+    });
+  </script>
+</body>
+</html>
