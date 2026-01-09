@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chile — FESplataformas</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+e2Y3kT3rKk2gqk2qQYvZfQ5k7GQ2m1w1gU1Yk0+0=" crossorigin=""/>
+
+  <style>
+    html,body{height:100%;margin:0;font-family:Arial,Helvetica,sans-serif}
+    #container{display:flex;flex-direction:row;height:100%}
+    #map{flex:1;min-height:400px}
+    #info{width:360px;max-width:40%;overflow:auto;padding:10px;border-left:1px solid #ddd;background:#fafafa}
+    .feature-card{border:1px solid #ddd;padding:8px;margin-bottom:8px;border-radius:4px;background:#fff}
+    .missing{color:#a00}
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="map"></div>
+    <aside id="info">
+      <h2>Chile — FESplataformas</h2>
+      <div id="list">Cargando datos…</div>
+    </aside>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-o9N1j6Ck9e1f0Gk2a7WY1QdJbVb0z2y1z5r8q6q3n5E=" crossorigin=""></script>
+
+  <!-- Cargar el archivo de datos (ajusta la ruta si corresponde) -->
+  <script src="../data/FESplataformas_0.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const infoEl = document.getElementById('list');
+
+      if (typeof json_FESplataformas_0 === 'undefined') {
+        infoEl.innerHTML = '<p class="missing">No se encontró la variable <code>json_FESplataformas_0</code>. Asegúrate de que <code>../data/FESplataformas_0.js</code> existe y define esa variable.</p>';
+        return;
+      }
+
+      // Filtrar features cuyo país sea Chile (case-insensitive, permite coincidencias parciales)
+      const chileFeatures = (json_FESplataformas_0.features || []).filter(f => {
+        const c = f && f.properties && f.properties.COUNTRY;
+        return typeof c === 'string' && c.toLowerCase().includes('chile');
+      });
+
+      if (!chileFeatures.length) {
+        infoEl.innerHTML = '<p class="missing">No se encontraron features para "Chile" en el fichero.</p>';
+      } else {
+        infoEl.innerHTML = '';
+      }
+
+      // Construir GeoJSON con solo las features de Chile
+      const chileGeoJSON = {
+        type: 'FeatureCollection',
+        features: chileFeatures
+      };
+
+      // Inicializar mapa
+      const map = L.map('map', { zoomControl: true }).setView([-33.5, -70.6], 5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+
+      // Agregar capa GeoJSON para Chile
+      let chileLayer = L.geoJSON(chileGeoJSON, {
+        style: () => ({ color: '#0077cc', weight: 2, fillOpacity: 0.25 }),
+        onEachFeature: (feature, layer) => {
+          const props = feature.properties || {};
+          const title = props.COUNTRY || 'Sin país';
+          const desc = props.DESCRIPCION || '';
+          const central = props.CENTRAL1 || props.CENTRAL || 'N/A';
+          const url = props.URLPAIS ? `<a href="${props.URLPAIS}" target="_blank">Enlace país</a>` : '';
+          const html = `<strong>${escapeHtml(title)}</strong><br/>${escapeHtml(central)}<br/>${url}<hr/><div style="max-height:150px;overflow:auto">${escapeHtml(desc)}</div>`;
+          layer.bindPopup(html);
+        }
+      }).addTo(map);
+
+      // Ajustar vista al bounds de las geometrías (si hay)
+      try {
+        if (chileLayer.getBounds && chileLayer.getBounds().isValid()) {
+          map.fitBounds(chileLayer.getBounds(), { padding: [20, 20] });
+        }
+      } catch (e) {
+        // Ignorar si no hay bounds válidos
+      }
+
+      // Rellenar la columna derecha con la lista de features encontradas
+      chileFeatures.forEach((f, i) => {
+        const p = f.properties || {};
+        const div = document.createElement('div');
+        div.className = 'feature-card';
+        div.innerHTML = `
+          <strong>${escapeHtml(p.COUNTRY || 'Sin COUNTRY')}</strong>
+          <div><em>${escapeHtml(p.ZONA || '')}</em></div>
+          <div style="margin-top:6px"><strong>Central:</strong> ${escapeHtml(p.CENTRAL1 || p.CENTRAL || 'N/A')}</div>
+          <div style="margin-top:6px">${p.URLPAIS ? `<a href="${p.URLPAIS}" target="_blank">${escapeHtml(p.URLPAIS)}</a>` : ''}</div>
+          <div style="margin-top:8px">${escapeHtml(p.DESCRIPCION ? truncate(p.DESCRIPCION, 300) : '')}</div>
+          <div style="margin-top:8px"><button data-idx="${i}">Ver en mapa</button></div>
+        `;
+        infoEl.appendChild(div);
+
+        // botón para centrar la feature en el mapa
+        div.querySelector('button').addEventListener('click', () => {
+          const layerForFeature = L.geoJSON(f);
+          if (layerForFeature.getBounds && layerForFeature.getBounds().isValid()) {
+            map.fitBounds(layerForFeature.getBounds(), { padding: [20, 20] });
+          }
+        });
+      });
+
+      // utilidades
+      function escapeHtml(str) {
+        if (!str && str !== 0) return '';
+        return String(str).replace(/[&<>"']/g, function (m) {
+          return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m];
+        });
+      }
+      function truncate(s, n) {
+        const t = (s || '').replace(/<\/?[^>]+(>|$)/g, ''); // quitar tags HTML si los hubiera
+        return t.length > n ? t.slice(0, n) + '…' : t;
+      }
+    });
+  </script>
+</body>
+</html>
