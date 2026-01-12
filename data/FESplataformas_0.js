@@ -9,7 +9,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Haití",
                 ZONA: "Norte/Centro",
-                DESCRIPCION: "<p><small>Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes, lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado. El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires, se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada, el icónico palacio presidencial.</small></p>",
+                DESCRIPCION: "<p>Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes, lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado. El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires, se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada, el icónico palacio presidencial.</p>",
                 CENTRAL1: "Confédération des Travailleurs Haïtiens (CTH)",
                 CENTRAL2: null,
                 CENTRAL3: null,
@@ -13500,7 +13500,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Argentina",
                 ZONA: "Sur/Sur",
-                DESCRIPCION: "<p><small>Argentina es un país sudamericano de gran envergadura con un terreno que incluye las montañas de los Andes, lagos glaciales y praderas en las Pampas, la tierra tradicional de pastoreo de su famoso ganado. El país es conocido por el baile y la música del tango. Su gran capital cosmopolita, Buenos Aires, se centra en la Plaza de Mayo, rodeada por imponentes edificios del siglo XIX, como la Casa Rosada, el icónico palacio presidencial.</small></p>",
+                DESCRIPCION: "<p>La economía de plataformas ingresa en Argentina como fenómeno reciente, pero de crecimiento acelerado. A comienzos de 2016 operaban sobre todo iniciativas locales; el cambio de contexto macro-regulatorio favoreció el aterrizaje de firmas globales (Airbnb, Uber, Cabify, Freelancer) y, con mayor fuerza a partir de 2018, el desembarco de plataformas de reparto a domicilio. Ese año marca la “irrupción más significativa” de delivery on-demand —Rappi y Glovo se suman a la ya instalada PedidosYa—. Este proceso coincidió con una etapa de crisis económica y aumento del desempleo, lo que creó un terreno favorable para la rápida expansión del sector y el reclutamiento de trabajadores que necesitaban ingresos de manera inmediata.</p>",
                 CENTRAL1: "<a href='https://www.cta.org.ar/' target='_blank'>Central de Trabajadoras y Trabajadores de la Argentina (CTA-T)</a>",
                 CENTRAL2: "<a href='https://ctaa.org.ar/' target='_blank'>Central de Trabajadores de la Argentina (CTA)</a>",
                 CENTRAL3: "Central de Trabajadores de la Argentina Autónoma (CTA-A)",
@@ -15678,7 +15678,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Bolivia",
                 ZONA: "Sur/Sur",
-                DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "El despliegue de las plataformas digitales de trabajo en Bolivia se inició en la segunda mitad de la década de 2010, con hitos como la llegada de Uber a La Paz en 2017 y el desembarco de PedidosYa en 2018, aunque su consolidación pública ocurrió recién durante la pandemia, cuando las restricciones de movilidad otorgaron mayor visibilidad a las empresas de reparto y aceleraron su crecimiento. No obstante, tal como advierten Miranda Colque y Larrea Montaño (2023), la limitada conectividad a internet y la baja penetración de la banca digital restringen significativamente su expansión, configurando un escenario en el que el trabajo mediado por plataformas permanece circunscripto a sectores urbanos con determinados perfiles socioeconómicos. ",
                 CENTRAL1: "Central Obrera Boliviana (COB)",
                 CENTRAL2: "Confederación Sindical Única de Trabajadores Campesinos de Bolivia (CSUTCB)",
                 CENTRAL3: "Confederación Sindical de Comunidades Interculturales Originarios de Bolivia (CSCIOB)",
@@ -16327,7 +16327,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Chile",
                 ZONA: "Sur/Sur",
-                DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "Haciendo una breve historización, y de acuerdo con Arriagada et al. (2023), el ingreso y la consolidación de las plataformas de trabajo en Chile, lejos de pensarse como un momento puntual en el tiempo, debe describirse como un proceso de crecimiento gradual que se aceleró significativamente en los últimos años. Las primeras plataformas que lideraron el mercado laboral chileno fueron las aplicaciones de transporte, como Uber y Cabify, que resultaron cruciales durante un período inicial de lento crecimiento. Recién a partir de 2019 puede reconocerse una etapa de expansión más marcada, que incluye la incorporación de servicios de entrega de alimentos (como PedidosYa y Rappi) y de productos de supermercado (como Cornershop, aplicación desarrollada en Chile y posteriormente adquirida por Uber).",
                 CENTRAL1: "Central Autónoma de Trabajadores de Chile (CAT)",
                 CENTRAL2: "Central Clasista de Trabajadores y Trabajadoras (CCTT)",
                 CENTRAL3: "Central Clasista de Trabajadores y Trabajadoras (CCTT)",
@@ -23215,7 +23215,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Perú",
                 ZONA: "Sur/Sur",
-                DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "El arribo de las plataformas digitales de trabajo a Perú tuvo lugar con el desembarco de Uber en 2014. Este ingreso se dio en un escenario laboral signado por la informalidad –superior al 70%– y la precarización, situación que se extiende incluso al sector formal, atravesado por una protección laboral fragmentada y desigual. Todo ello, como indican Manky et al. (2024), es resultado de la baja capacidad estatal y de una estructura productiva no industrializada, que habilita formas de autoempleo o arreglos informales y convierte los derechos laborales en un privilegio al que accede solo una parte reducida de la fuerza de trabajo.",
                 CENTRAL1: "Confederación General de Trabajadores del Perú (CGTP)",
                 CENTRAL2: "Central Unitaria de Trabajadores del Perú (CUT Perú)",
                 CENTRAL3: "Central Autónoma de Trabajadores del Perú (CATP)",
@@ -24219,7 +24219,7 @@ var json_FESplataformas_0 = {
             properties: {
                 COUNTRY: "Uruguay",
                 ZONA: "Sur/Sur",
-                DESCRIPCION: "Hola mundo",
+                DESCRIPCION: "La llegada de las plataformas digitales a Uruguay se produjo en un contexto especialmente propicio: altos niveles de digitalización, fuerte penetración de Internet y políticas públicas que habían consolidado una infraestructura tecnológica muy superior al promedio regional. Según analiza Cancela Allio (2025), esta situación facilitó la irrupción temprana de aplicaciones laborales mediadas digitalmente. PedidosYa, creada en Uruguay en 2010–2011, se expandió como plataforma laboral a partir de 2016–2017, cuando adoptó modelos de reparto basados en “socios” y trabajo a demanda. Uber ingresó al país en 2015, transformando el segmento de movilidad urbana e introduciendo nuevas tensiones regulatorias. En conjunto, estas plataformas se insertaron en un mercado laboral ya atravesado por procesos previos de informalidad, flexibilización y tercerización, lo que favoreció su rápida adopción por parte de trabajadores que buscaban ingresos autónomos o complementarios.",
                 CENTRAL1: "Plenario Intersindical de Trabajadores – Convención Nacional de Trabajadores (PIT-CNT)",
                 CENTRAL2: null,
                 CENTRAL3: null,

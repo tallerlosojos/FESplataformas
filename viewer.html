@@ -4,338 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del País - Plataformas Sindicales</title>
+    
+    <!-- jQuery (requerido por Foundation) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Foundation CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous" />
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-            color: white;
-            padding: 1.5rem 0;
-            margin-bottom: 2rem;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .back-button {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .back-button:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .country-info-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
-        }
-
-        .country-header {
-            padding: 2rem;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .country-title {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .country-name {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a237e;
-            margin-right: 15px;
-        }
-
-        .country-zone {
-            display: inline-block;
-            padding: 6px 15px;
-            background-color: #e8eaf6;
-            color: #3949ab;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .centrales-count-badge {
-            background-color: #4caf50;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-        }
-
-        .centrales-count-badge i {
-            margin-right: 8px;
-        }
-
-        .country-content {
-            padding: 2rem;
-        }
-
-        .section {
-            margin-bottom: 2.5rem;
-        }
-
-        .section-title {
-            color: #1a237e;
-            margin-bottom: 1.2rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e8eaf6;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        .centrales-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .central-card {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #3949ab;
-            transition: transform 0.3s;
-        }
-
-        .central-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .central-number {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background-color: #3949ab;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            font-weight: 600;
-            margin-right: 10px;
-        }
-
-        .central-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #333;
-        }
-
-        .info-item {
-            margin-bottom: 1.2rem;
-            padding-bottom: 1.2rem;
-            border-bottom: 1px dashed #eee;
-        }
-
-        .info-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .info-label {
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-        }
-
-        .info-label i {
-            margin-right: 8px;
-            color: #3949ab;
-        }
-
-        .info-value {
-            color: #333;
-            line-height: 1.7;
-        }
-
-        .html-content {
-            background-color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .action-button {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .action-button i {
-            margin-right: 8px;
-        }
-
-        .btn-primary {
-            background-color: #3949ab;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #283593;
-        }
-
-        .btn-secondary {
-            background-color: #f5f5f5;
-            color: #666;
-            border: 1px solid #ddd;
-        }
-
-        .btn-secondary:hover {
-            background-color: #e0e0e0;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .error {
-            text-align: center;
-            padding: 3rem;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            color: #d32f2f;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: #666;
-            border-top: 1px solid #e0e0e0;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .back-button {
-                margin-top: 1rem;
-            }
-            
-            .country-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .centrales-count-badge {
-                margin-top: 1rem;
-            }
-            
-            .centrales-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div>
-                    <h1>Plataformas Sindicales</h1>
-                    <p>Detalles del país</p>
+    <header class="margin-bottom-2">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x align-middle">
+                <div class="cell auto">
+                    <h1 class="h3">Plataformas Sindicales</h1>
+                    <p class="subheader">Detalles del país</p>
                 </div>
-                <a href="paises.html" class="back-button">
-                    <i class="fas fa-arrow-left"></i> Volver al listado
-                </a>
+                <div class="cell shrink">
+                    <a href="paises.html" class="button secondary">
+                        <i class="fas fa-arrow-left"></i> Volver al listado
+                    </a>
+                </div>
             </div>
         </div>
     </header>
 
-    <div class="container">
+    <div class="grid-container">
         <div id="country-container">
-            <div class="loading">
-                <i class="fas fa-spinner fa-spin fa-2x" style="color: #3949ab; margin-bottom: 1rem;"></i>
+            <div class="callout text-center">
+                <i class="fas fa-spinner fa-spin fa-2x" style="color: #1779ba; margin-bottom: 1rem;"></i>
                 <h3>Cargando información del país...</h3>
             </div>
         </div>
 
-        <footer>
+        <footer class="margin-top-3">
             <p>Plataforma de información sindical &copy; <span id="current-year"></span></p>
         </footer>
     </div>
 
+    <!-- Foundation JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js" crossorigin="anonymous"></script>
+    
     <script>
+        // Inicializar Foundation
+        $(document).foundation();
+        
         // Obtener parámetros de la URL
         const urlParams = new URLSearchParams(window.location.search);
         const countryId = urlParams.get('country');
@@ -372,7 +90,7 @@
                         let jsonString = jsonMatch[1];
                         
                         // 1. Reemplazar comillas curvadas por comillas rectas
-                        jsonString = jsonString.replace(/[“”]/g, '"');
+                        jsonString = jsonString.replace(/["'']/g, '"');
                         
                         // 2. Escapar caracteres especiales en strings
                         jsonString = jsonString.replace(/\n/g, '\\n')
@@ -463,87 +181,95 @@
             const centralesCount = centrales.length;
             
             // Determinar color de la zona
-            let zoneColor = '#3949ab';
-            if (props.ZONA === 'Norte/Centro') zoneColor = '#1a237e';
+            let zoneColor = '#1779ba';
             
             // Generar HTML para las centrales
             let centralesHTML = '';
             if (centrales.length > 0) {
                 centrales.forEach(central => {
                     centralesHTML += `
-                        <div class="central-card">
-                            <div>
-                                <span class="central-number">${central.num}</span>
-                                <span class="central-name">${central.name}</span>
+                        <div class="cell medium-6 large-4">
+                            <div class="callout">
+                                <span class="label">${central.num}</span>
+                                <h5>${central.name}</h5>
                             </div>
                         </div>
                     `;
                 });
             } else {
                 centralesHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #888;">
-                        <i class="fas fa-users fa-2x" style="margin-bottom: 1rem;"></i>
-                        <h3>No se registran centrales sindicales</h3>
+                    <div class="cell">
+                        <div class="callout warning text-center">
+                            <i class="fas fa-users fa-2x" style="margin-bottom: 1rem;"></i>
+                            <h4>No se registran centrales sindicales</h4>
+                        </div>
                     </div>
                 `;
             }
             
             // Procesar la descripción HTML (si existe)
-            let descripcionHTML = props.DESCRIPCION || '<p style="color: #888; font-style: italic;">No hay descripción disponible</p>';
+            let descripcionHTML = props.DESCRIPCION || '<p class="text-muted"><em>No hay descripción disponible</em></p>';
             
             // Crear HTML del país
             const countryHTML = `
-                <div class="country-info-card">
-                    <div class="country-header">
-                        <div class="country-title">
-                            <h2 class="country-name">${props.COUNTRY || 'País sin nombre'}</h2>
-                            <span class="country-zone" style="background-color: ${zoneColor}20; color: ${zoneColor};">${props.ZONA || 'Sin zona'}</span>
+                <div class="callout">
+                    <div class="grid-x grid-padding-x align-middle margin-bottom-2">
+                        <div class="cell medium-8">
+                            <h2 class="h4">${props.COUNTRY || 'País sin nombre'}</h2>
+                            <span class="label">${props.ZONA || 'Sin zona'}</span>
                         </div>
-                        <div class="centrales-count-badge">
-                            <i class="fas fa-users"></i>
-                            <span>${centralesCount} centrales sindicales</span>
+                        <div class="cell medium-4 text-right">
+                            <span class="badge success">
+                                <i class="fas fa-users"></i> ${centralesCount} centrales sindicales
+                            </span>
                         </div>
                     </div>
                     
-                    <div class="country-content">
-                        <div class="section">
-                            <h3 class="section-title"><i class="fas fa-info-circle"></i> Descripción</h3>
-                            <div class="info-item">
-                                <div class="html-content">${descripcionHTML}</div>
+                    <div class="margin-bottom-2">
+                        <h5><i class="fas fa-info-circle"></i> Descripción</h5>
+                        <div class="callout">
+                            ${descripcionHTML}
+                        </div>
+                    </div>
+                    
+                    <div class="margin-bottom-2">
+                        <h5><i class="fas fa-users"></i> Centrales Sindicales</h5>
+                        <div class="grid-x grid-margin-x">
+                            ${centralesHTML}
+                        </div>
+                    </div>
+                    
+                    <div class="margin-bottom-2">
+                        <h5><i class="fas fa-link"></i> Recursos Adicionales</h5>
+                        <div class="grid-x grid-margin-x">
+                            <div class="cell medium-4">
+                                <div class="callout">
+                                    <h6><i class="fas fa-file-alt"></i> Entrevistas asociadas</h6>
+                                    <p>${props.ENTREVISTAS || 'No disponible'}</p>
+                                </div>
+                            </div>
+                            <div class="cell medium-4">
+                                <div class="callout">
+                                    <h6><i class="fas fa-gavel"></i> Legislación asociada</h6>
+                                    <p>${props.LEGISLACION || 'No disponible'}</p>
+                                </div>
+                            </div>
+                            <div class="cell medium-4">
+                                <div class="callout">
+                                    <h6><i class="fas fa-info"></i> Más información</h6>
+                                    <p>${props.OTROS || 'No disponible'}</p>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="section">
-                            <h3 class="section-title"><i class="fas fa-users"></i> Centrales Sindicales</h3>
-                            <div class="centrales-grid">
-                                ${centralesHTML}
-                            </div>
-                        </div>
-                        
-                        <div class="section">
-                            <h3 class="section-title"><i class="fas fa-link"></i> Recursos Adicionales</h3>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-file-alt"></i> Entrevistas asociadas</div>
-                                <div class="info-value">${props.ENTREVISTAS || 'No disponible'}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-gavel"></i> Legislación asociada</div>
-                                <div class="info-value">${props.LEGISLACION || 'No disponible'}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label"><i class="fas fa-info"></i> Más información</div>
-                                <div class="info-value">${props.OTROS || 'No disponible'}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="section">
-                            <h3 class="section-title"><i class="fas fa-external-link-alt"></i> Acciones</h3>
-                            <div class="button-group">
-                                ${props.URLPAIS || '<a href="paises.html" class="action-button btn-primary"><i class="fas fa-arrow-left"></i> Volver al listado</a>'}
-                                <a href="paises.html" class="action-button btn-secondary">
-                                    <i class="fas fa-list"></i> Ver todos los países
-                                </a>
-                            </div>
+                    </div>
+                    
+                    <div class="margin-bottom-2">
+                        <h5><i class="fas fa-external-link-alt"></i> Acciones</h5>
+                        <div class="button-group">
+                            ${props.URLPAIS || '<a href="paises.html" class="button"><i class="fas fa-arrow-left"></i> Volver al listado</a>'}
+                            <a href="paises.html" class="button secondary">
+                                <i class="fas fa-list"></i> Ver todos los países
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -555,11 +281,10 @@
         
         function showError(message) {
             document.getElementById('country-container').innerHTML = `
-                <div class="error">
-                    <i class="fas fa-exclamation-triangle fa-2x" style="margin-bottom: 1rem;"></i>
-                    <h3>${message}</h3>
+                <div class="callout alert text-center">
+                    <h4><i class="fas fa-exclamation-triangle"></i> ${message}</h4>
                     <p style="margin-top: 1rem;">
-                        <a href="paises.html" class="action-button btn-primary" style="display: inline-flex;">
+                        <a href="paises.html" class="button">
                             <i class="fas fa-arrow-left"></i> Volver al listado
                         </a>
                     </p>

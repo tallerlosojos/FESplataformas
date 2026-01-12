@@ -707,6 +707,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .leaflet-touch .leaflet-bar {
   box-shadow: none;
 }
+.leaflet-touch .leaflet-control-attribution{
+  display: none;
+}
 
 .leaflet-touch .leaflet-control-layers,
 .leaflet-touch .leaflet-bar {
