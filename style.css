@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-body{
-  font-family: "Noto Sans", sans-serif;
+body, h1,h2,h3,h4,h5,h6,p,ul,li, a, select, option{
+  font-family: "Noto Sans", sans-serif !important;
 }
+
 .ol-popup{
 width: 450px;
   background: black;
@@ -182,7 +183,7 @@ a{
   }
   a:hover, a:focus{
     text-decoration: none;
-    color: white;
+    color: inherit;
   }
 
   .title-link {
@@ -190,4 +191,72 @@ a{
   text-transform: none !important;
   margin-bottom: 1rem !important;
   border-bottom: none !important;
+}
+
+/* paises.html */
+
+
+header .button{
+  min-width: 100%;
+  min-height: 100%;
+}
+header .callout{
+  margin: 0;
+  border: 0;
+}
+header .button, header .callout{
+  padding: 2rem;
+  line-height: 1;
+  text-decoration: none;
+}
+.callout-filter{
+  margin: 2rem 0;
+}
+.card-paises{
+  border-radius: 10px 0 10px 10px;
+}
+.card-paises-content{
+  min-height: 250px;
+}
+.card-paises-content a{
+  color: indianred;
+}
+.card-paises-header{
+  padding: 0 0 0 1rem;
+  border-radius: 10px 0 0 0;
+}
+.card-paises-footer .button{
+  border-radius: 0 0 10px 10px;
+}
+.button{
+  background: indianRed;
+  margin: 0;
+}
+.button:hover,.button:focus{
+  background: rgb(130, 58, 58);
+}
+.label{
+  background: #aaa;
+  color: black;
+  font-weight: bolder;
+}
+.card-divider{
+  background: black;
+  color: white;
+  border: 0;
+}
+h5.paises-name{
+  font-size: 1rem;
+  padding: 0.4rem 0;
+  font-weight: bold;
+  margin: 0;
+}
+span.pais-zone{
+  padding: .7rem .75rem;
+}
+.card-section-footer{
+  padding: 0;
+}
+ul.paises-centrales{
+  font-size: 0.85rem;
 }

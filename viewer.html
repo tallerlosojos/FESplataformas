@@ -13,9 +13,8 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="margin-bottom-2">
@@ -26,7 +25,7 @@
                     <p class="subheader">Detalles del país</p>
                 </div>
                 <div class="cell shrink">
-                    <a href="paises.html" class="button secondary">
+                    <a href="paises.html" class="button">
                         <i class="fas fa-arrow-left"></i> Volver al listado
                     </a>
                 </div>
@@ -212,22 +211,22 @@
             
             // Crear HTML del país
             const countryHTML = `
-                <div class="callout">
-                    <div class="grid-x grid-padding-x align-middle margin-bottom-2">
+                    <div class="grid-x align-middle margin-bottom-2">
                         <div class="cell medium-8">
                             <h2 class="h4">${props.COUNTRY || 'País sin nombre'}</h2>
-                            <span class="label">${props.ZONA || 'Sin zona'}</span>
                         </div>
                         <div class="cell medium-4 text-right">
-                            <span class="badge success">
+                            <span class="label">${props.ZONA || 'Sin zona'}</span>
+                            <span class="label success">
                                 <i class="fas fa-users"></i> ${centralesCount} centrales sindicales
                             </span>
                         </div>
                     </div>
                     
                     <div class="margin-bottom-2">
-                        <h5><i class="fas fa-info-circle"></i> Descripción</h5>
+                        
                         <div class="callout">
+                            <h5><i class="fas fa-info-circle"></i> Descripción</h5>
                             ${descripcionHTML}
                         </div>
                     </div>
@@ -272,7 +271,6 @@
                             </a>
                         </div>
                     </div>
-                </div>
             `;
             
             // Mostrar en la página

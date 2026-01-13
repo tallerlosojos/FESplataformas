@@ -20,31 +20,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+
+        <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header class="margin-bottom-2">
-        <div class="grid-container" equalizer>
-            <div class="grid-x grid-padding-x">
-                <div class="cell medium-5" equalizer-watch>
-                    <h1 class="h2">FESplataformas</h1>
-                    <p class="subheader">Sindicatos tradicionales y trabajadores de plataformas en América Latina</p>
+        <div class="grid-container">
+            <div class="grid-x" equalizer>
+                <div class="cell medium-5">
+                    <h1 class="h2" equalizer-watch>FESplataformas</h1>
+                    <!-- <p class="subheader">Sindicatos tradicionales y trabajadores de plataformas en América Latina</p> -->
                 </div>
-                <div class="cell medium-2 medium-offset-2" equalizer-watch>
-                    <a class="button" href="index.html">volver al mapa</a>
-                </div>
-                <div class="cell medium-3" equalizer-watch>
-                    <div class="callout primary">
-                        <h5><i class="fas fa-chart-line"></i> Repositorio</h5>
+                <div class="cell medium-3 medium-offset-2">
+                    <div class="callout primary text-center" equalizer-watch>
+                        <!-- <h5><i class="fas fa-chart-line"></i> Repositorio</h5> -->
                         <p id="total-countries">Cargando datos...</p>
                     </div>
+                </div>
+                <div class="cell medium-2 align-">
+                    <a class="button equalizer-watch" href="index.html">volver al mapa</a>
                 </div>
             </div>
         </div>
     </header>
 
     <div class="grid-container">
-        <section class="callout margin-bottom-2">
+        <section class="callout callout-filter margin-bottom-2">
             <h4><i class="fas fa-filter"></i> Filtros de Búsqueda</h4>
             <div class="grid-x grid-margin-x">
                 <div class="cell medium-4">
@@ -66,7 +68,7 @@
                 <div class="cell medium-4">
                     <label for="sort-filter"><i class="fas fa-sort-amount-down"></i> Ordenar por</label>
                     <select id="sort-filter" class="filter-select">
-                        <option value="name-asc">Nombre (A-Z)</option>
+                        <option value="name-asc" selected>Nombre (A-Z)</option>
                         <option value="name-desc">Nombre (Z-A)</option>
                         <option value="centrales-desc">Más centrales primero</option>
                         <option value="centrales-asc">Menos centrales primero</option>
@@ -89,18 +91,18 @@
             </div>
         </section>
 
-        <section class="callout margin-bottom-2">
+        <!-- <section class="callout margin-bottom-2">
             <h4>Estadísticas</h4>
             <div class="grid-x grid-margin-x" id="zone-stats">
-                <!-- Las estadísticas por zona se generarán con JavaScript -->
+                 Las estadísticas por zona se generarán con JavaScript 
             </div>
-        </section>
+        </section> -->
     </div>
 
     <footer class="margin-top-3">
         <div class="grid-container">
             <p>Plataforma de información sindical &copy; <span id="current-year"></span></p>
-            <p class="small">Datos geoespaciales de centrales sindicales en América Latina y el Caribe</p>
+            <!-- <p class="small">Datos geoespaciales de centrales sindicales en América Latina y el Caribe</p> -->
         </div>
     </footer>
 
@@ -116,6 +118,72 @@
         let countriesData = [];
         let zones = new Set();
 
+        // Función para mostrar el contenido real del archivo
+        function debugFileContent(data) {
+            console.log("=== DEBUG INFO ===");
+            console.log("Longitud total:", data.length);
+            console.log("Primeros 500 caracteres:");
+            console.log(data.substring(0, 500));
+            console.log("Últimos 500 caracteres:");
+            console.log(data.substring(data.length - 500));
+            console.log("¿Contiene < ?", data.includes('<'));
+            console.log("¿Contiene HTML?", data.includes('<html') || data.includes('<!DOCTYPE'));
+            console.log("=== FIN DEBUG ===");
+        }
+
+        // Nueva función para parsear strings JSON de manera robusta
+        function parseJSONString(jsonString) {
+            console.log("Parseando JSON, primeros 200 chars:", jsonString.substring(0, 200));
+            
+            try {
+                // Limpieza básica
+                let cleaned = jsonString
+                    .replace(/[ \t\r\n]+/g, ' ') // Normalizar espacios
+                    .replace(/[“”]/g, '"')       // Reemplazar comillas curvadas
+                    .replace(/‘’/g, "'")         // Reemplazar apóstrofes curvados
+                
+                console.log("JSON después de limpieza básica (primeros 200 chars):", cleaned.substring(0, 200));
+                
+                // Intentar parsear directamente
+                return JSON.parse(cleaned);
+            } catch (parseError) {
+                console.warn("Primer intento de parseo falló:", parseError.message);
+                
+                // Intentar arreglar problemas comunes
+                try {
+                    // Método alternativo: usar eval con seguridad
+                    console.log("Intentando evaluar como JavaScript...");
+                    
+                    // Crear un contexto seguro para eval
+                    const jsonData = (new Function('return ' + jsonString + ';'))();
+                    
+                    console.log("✅ JSON evaluado exitosamente como JavaScript");
+                    return jsonData;
+                } catch (evalError) {
+                    console.error("Error al evaluar como JS:", evalError);
+                    
+                    // Mostrar más información del error
+                    console.error("Posición del error en la cadena:", jsonString.substring(0, 100));
+                    
+                    // Intentar un parseo manual simple para encontrar el problema
+                    try {
+                        // Buscar y reemplazar caracteres problemáticos
+                        const sanitized = jsonString
+                            .replace(/\\'/g, "'")
+                            .replace(/\\"/g, '"')
+                            .replace(/\\n/g, '\n')
+                            .replace(/\\r/g, '\r')
+                            .replace(/\\t/g, '\t');
+                        
+                        return JSON.parse(sanitized);
+                    } catch (finalError) {
+                        console.error("Error final al parsear:", finalError);
+                        return null;
+                    }
+                }
+            }
+        }
+
         // Cargar datos desde el archivo externo
         console.log("Intentando cargar datos desde: ./data/FESplataformas_0.js");
         fetch('./data/FESplataformas_0.js')
@@ -127,63 +195,54 @@
                 return response.text();
             })
             .then(data => {
+                // Debuggear el contenido
+                debugFileContent(data);
+                
+                // Verificar si el archivo es HTML accidentalmente
+                if (data.includes('<html') || data.includes('<!DOCTYPE')) {
+                    console.error("⚠️ El archivo parece ser HTML, no JS/JSON");
+                    showError('El archivo cargado parece ser una página HTML. Verifica que estás cargando el archivo JS correcto.');
+                    return;
+                }
+                
                 console.log("Archivo cargado exitosamente. Longitud:", data.length, "caracteres");
-
-                // Extraer el objeto JSON del archivo JS con un regex más robusto
-                const jsonMatch = data.match(/var json_FESplataformas_0 = (\{[\s\S]*?\});/);
-
+                console.log("Primeros 200 caracteres:", data.substring(0, 200));
+                
+                // Intenta varios métodos para extraer el JSON
+                let jsonData;
+                
+                // Método 1: Buscar el patrón var json_FESplataformas_0 = {...}
+                const jsonMatch = data.match(/var json_FESplataformas_0\s*=\s*(\{[\s\S]*?\});/);
+                
                 if (jsonMatch && jsonMatch[1]) {
-                    console.log("✅ JSON encontrado en el archivo");
-
-                    // Limpiar el JSON antes de parsear
-                    let jsonString = jsonMatch[1];
-
-                    // 1. Reemplazar comillas curvadas por comillas rectas (problema común de copy-paste)
-                    jsonString = jsonString.replace(/[“”]/g, '"');
-
-                    // 2. Escapar caracteres especiales en strings
-                    jsonString = jsonString.replace(/\n/g, '\\n')
-                        .replace(/\r/g, '\\r')
-                        .replace(/\t/g, '\\t');
-
-                    // 3. Asegurar que los strings estén correctamente formados
-                    jsonString = jsonString.replace(/(\w+):\s*"([^"]*)"/g, function (match, key, value) {
-                        const escapedValue = value.replace(/\\/g, '\\\\')
-                            .replace(/"/g, '\\"')
-                            .replace(/\n/g, '\\n')
-                            .replace(/\r/g, '\\r')
-                            .replace(/\t/g, '\\t');
-                        return key + ': "' + escapedValue + '"';
-                    });
-
-                    console.log("JSON limpiado, primeros 500 chars:", jsonString.substring(0, 500));
-
-                    try {
-                        const jsonData = JSON.parse(jsonString);
-                        console.log("✅ JSON parseado correctamente");
-                        console.log("Número de países (features):", jsonData.features.length);
-
-                        // Procesar los datos
-                        processData(jsonData.features);
-                        initializePage();
-                    } catch (parseError) {
-                        console.error('❌ Error al parsear JSON después de limpiar:', parseError);
-
-                        // Intentar un enfoque alternativo: evaluar como JavaScript
-                        console.log("Intentando evaluación como JavaScript...");
-                        try {
-                            const jsonData = eval('(' + jsonMatch[1] + ')');
-                            console.log("✅ JSON evaluado como JavaScript exitosamente");
-                            processData(jsonData.features);
-                            initializePage();
-                        } catch (evalError) {
-                            console.error('❌ Error al evaluar como JS:', evalError);
-                            showError('No se pudo procesar el archivo de datos. El formato contiene caracteres inválidos.');
-                        }
+                    console.log("✅ JSON encontrado usando método 1 (patrón var)");
+                    jsonData = parseJSONString(jsonMatch[1]);
+                } 
+                // Método 2: Buscar solo el objeto JSON (más flexible)
+                else if (data.trim().startsWith('{') && data.trim().endsWith('}')) {
+                    console.log("✅ El archivo parece ser un objeto JSON directo");
+                    jsonData = parseJSONString(data);
+                }
+                // Método 3: Buscar cualquier objeto JSON en el archivo
+                else {
+                    console.log("⚠️ Intentando método 3: buscar cualquier objeto JSON");
+                    const allJsonMatches = data.match(/\{[\s\S]*?\}(?=\s*(?:;|$))/g);
+                    if (allJsonMatches && allJsonMatches.length > 0) {
+                        console.log("Encontrados", allJsonMatches.length, "posibles objetos JSON");
+                        // Tomar el más largo (probablemente el correcto)
+                        const longestMatch = allJsonMatches.reduce((a, b) => a.length > b.length ? a : b);
+                        jsonData = parseJSONString(longestMatch);
                     }
+                }
+                
+                if (jsonData) {
+                    console.log("✅ Datos procesados correctamente");
+                    console.log("Número de países (features):", jsonData.features ? jsonData.features.length : "No tiene features");
+                    processData(jsonData.features || []);
+                    initializePage();
                 } else {
                     console.error('❌ No se pudo extraer JSON del archivo');
-                    showError('Formato de archivo incorrecto. El archivo debe contener "var json_FESplataformas_0 = {...};"');
+                    showError('Formato de archivo incorrecto. Asegúrate de que el archivo contiene un objeto JSON válido.');
                 }
             })
             .catch(error => {
@@ -203,6 +262,7 @@
                             1. Abre el archivo FESplataformas_0.js en un editor de texto<br>
                             2. Guarda como UTF-8 sin BOM<br>
                             3. Reemplaza todas las comillas curvadas por rectas<br>
+                            4. Verifica que el archivo no sea HTML
                         </p>
                     </div>
                 </div>
@@ -263,6 +323,9 @@
                 return countryData;
             });
 
+            // Ordenar los países alfabéticamente al cargar (A-Z)
+            countriesData.sort((a, b) => a.name.localeCompare(b.name));
+            
             console.log("Procesamiento completado. Total países:", countriesData.length);
             console.log("Zonas encontradas:", Array.from(zones));
         }
@@ -291,9 +354,9 @@
             console.log("Filtros de zona creados:", zones.size, "zonas");
 
             // Generar estadísticas por zona
-            generateZoneStats();
+          // generateZoneStats();
 
-            // Mostrar todos los países inicialmente
+            // Mostrar todos los países inicialmente ordenados alfabéticamente
             renderCountries(countriesData);
 
             // Añadir event listeners a los filtros
@@ -372,7 +435,7 @@
                 return true;
             });
 
-            // Ordenar países
+            // Ordenar países según la opción seleccionada
             filteredCountries.sort((a, b) => {
                 switch (sortOption) {
                     case 'name-asc':
@@ -384,7 +447,7 @@
                     case 'centrales-asc':
                         return a.centralesCount - b.centralesCount;
                     default:
-                        return 0;
+                        return a.name.localeCompare(b.name); // Orden alfabético por defecto
                 }
             });
 
@@ -436,30 +499,28 @@
 
                 countriesHTML += `
                     <div class="cell medium-6 large-4">
-                        <div class="card"  data-equalizer="pais">
-                            <div class="card-divider" style="padding: 0 0 0 1rem;">
+                        <div class="card card-paises"  data-equalizer="pais">
+                            <div class="card-divider card-paises-header">
                                 <div class="grid-x align-middle" style="width: 100%;">
-                                    <div class="cell small-6">
-                                <h5 style="font-size: 1rem;
-    padding: 0.5rem 0;
-    font-weight: bold;margin: 0;">${country.name}</h5>
+                                    <div class="cell small-8">
+                                <h5 class="paises-name">${country.name}</h5>
                                 </div>
-                                <div class="cell small-6">
-                                <span class="label float-right" style="padding: .7rem .75rem;">${country.zone}</span>
+                                <div class="cell small-4">
+                                <span class="label float-right pais-zone">${country.zone}</span>
                                 </div>
                                 </div>
                                 
                             </div>
-                            <div class="card-section"  style="min-height: 250px;">
+                            <div class="card-section card-paises-content">
                                 <p>
                                     <i class="fas fa-users"></i>
                                     <strong>${country.centralesCount}</strong> centrales sindicales registradas
                                 </p>
-                                <ul class="no-bullet">
+                                <ul class="no-bullet paises-centrales">
                                     ${centralesHTML}
                                 </ul>
                             </div>
-                            <div class="card-section">
+                            <div class="card-section card-paises-footer card-section-footer">
                                 <div class="button-group expanded">
                                     <a href="viewer.html?country=${country.id}" class="button">
                                         <i class="fas fa-external-link-alt"></i> Ver más
@@ -477,7 +538,7 @@
         function resetFilters() {
             document.getElementById('zone-filter').value = 'all';
             document.getElementById('central-filter').value = 'all';
-            document.getElementById('sort-filter').value = 'name-asc';
+            document.getElementById('sort-filter').value = 'name-asc'; // Restablecer a orden alfabético A-Z
             applyFilters();
         }
     </script>
