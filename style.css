@@ -350,6 +350,7 @@ footer {
 
 .callout-total-countries {
   border-radius: 0 0 0 10px;
+  background: rgb(250, 238, 215) !important;
 }
 .callout-no-paises{
   padding: 2rem;
