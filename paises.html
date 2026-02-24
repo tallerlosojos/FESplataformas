@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
-        <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -33,7 +33,7 @@
                     <!-- <p class="subheader">Sindicatos tradicionales y trabajadores de plataformas en América Latina</p> -->
                 </div>
                 <div class="cell medium-3 medium-offset-2">
-                    <div class="callout primary text-center" equalizer-watch>
+                    <div class="callout primary text-center callout-total-countries" equalizer-watch>
                         <!-- <h5><i class="fas fa-chart-line"></i> Repositorio</h5> -->
                         <p id="total-countries">Cargando datos...</p>
                     </div>
@@ -44,6 +44,30 @@
             </div>
         </div>
     </header>
+
+    <div id="paises-header">
+        <div class="grid-container">
+            <div class="grid-x">
+                <div class="small-12 cell">
+                    <p>El estudio cubrió tres subregiones, cada una con particularidades en su estructura sindical,
+                        legislación laboral y grado de desarrollo del trabajo en plataformas:</p>
+
+                    <ol>
+                        <li>Co1 – Centro y Norteamérica: México —donde hay más volumen de información— y experiencias
+                            relevantes en Centroamérica: Guatemala, Honduras, El Salvador, Costa Rica, República
+                            Dominicana y Panamá.
+                        </li>
+                        <li>Co2 – Cono Sur-Norte: Colombia, Venezuela, Ecuador, Brasil y Paraguay.</li>
+                        <li>Co3 – Cono Sur-Sur: Uruguay, Bolivia, Perú, Argentina y Chile.</li>
+                    </ol>
+
+                    <p>En total fueron 22 países los investigados, los cuales contaban con un total de 76 centrales
+                        sindicales activas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="grid-container">
         <section class="callout callout-filter margin-bottom-2">
@@ -101,7 +125,7 @@
 
     <footer class="margin-top-3">
         <div class="grid-container">
-            <p>Plataforma de información sindical &copy; <span id="current-year"></span></p>
+            <h6>Plataforma de información sindical &copy; <span id="current-year"></span></h6>
             <!-- <p class="small">Datos geoespaciales de centrales sindicales en América Latina y el Caribe</p> -->
         </div>
     </footer>
@@ -134,37 +158,37 @@
         // Nueva función para parsear strings JSON de manera robusta
         function parseJSONString(jsonString) {
             console.log("Parseando JSON, primeros 200 chars:", jsonString.substring(0, 200));
-            
+
             try {
                 // Limpieza básica
                 let cleaned = jsonString
                     .replace(/[ \t\r\n]+/g, ' ') // Normalizar espacios
                     .replace(/[“”]/g, '"')       // Reemplazar comillas curvadas
                     .replace(/‘’/g, "'")         // Reemplazar apóstrofes curvados
-                
+
                 console.log("JSON después de limpieza básica (primeros 200 chars):", cleaned.substring(0, 200));
-                
+
                 // Intentar parsear directamente
                 return JSON.parse(cleaned);
             } catch (parseError) {
                 console.warn("Primer intento de parseo falló:", parseError.message);
-                
+
                 // Intentar arreglar problemas comunes
                 try {
                     // Método alternativo: usar eval con seguridad
                     console.log("Intentando evaluar como JavaScript...");
-                    
+
                     // Crear un contexto seguro para eval
                     const jsonData = (new Function('return ' + jsonString + ';'))();
-                    
+
                     console.log("✅ JSON evaluado exitosamente como JavaScript");
                     return jsonData;
                 } catch (evalError) {
                     console.error("Error al evaluar como JS:", evalError);
-                    
+
                     // Mostrar más información del error
                     console.error("Posición del error en la cadena:", jsonString.substring(0, 100));
-                    
+
                     // Intentar un parseo manual simple para encontrar el problema
                     try {
                         // Buscar y reemplazar caracteres problemáticos
@@ -174,7 +198,7 @@
                             .replace(/\\n/g, '\n')
                             .replace(/\\r/g, '\r')
                             .replace(/\\t/g, '\t');
-                        
+
                         return JSON.parse(sanitized);
                     } catch (finalError) {
                         console.error("Error final al parsear:", finalError);
@@ -197,27 +221,27 @@
             .then(data => {
                 // Debuggear el contenido
                 debugFileContent(data);
-                
+
                 // Verificar si el archivo es HTML accidentalmente
                 if (data.includes('<html') || data.includes('<!DOCTYPE')) {
                     console.error("⚠️ El archivo parece ser HTML, no JS/JSON");
                     showError('El archivo cargado parece ser una página HTML. Verifica que estás cargando el archivo JS correcto.');
                     return;
                 }
-                
+
                 console.log("Archivo cargado exitosamente. Longitud:", data.length, "caracteres");
                 console.log("Primeros 200 caracteres:", data.substring(0, 200));
-                
+
                 // Intenta varios métodos para extraer el JSON
                 let jsonData;
-                
+
                 // Método 1: Buscar el patrón var json_FESplataformas_0 = {...}
                 const jsonMatch = data.match(/var json_FESplataformas_0\s*=\s*(\{[\s\S]*?\});/);
-                
+
                 if (jsonMatch && jsonMatch[1]) {
                     console.log("✅ JSON encontrado usando método 1 (patrón var)");
                     jsonData = parseJSONString(jsonMatch[1]);
-                } 
+                }
                 // Método 2: Buscar solo el objeto JSON (más flexible)
                 else if (data.trim().startsWith('{') && data.trim().endsWith('}')) {
                     console.log("✅ El archivo parece ser un objeto JSON directo");
@@ -234,7 +258,7 @@
                         jsonData = parseJSONString(longestMatch);
                     }
                 }
-                
+
                 if (jsonData) {
                     console.log("✅ Datos procesados correctamente");
                     console.log("Número de países (features):", jsonData.features ? jsonData.features.length : "No tiene features");
@@ -325,7 +349,7 @@
 
             // Ordenar los países alfabéticamente al cargar (A-Z)
             countriesData.sort((a, b) => a.name.localeCompare(b.name));
-            
+
             console.log("Procesamiento completado. Total países:", countriesData.length);
             console.log("Zonas encontradas:", Array.from(zones));
         }
@@ -354,7 +378,7 @@
             console.log("Filtros de zona creados:", zones.size, "zonas");
 
             // Generar estadísticas por zona
-          // generateZoneStats();
+            // generateZoneStats();
 
             // Mostrar todos los países inicialmente ordenados alfabéticamente
             renderCountries(countriesData);
@@ -464,7 +488,7 @@
                 resultsCount.innerHTML = '<span style="color: #666; font-weight: normal;">(0 países)</span>';
                 container.innerHTML = `
                     <div class="cell">
-                        <div class="callout warning text-center">
+                        <div class="callout warning text-center callout-no-paises">
                             <h4><i class="fas fa-search"></i> No se encontraron países</h4>
                             <p>Intenta ajustar los filtros de búsqueda.</p>
                         </div>
@@ -489,7 +513,7 @@
 
                 // Si hay más de 3 centrales, añadir indicador
                 if (country.centralesList.length > 3) {
-                    centralesHTML += `<li class="small"><em>+${country.centralesList.length - 3} más</em></li>`;
+                    centralesHTML += `<li class="small viewer-centrales-mas"><em>+${country.centralesList.length - 3} más</em></li>`;
                 }
 
                 // Si no hay centrales
@@ -512,7 +536,7 @@
                                 
                             </div>
                             <div class="card-section card-paises-content">
-                                <p>
+                                <p class="card-centrales-nro">
                                     <i class="fas fa-users"></i>
                                     <strong>${country.centralesCount}</strong> centrales sindicales registradas
                                 </p>

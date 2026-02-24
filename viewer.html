@@ -16,13 +16,13 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header class="margin-bottom-2">
+<body class="page-viewer">
+    <header class="viewer-header margin-bottom-2">
         <div class="grid-container">
             <div class="grid-x grid-padding-x align-middle">
                 <div class="cell auto">
                     <h1 class="h3">Plataformas Sindicales</h1>
-                    <p class="subheader">Detalles del país</p>
+                    <!-- <p class="subheader">Detalles del país</p> -->
                 </div>
                 <div class="cell shrink">
                     <a href="paises.html" class="button">
@@ -67,101 +67,124 @@
             showError('No se especificó un país para mostrar');
         }
         
-        function loadCountryData(countryId) {
+                function loadCountryData(countryId) {
             console.log("Cargando datos para país ID:", countryId);
             
-            // Cargar datos desde el archivo externo
             fetch('./data/FESplataformas_0.js')
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
-                    }
+                    if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
                     return response.text();
                 })
                 .then(data => {
-                    console.log("Archivo de datos cargado");
-                    
-                    // Extraer el objeto JSON del archivo JS
+                    // Extracción robusta del objeto JS
                     const jsonMatch = data.match(/var json_FESplataformas_0 = (\{[\s\S]*?\});/);
                     
                     if (jsonMatch && jsonMatch[1]) {
-                        // Limpiar el JSON antes de parsear (igual que en paises.html)
-                        let jsonString = jsonMatch[1];
-                        
-                        // 1. Reemplazar comillas curvadas por comillas rectas
-                        jsonString = jsonString.replace(/["'']/g, '"');
-                        
-                        // 2. Escapar caracteres especiales en strings
-                        jsonString = jsonString.replace(/\n/g, '\\n')
-                                               .replace(/\r/g, '\\r')
-                                               .replace(/\t/g, '\\t');
-                        
-                        // 3. Asegurar que los strings estén correctamente formados
-                        jsonString = jsonString.replace(/(\w+):\s*"([^"]*)"/g, function(match, key, value) {
-                            const escapedValue = value.replace(/\\/g, '\\\\')
-                                                      .replace(/"/g, '\\"')
-                                                      .replace(/\n/g, '\\n')
-                                                      .replace(/\r/g, '\\r')
-                                                      .replace(/\t/g, '\\t');
-                            return key + ': "' + escapedValue + '"';
-                        });
-                        
                         try {
-                            const jsonData = JSON.parse(jsonString);
-                            console.log("JSON parseado correctamente");
+                            // Usamos new Function para procesar el objeto JS de forma segura y directa
+                            const jsonData = new Function(`return ${jsonMatch[1]}`)();
                             
-                            // Buscar el país por ID
                             const countryFeature = jsonData.features.find(feature => {
-                                const countryName = feature.properties.COUNTRY;
-                                if (!countryName) return false;
-                                const normalizedId = countryName.toLowerCase().replace(/\s+/g, '-');
-                                return normalizedId === countryId;
+                                const name = feature.properties.COUNTRY;
+                                return name && name.toLowerCase().replace(/\s+/g, '-') === countryId;
                             });
                             
-                            if (countryFeature) {
-                                console.log("País encontrado:", countryFeature.properties.COUNTRY);
-                                displayCountry(countryFeature);
-                            } else {
-                                console.error("País no encontrado con ID:", countryId);
-                                showError('País no encontrado');
-                            }
-                        } catch (parseError) {
-                            console.error('Error al parsear JSON:', parseError);
-                            
-                            // Intentar evaluación como JavaScript
-                            try {
-                                const jsonData = eval('(' + jsonMatch[1] + ')');
-                                console.log("JSON evaluado como JavaScript");
-                                
-                                // Buscar el país por ID
-                                const countryFeature = jsonData.features.find(feature => {
-                                    const countryName = feature.properties.COUNTRY;
-                                    if (!countryName) return false;
-                                    const normalizedId = countryName.toLowerCase().replace(/\s+/g, '-');
-                                    return normalizedId === countryId;
-                                });
-                                
-                                if (countryFeature) {
-                                    displayCountry(countryFeature);
-                                } else {
-                                    showError('País no encontrado');
-                                }
-                            } catch (evalError) {
-                                console.error('Error al evaluar como JS:', evalError);
-                                showError('Error al procesar los datos del país');
-                            }
+                            countryFeature ? displayCountry(countryFeature) : showError('País no encontrado');
+                        } catch (e) {
+                            console.error('Error procesando datos:', e);
+                            showError('Error al procesar la base de datos');
                         }
-                    } else {
-                        showError('Error al cargar datos');
                     }
                 })
-                .catch(error => {
-                    console.error('Error al cargar el archivo:', error);
-                    showError('Error al cargar los datos del país: ' + error.message);
-                });
+                .catch(error => showError('Error al cargar archivo: ' + error.message));
         }
         
         function displayCountry(feature) {
+            const props = feature.properties;
+            
+            // 1. Filtrar centrales y capturar sus nuevas reseñas (resena1, resena2...)
+            const centrales = [];
+            for (let i = 1; i <= 7; i++) {
+                const nombre = props[`CENTRAL${i}`];
+                const resena = props[`resena${i}`]; // El campo que añadiste
+                if (nombre && nombre.trim() !== '') {
+                    centrales.push({ num: i, name: nombre, text: resena });
+                }
+            }
+            
+            const centralesCount = centrales.length;
+            
+            // 2. Generar HTML de las tarjetas de centrales
+            let centralesHTML = '';
+            if (centrales.length > 0) {
+                centrales.forEach(c => {
+                    centralesHTML += `
+                        <div class="viewer-central-item cell medium-6 large-4 margin-bottom-1">
+                            <div class="callout" style="height: 100%; border-left: 5px solid #1779ba;">
+                                <span class="label alert">${c.num}</span>
+                                <h5 class="viewer-central-name"><strong>${c.name}</strong></h5>
+                                <hr>
+                                <p class="small" style="line-height: 1.4;">${c.text || '<em>Sin reseña disponible.</em>'}</p>
+                            </div>
+                        </div>`;
+                });
+            } else {
+                centralesHTML = `<div class="cell"><div class="callout warning">No se registran centrales.</div></div>`;
+            }
+            
+            let descripcionHTML = props.DESCRIPCION || '<p>No hay descripción disponible</p>';
+            
+            // 3. Tu estructura original de visualización
+            const countryHTML = `
+                <div class="viewer-head-content grid-x align-middle margin-bottom-2">
+                    <div class="cell medium-8">
+                        <h2 class="viewer-pais-title">${props.COUNTRY || 'Sin nombre'}</h2>
+                    </div>
+                    <div class="cell medium-4 text-right">
+                        <span class="label rounded">Zona ${props.ZONA || 'N/A'}</span>
+                        <span class="label success rounded"><i class="fas fa-users"></i> ${centralesCount} centrales</span>
+                    </div>
+                </div>
+                
+                <div class="viewer-description margin-bottom-2">
+                    <div class="callout">
+                        <h5><i class="fas fa-info-circle"></i> Descripción</h5>
+                        ${descripcionHTML}
+                    </div>
+                </div>
+                
+                <div class="margin-bottom-2">
+                    <h5><i class="fas fa-users"></i> Centrales Sindicales</h5>
+                    <div class="grid-x grid-margin-x">
+                        ${centralesHTML}
+                    </div>
+                </div>
+                
+                <div class="margin-bottom-2">
+                    <h5><i class="fas fa-link"></i> Recursos Adicionales</h5>
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell medium-4">
+                            <div class="callout"><h6>Entrevistas</h6><p>${props.ENTREVISTAS || 'No disponible'}</p></div>
+                        </div>
+                        <div class="cell medium-4">
+                            <div class="callout"><h6>Legislación</h6><p>${props.LEGISLACION || 'No disponible'}</p></div>
+                        </div>
+                        <div class="cell medium-4">
+                            <div class="callout"><h6>Otros</h6><p>${props.OTROS || 'No disponible'}</p></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <a href="paises.html" class="button secondary"><i class="fas fa-arrow-left"></i> Volver al listado</a>
+                </div>
+            `;
+            
+            document.getElementById('country-container').innerHTML = countryHTML;
+        }
+
+        
+                function displayCountry(feature) {
             const props = feature.properties;
             console.log("Mostrando país:", props.COUNTRY);
             
@@ -179,18 +202,20 @@
             // Contar centrales
             const centralesCount = centrales.length;
             
-            // Determinar color de la zona
-            let zoneColor = '#1779ba';
-            
-            // Generar HTML para las centrales
+            // Generar HTML para las centrales (Integrando el campo resena)
             let centralesHTML = '';
             if (centrales.length > 0) {
                 centrales.forEach(central => {
+                    // Capturar la reseña correspondiente (resena1, resena2, etc.)
+                    const resenaTexto = props[`RESENA${central.num}`] || 'No hay reseña disponible';
+                    
                     centralesHTML += `
-                        <div class="cell medium-6 large-4">
-                            <div class="callout">
-                                <span class="label">${central.num}</span>
-                                <h5>${central.name}</h5>
+                        <div class="viewer-central-item cell medium-4 margin-bottom-1">
+                            <div class="callout" style="height: 100%;">
+                                <span class="label alert">${central.num}</span>
+                                <h5 class="viewer-central-name"><strong>${central.name}</strong></h5>
+                                <hr>
+                                <p class="central-desc small text-left">${resenaTexto}</p>
                             </div>
                         </div>
                     `;
@@ -209,22 +234,21 @@
             // Procesar la descripción HTML (si existe)
             let descripcionHTML = props.DESCRIPCION || '<p class="text-muted"><em>No hay descripción disponible</em></p>';
             
-            // Crear HTML del país
+            // Crear HTML del país (Tu estructura original completa)
             const countryHTML = `
-                    <div class="grid-x align-middle margin-bottom-2">
+                    <div class="viewer-head-content grid-x align-middle margin-bottom-2">
                         <div class="cell medium-8">
-                            <h2 class="h4">${props.COUNTRY || 'País sin nombre'}</h2>
+                            <h2 class="viewer-pais-title">${props.COUNTRY || 'País sin nombre'}</h2>
                         </div>
                         <div class="cell medium-4 text-right">
-                            <span class="label">${props.ZONA || 'Sin zona'}</span>
-                            <span class="label success">
+                            <span class="label rounded">Zona ${props.ZONA || 'Sin zona'}</span>
+                            <span class="label success rounded">
                                 <i class="fas fa-users"></i> ${centralesCount} centrales sindicales
                             </span>
                         </div>
                     </div>
                     
-                    <div class="margin-bottom-2">
-                        
+                    <div class="viewer-description">
                         <div class="callout">
                             <h5><i class="fas fa-info-circle"></i> Descripción</h5>
                             ${descripcionHTML}
@@ -275,7 +299,9 @@
             
             // Mostrar en la página
             document.getElementById('country-container').innerHTML = countryHTML;
+            $(document).foundation(); // Asegura que Foundation reconozca el nuevo HTML
         }
+
         
         function showError(message) {
             document.getElementById('country-container').innerHTML = `

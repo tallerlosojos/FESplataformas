@@ -1,18 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-body, h1,h2,h3,h4,h5,h6,p,ul,li, a, select, option{
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+a,
+select,
+option {
   font-family: "Noto Sans", sans-serif !important;
 }
 
-.ol-popup{
-width: 450px;
+body {
+  background: #efefef;
+  
+}
+
+.ol-popup {
+  width: 450px;
   background: black;
   border-radius: 0;
   padding: 0.5rem 3rem 1rem 1rem;
-  *{
+
+  * {
     color: white;
-    a:hover, a:focus{
-        text-decoration: none;
+
+    a:hover,
+    a:focus {
+      text-decoration: none;
     }
   }
 }
@@ -38,20 +58,21 @@ width: 450px;
   font-size: 17px;
 }
 
-#popup-content ul li > a{
-    font-size: 1rem;
-    text-transform: uppercase;
+#popup-content ul li>a {
+  font-size: 1rem;
+  text-transform: uppercase;
 }
 
-table body tr:first-child td{
-                font-size: 1.4rem;
-            }
+table body tr:first-child td {
+  font-size: 1.4rem;
+}
 
 
-            td img {
+td img {
   max-height: none !important;
   max-width: 100% !important;
 }
+
 /* 
 #popup-content ul li a:first-child{
     display: none;
@@ -65,10 +86,13 @@ table body tr:first-child td{
   height: 32px;
   opacity: 0.3;
 }
+
 .ol-popup-closer:hover {
   opacity: 1;
 }
-.ol-popup-closer:before, .ol-popup-closer:after {
+
+.ol-popup-closer:before,
+.ol-popup-closer:after {
   position: absolute;
   left: 15px;
   content: ' ';
@@ -76,66 +100,70 @@ table body tr:first-child td{
   width: 2px;
   background-color: #ddd;
 }
+
 .ol-popup-closer:before {
   transform: rotate(45deg);
 }
+
 .ol-popup-closer:after {
   transform: rotate(-45deg);
 }
 
 
 #offCanvas {
-    background: none;
-    box-shadow: none;
-    border-top: 1px solid #d70000;
-    background: rgba(0, 0, 0, 0.4);
+  background: none;
+  box-shadow: none;
+  border-top: 1px solid #d70000;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .offCanvas {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 
 }
 
 .js-off-canvas-overlay {
-    background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .button-1 {
-    position: absolute;
-    top: 100px;
-    left: 100px;
+  position: absolute;
+  top: 100px;
+  left: 100px;
 }
 
 #menuButton {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    z-index: 2;
-    text-align: center;
-    background: black;
-    color: white;
-    z-index: 13;
-    margin: 0;
-    transition: all .2s ease-in-out;
-    box-shadow: 0 0 3px rgba(255,255,255,0.2);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 2;
+  text-align: center;
+  background: black;
+  color: white;
+  z-index: 13;
+  margin: 0;
+  transition: all .2s ease-in-out;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 #menuButton:hover,
 #menuButton:focus {
-     background: black;
-    color: white;
-    box-shadow: 0 0 8px rgba(255,255,255,0.25);
+  background: black;
+  color: white;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
 }
 
 table {
   margin-bottom: 0;
 }
 
-tbody, tfoot, thead {
+tbody,
+tfoot,
+thead {
   border: none;
   background-color: black;
 }
@@ -145,18 +173,21 @@ tbody tr:nth-child(2n) {
   background-color: #333;
 }
 
-tbody td, tbody th {
+tbody td,
+tbody th {
   padding: 0;
 }
 
-table tbody tr:first-child{ /* pais */
+table tbody tr:first-child {
+  /* pais */
   font-size: 1.4em;
   display: block;
   margin-bottom: 0rem;
   width: 50%;
 }
 
-table tbody tr:last-child{ /* enlace final */
+table tbody tr:last-child {
+  /* enlace final */
   font-size: 1.2rem;
   display: block;
   margin-top: 2rem;
@@ -164,29 +195,35 @@ table tbody tr:last-child{ /* enlace final */
   background: none;
 }
 
-table tbody tr:nth-child(2){ /* Zona */
+table tbody tr:nth-child(2) {
+  /* Zona */
   background-color: black;
   margin-bottom: 1rem;
   display: block;
 }
-table tbody tr:nth-child(2):before{
+
+table tbody tr:nth-child(2):before {
   content: "Zona ";
   display: inline;
 }
 
-td{
+td {
   display: inline;
 }
-a{
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  a:hover, a:focus{
-    text-decoration: none;
-    color: inherit;
-  }
 
-  .title-link {
+a {
+  text-decoration: underline;
+  font-weight: bold;
+  color:indianred;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title-link {
   font-size: 0.8rem !important;
   text-transform: none !important;
   margin-bottom: 1rem !important;
@@ -196,67 +233,186 @@ a{
 /* paises.html */
 
 
-header .button{
+header .button {
   min-width: 100%;
   min-height: 100%;
 }
-header .callout{
+
+header .callout {
   margin: 0;
   border: 0;
 }
-header .button, header .callout{
+
+header .button,
+header .callout {
   padding: 2rem;
   line-height: 1;
   text-decoration: none;
 }
-.callout-filter{
+
+.callout-filter {
   margin: 2rem 0;
+  background: lightgray;
 }
-.card-paises{
+
+.callout-filter h4 {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 1rem;
+  margin: 2rem 0 1rem;
+}
+
+.callout-filter label {
+  margin-bottom: .5rem;
+}
+
+.card-paises {
   border-radius: 10px 0 10px 10px;
+  margin-bottom: 2rem;
 }
-.card-paises-content{
+
+.card-paises-content {
   min-height: 250px;
 }
-.card-paises-content a{
+
+.card-paises-content a {
   color: indianred;
 }
-.card-paises-header{
+
+.card-paises-header {
   padding: 0 0 0 1rem;
   border-radius: 10px 0 0 0;
 }
-.card-paises-footer .button{
+
+.card-paises-footer .button {
   border-radius: 0 0 10px 10px;
 }
-.button{
+
+.card-centrales-nro {
+  font-weight: bolder;
+  font-size: .9rem;
+}
+
+.button {
   background: indianRed;
   margin: 0;
 }
-.button:hover,.button:focus{
+
+.button:hover,
+.button:focus {
   background: rgb(130, 58, 58);
 }
-.label{
+
+.label {
   background: #aaa;
   color: black;
   font-weight: bolder;
 }
-.card-divider{
+
+.card-divider {
   background: black;
   color: white;
   border: 0;
 }
-h5.paises-name{
+
+h5.paises-name {
   font-size: 1rem;
   padding: 0.4rem 0;
   font-weight: bold;
   margin: 0;
 }
-span.pais-zone{
+
+span.pais-zone {
   padding: .7rem .75rem;
 }
-.card-section-footer{
+
+.card-section-footer {
   padding: 0;
 }
-ul.paises-centrales{
-  font-size: 0.85rem;
+
+ul.paises-centrales {
+  font-size: .85rem;
+  list-style-type: disclosure-closed;
+  margin-left: 15px;
+}
+
+footer {
+  margin-top: 4rem;
+  border-top: 1px solid lightgray;
+  padding: 2rem 0;
+}
+
+.callout-total-countries {
+  border-radius: 0 0 0 10px;
+}
+.callout-no-paises{
+  padding: 2rem;
+}
+
+.callout-no-paises h4{
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 1rem;
+}
+.rounded{
+  border-radius: 5px;
+}
+.page-viewer h5{
+  margin: 2rem 0 1rem 0;
+  font-size: .9rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+.page-viewer h5 i{
+  font-size: .8rem;
+  bottom: 1px;
+  position: relative;
+}
+.page-viewer .viewer-header{
+  margin-bottom: 2rem;
+}
+.page-viewer .viewer-description .callout{
+  background: none;
+  border: 0;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+.page-viewer .viewer-head-content{
+  margin-bottom: 1rem;
+}
+.page-viewer .viewer-head-content .viewer-pais-title{
+  font-size: 1.4rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+.page-viewer .viewer-centrales-mas{
+  margin-top: .3rem;
+}
+.page-viewer .viewer-central-item .callout{
+  padding: 0rem;
+  background: none;
+  border: 0;
+  margin: 0 0 2rem;
+}
+.page-viewer .viewer-central-item h5.viewer-central-name:last-child{
+  margin-bottom: 0;
+}
+.page-viewer .viewer-central-item h5.viewer-central-name{
+  font-size: .85rem !important;
+  text-transform: none;
+  padding-right: 1rem;
+  margin:.5rem 0;
+}
+.label.alert{
+  background: black;
+  border-radius: 3px;
+}
+#paises-header{
+  padding: 50px 0 10px !important;
+}
+#paises-header p{
+  font-size: .9rem;
+}
+#paises-header li{
+  font-size: .9rem;
 }

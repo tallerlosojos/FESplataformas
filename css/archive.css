@@ -1,6 +1,6 @@
 body {
   background: white;
-   /* #cfebea; */
+  /* #cfebea; */
 }
 
 body,
@@ -110,14 +110,20 @@ ul {
   }
 }
 
-#button-volver{
-  position: absolute; right: 0; background: black;
+#button-volver {
+  position: absolute;
+  right: 0;
+  background: black;
   border-radius: 0 0 0 5px;
   position: fixed;
   z-index: 10000;
 }
-#button-volver:hover, #button-volver:focus{
-  position: absolute; right: 0; background: #969696;
+
+#button-volver:hover,
+#button-volver:focus {
+  position: absolute;
+  right: 0;
+  background: #969696;
   border-radius: 0 0 0 5px;
 }
 
@@ -285,7 +291,6 @@ div.progress {
     border-left: 0;
   }
 }
-
 
 /* Small only */
 @media screen and (max-width: 39.9375em) {}

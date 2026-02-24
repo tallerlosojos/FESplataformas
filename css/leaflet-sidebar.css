@@ -257,7 +257,7 @@ font-size: 1.2rem;
 }
 
 .sidebar-left .sidebar-close {
-  right: 0;
+  right: 15px;
 }
 
 .sidebar-right .sidebar-close {
