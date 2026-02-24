@@ -186,7 +186,7 @@ small {
 
 
 .sidebar-left .sidebar-content {
-  left: 40px;
+  left: 36px;
   right: 0;
   position: inherit;
   border-radius: 0 5px 0 0;
@@ -258,9 +258,9 @@ font-size: 1.2rem;
   cursor: pointer;
 }
 
-.sidebar-left .sidebar-close {
+/* .sidebar-left .sidebar-close {
   right: 15px;
-}
+} */
 
 .sidebar-right .sidebar-close {
   left: 0;

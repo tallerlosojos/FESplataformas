@@ -853,15 +853,16 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 .position-bottom {
-  height: 23vh;
-  -webkit-transform: translateY(23vh);
-  transform: translateY(23vh);
+  height: 35vh;
+  -webkit-transform: translateY(35vh);
+  transform: translateY(35vh);
 }
 
 .position-bottom.is-transition-push {
   -webkit-box-shadow: inset 0 13px 20px -13px IndianRed;
   box-shadow: inset 0 13px 20px -13px rgba(0, 0, 0, 0.75);
   z-index: 10000;
+  padding: 0 0 4rem 0;
 }
 
 .off-canvas {
