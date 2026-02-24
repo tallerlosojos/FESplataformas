@@ -8,6 +8,7 @@
     <!-- jQuery (requerido por Foundation) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
+    
     <!-- Foundation CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous" />
     
@@ -26,7 +27,7 @@
                 </div>
                 <div class="cell shrink">
                     <a href="paises.html" class="button">
-                        <i class="fas fa-arrow-left"></i> Volver al listado
+                        <i class="fas fa-arrow-left"></i> Volver al repositorio
                     </a>
                 </div>
             </div>
@@ -153,6 +154,7 @@
                     </div>
                 </div>
                 
+                
                 <div class="margin-bottom-2">
                     <h5><i class="fas fa-users"></i> Centrales Sindicales</h5>
                     <div class="grid-x grid-margin-x">
@@ -254,6 +256,8 @@
                             ${descripcionHTML}
                         </div>
                     </div>
+
+                    <hr/>
                     
                     <div class="margin-bottom-2">
                         <h5><i class="fas fa-users"></i> Centrales Sindicales</h5>
@@ -265,19 +269,13 @@
                     <div class="margin-bottom-2">
                         <h5><i class="fas fa-link"></i> Recursos Adicionales</h5>
                         <div class="grid-x grid-margin-x">
-                            <div class="cell medium-4">
-                                <div class="callout">
-                                    <h6><i class="fas fa-file-alt"></i> Entrevistas asociadas</h6>
-                                    <p>${props.ENTREVISTAS || 'No disponible'}</p>
-                                </div>
-                            </div>
-                            <div class="cell medium-4">
+                            <div class="cell medium-6">
                                 <div class="callout">
                                     <h6><i class="fas fa-gavel"></i> Legislación asociada</h6>
                                     <p>${props.LEGISLACION || 'No disponible'}</p>
                                 </div>
                             </div>
-                            <div class="cell medium-4">
+                            <div class="cell medium-6">
                                 <div class="callout">
                                     <h6><i class="fas fa-info"></i> Más información</h6>
                                     <p>${props.OTROS || 'No disponible'}</p>
@@ -289,9 +287,9 @@
                     <div class="margin-bottom-2">
                         <h5><i class="fas fa-external-link-alt"></i> Acciones</h5>
                         <div class="button-group">
-                            ${props.URLPAIS || '<a href="paises.html" class="button"><i class="fas fa-arrow-left"></i> Volver al listado</a>'}
-                            <a href="paises.html" class="button secondary">
-                                <i class="fas fa-list"></i> Ver todos los países
+                            <a href="paises.html" class="button"><i class="fas fa-arrow-left"></i> volver al repositorio</a>
+                            <a href="index.html" class="button secondary">
+                                 ir al mapa
                             </a>
                         </div>
                     </div>
@@ -309,7 +307,7 @@
                     <h4><i class="fas fa-exclamation-triangle"></i> ${message}</h4>
                     <p style="margin-top: 1rem;">
                         <a href="paises.html" class="button">
-                            <i class="fas fa-arrow-left"></i> Volver al listado
+                            <i class="fas fa-arrow-left"></i> Volver al repositorio
                         </a>
                     </p>
                 </div>
