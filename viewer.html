@@ -61,6 +61,9 @@
         // Establecer el año actual en el footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
+        // Datos de legislación (se carga aparte)
+        let legislacionData = null;
+        
         // Cargar datos del país
         if (countryId) {
             loadCountryData(countryId);
@@ -68,8 +71,13 @@
             showError('No se especificó un país para mostrar');
         }
         
+        // Cargar legislación en paralelo
+        fetch('./data/legislacion.json')
+            .then(r => r.json())
+            .then(d => { legislacionData = d; })
+            .catch(() => { legislacionData = {}; });
+        
                 function loadCountryData(countryId) {
-            console.log("Cargando datos para país ID:", countryId);
             
             fetch('./data/FESplataformas_0.js')
                 .then(response => {
@@ -92,7 +100,6 @@
                             
                             countryFeature ? displayCountry(countryFeature) : showError('País no encontrado');
                         } catch (e) {
-                            console.error('Error procesando datos:', e);
                             showError('Error al procesar la base de datos');
                         }
                     }
@@ -102,93 +109,6 @@
         
         function displayCountry(feature) {
             const props = feature.properties;
-            
-            // 1. Filtrar centrales y capturar sus nuevas reseñas (resena1, resena2...)
-            const centrales = [];
-            for (let i = 1; i <= 7; i++) {
-                const nombre = props[`CENTRAL${i}`];
-                const resena = props[`resena${i}`]; // El campo que añadiste
-                if (nombre && nombre.trim() !== '') {
-                    centrales.push({ num: i, name: nombre, text: resena });
-                }
-            }
-            
-            const centralesCount = centrales.length;
-            
-            // 2. Generar HTML de las tarjetas de centrales
-            let centralesHTML = '';
-            if (centrales.length > 0) {
-                centrales.forEach(c => {
-                    centralesHTML += `
-                        <div class="viewer-central-item cell medium-6 large-4 margin-bottom-1">
-                            <div class="callout" style="height: 100%; border-left: 5px solid #1779ba;">
-                                <span class="label alert">${c.num}</span>
-                                <h5 class="viewer-central-name"><strong>${c.name}</strong></h5>
-                                <hr>
-                                <p class="small" style="line-height: 1.4;">${c.text || '<em>Sin reseña disponible.</em>'}</p>
-                            </div>
-                        </div>`;
-                });
-            } else {
-                centralesHTML = `<div class="cell"><div class="callout warning">No se registran centrales.</div></div>`;
-            }
-            
-            let descripcionHTML = props.DESCRIPCION || '<p>No hay descripción disponible</p>';
-            
-            // 3. Tu estructura original de visualización
-            const countryHTML = `
-                <div class="viewer-head-content grid-x align-middle margin-bottom-2">
-                    <div class="cell medium-8">
-                        <h2 class="viewer-pais-title">${props.COUNTRY || 'Sin nombre'}</h2>
-                    </div>
-                    <div class="cell medium-4 text-right">
-                        <span class="label rounded">Zona ${props.ZONA || 'N/A'}</span>
-                        <span class="label success rounded"><i class="fas fa-users"></i> ${centralesCount} centrales</span>
-                    </div>
-                </div>
-                
-                <div class="viewer-description margin-bottom-2">
-                    <div class="callout">
-                        <h5><i class="fas fa-info-circle"></i> Descripción</h5>
-                        ${descripcionHTML}
-                    </div>
-                </div>
-                
-                
-                <div class="margin-bottom-2">
-                    <h5><i class="fas fa-users"></i> Centrales Sindicales</h5>
-                    <div class="grid-x grid-margin-x">
-                        ${centralesHTML}
-                    </div>
-                </div>
-                
-                <div class="margin-bottom-2">
-                    <h5><i class="fas fa-link"></i> Recursos Adicionales</h5>
-                    <div class="grid-x grid-margin-x">
-                        <div class="cell medium-4">
-                            <div class="callout"><h6>Entrevistas</h6><p>${props.ENTREVISTAS || 'No disponible'}</p></div>
-                        </div>
-                        <div class="cell medium-4">
-                            <div class="callout"><h6>Legislación</h6><p>${props.LEGISLACION || 'No disponible'}</p></div>
-                        </div>
-                        <div class="cell medium-4">
-                            <div class="callout"><h6>Otros</h6><p>${props.OTROS || 'No disponible'}</p></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="button-group">
-                    <a href="paises.html" class="button secondary"><i class="fas fa-arrow-left"></i> Volver al listado</a>
-                </div>
-            `;
-            
-            document.getElementById('country-container').innerHTML = countryHTML;
-        }
-
-        
-                function displayCountry(feature) {
-            const props = feature.properties;
-            console.log("Mostrando país:", props.COUNTRY);
             
             // Obtener lista de centrales
             const centrales = [
@@ -267,18 +187,11 @@
                     </div>
                     
                     <div class="margin-bottom-2">
-                        <h5><i class="fas fa-link"></i> Recursos Adicionales</h5>
+                        <h5><i class="fas fa-gavel"></i> Legislación asociada</h5>
                         <div class="grid-x grid-margin-x">
-                            <div class="cell medium-6">
+                            <div class="cell medium-12">
                                 <div class="callout">
-                                    <h6><i class="fas fa-gavel"></i> Legislación asociada</h6>
-                                    <p>${props.LEGISLACION || 'No disponible'}</p>
-                                </div>
-                            </div>
-                            <div class="cell medium-6">
-                                <div class="callout">
-                                    <h6><i class="fas fa-info"></i> Más información</h6>
-                                    <p>${props.OTROS || 'No disponible'}</p>
+                                    ${renderLegislacionHTML(props.COUNTRY)}
                                 </div>
                             </div>
                         </div>
@@ -299,7 +212,43 @@
             document.getElementById('country-container').innerHTML = countryHTML;
             $(document).foundation(); // Asegura que Foundation reconozca el nuevo HTML
         }
-
+        
+        function getLegBadgeClass(estado) {
+            const e = (estado || '').toLowerCase();
+            if (e.includes('sancionada') || e.includes('vigente') || e.includes('publicada')) return 'leg-badge-verde';
+            if (e.includes('tramitaci') || e.includes('trámite') || e.includes('ingresado') || e.includes('presentado')) return 'leg-badge-amarillo';
+            if (e.includes('derogado') || e.includes('caducado') || e.includes('archivado')) return 'leg-badge-rojo';
+            if (e.includes('no se localiz') || e.includes('sin sanci') || e.includes('sin norma')) return 'leg-badge-gris';
+            return 'leg-badge-azul';
+        }
+        
+        function renderLegislacionHTML(countryName) {
+            if (!legislacionData || !legislacionData[countryName] || legislacionData[countryName].length === 0) {
+                return '<div class="leg-section"><p>No disponible</p></div>';
+            }
+            
+            let html = '<div class="leg-section"><div class="leg-table">';
+            legislacionData[countryName].forEach(entry => {
+                const badgeClass = getLegBadgeClass(entry.estado);
+                const enlace1 = entry.enlace ? `<a href="${entry.enlace}" target="_blank" rel="noopener" class="leg-link"><i class="fas fa-external-link-alt"></i> Ver norma</a>` : '';
+                const enlace2 = entry.enlace2 ? ` | <a href="${entry.enlace2}" target="_blank" rel="noopener" class="leg-link"><i class="fas fa-external-link-alt"></i> Complementario</a>` : '';
+                html += `
+                    <div class="leg-entry">
+                        <div class="leg-entry-header">
+                            <span class="leg-badge ${badgeClass}">${entry.tipo}</span>
+                            <strong>${entry.norma}</strong>
+                        </div>
+                        <div class="leg-entry-body">
+                            <p class="leg-alcance">${entry.alcance}</p>
+                            <p class="leg-estado"><i class="fas fa-info-circle"></i> ${entry.estado}</p>
+                            ${enlace1}${enlace2}
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div></div>';
+            return html;
+        }
         
         function showError(message) {
             document.getElementById('country-container').innerHTML = `

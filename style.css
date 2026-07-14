@@ -433,3 +433,87 @@ footer {
   line-height: 1.2;
   margin: 1.5rem 0;
 }
+
+/* Legislación */
+.leg-section {
+  margin-top: .5rem;
+}
+
+.leg-table {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.leg-entry {
+  margin-bottom: 1rem;
+}
+
+.leg-entry-header {
+  display: flex;
+  align-items: flex-start;
+  gap: .35rem;
+  line-height: 1.4;
+}
+
+.leg-entry-header strong {
+  font-size: .8rem;
+  flex: 1;
+}
+
+.leg-entry-body {
+  font-size: .8rem;
+  line-height: 1.4;
+}
+
+.leg-entry-body .leg-alcance {
+  margin-bottom: .15rem;
+}
+
+.leg-entry-body .leg-estado {
+  color: inherit;
+  margin-bottom: 0;
+}
+
+.leg-badge {
+  display: inline-block;
+  font-size: .6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: .1rem .3rem;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: .15rem;
+}
+
+.leg-badge-verde { background: #d4edda; color: #155724; }
+.leg-badge-amarillo { background: #fff3cd; color: #856404; }
+.leg-badge-rojo { background: #f8d7da; color: #721c24; }
+.leg-badge-gris { background: #e2e3e5; color: #383d41; }
+.leg-badge-azul { background: #d1ecf1; color: #0c5460; }
+
+.leg-link {
+  font-size: .8rem;
+  color: indianred;
+  text-decoration: underline;
+}
+
+.leg-link:hover {
+  text-decoration: none;
+}
+
+.section-header {
+  font-size: .8rem;
+  display: block;
+  margin-bottom: 1rem;
+  border: 1px dotted #969696;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Ajuste para sidebar en index.html */
+.sidebar-content .leg-section {
+  padding: 0 .5rem;
+}

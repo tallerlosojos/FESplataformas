@@ -142,22 +142,8 @@
         let countriesData = [];
         let zones = new Set();
 
-        // Función para mostrar el contenido real del archivo
-        function debugFileContent(data) {
-            console.log("=== DEBUG INFO ===");
-            console.log("Longitud total:", data.length);
-            console.log("Primeros 500 caracteres:");
-            console.log(data.substring(0, 500));
-            console.log("Últimos 500 caracteres:");
-            console.log(data.substring(data.length - 500));
-            console.log("¿Contiene < ?", data.includes('<'));
-            console.log("¿Contiene HTML?", data.includes('<html') || data.includes('<!DOCTYPE'));
-            console.log("=== FIN DEBUG ===");
-        }
-
-        // Nueva función para parsear strings JSON de manera robusta
+        // Función para parsear strings JSON de manera robusta
         function parseJSONString(jsonString) {
-            console.log("Parseando JSON, primeros 200 chars:", jsonString.substring(0, 200));
 
             try {
                 // Limpieza básica
@@ -166,29 +152,17 @@
                     .replace(/[“”]/g, '"')       // Reemplazar comillas curvadas
                     .replace(/‘’/g, "'")         // Reemplazar apóstrofes curvados
 
-                console.log("JSON después de limpieza básica (primeros 200 chars):", cleaned.substring(0, 200));
-
                 // Intentar parsear directamente
                 return JSON.parse(cleaned);
             } catch (parseError) {
-                console.warn("Primer intento de parseo falló:", parseError.message);
 
                 // Intentar arreglar problemas comunes
                 try {
                     // Método alternativo: usar eval con seguridad
-                    console.log("Intentando evaluar como JavaScript...");
-
-                    // Crear un contexto seguro para eval
                     const jsonData = (new Function('return ' + jsonString + ';'))();
 
-                    console.log("✅ JSON evaluado exitosamente como JavaScript");
                     return jsonData;
                 } catch (evalError) {
-                    console.error("Error al evaluar como JS:", evalError);
-
-                    // Mostrar más información del error
-                    console.error("Posición del error en la cadena:", jsonString.substring(0, 100));
-
                     // Intentar un parseo manual simple para encontrar el problema
                     try {
                         // Buscar y reemplazar caracteres problemáticos
@@ -201,7 +175,6 @@
 
                         return JSON.parse(sanitized);
                     } catch (finalError) {
-                        console.error("Error final al parsear:", finalError);
                         return null;
                     }
                 }
@@ -209,28 +182,19 @@
         }
 
         // Cargar datos desde el archivo externo
-        console.log("Intentando cargar datos desde: ./data/FESplataformas_0.js");
         fetch('./data/FESplataformas_0.js')
             .then(response => {
-                console.log("Respuesta recibida, status:", response.status);
                 if (!response.ok) {
                     throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
                 }
                 return response.text();
             })
             .then(data => {
-                // Debuggear el contenido
-                debugFileContent(data);
-
                 // Verificar si el archivo es HTML accidentalmente
                 if (data.includes('<html') || data.includes('<!DOCTYPE')) {
-                    console.error("⚠️ El archivo parece ser HTML, no JS/JSON");
                     showError('El archivo cargado parece ser una página HTML. Verifica que estás cargando el archivo JS correcto.');
                     return;
                 }
-
-                console.log("Archivo cargado exitosamente. Longitud:", data.length, "caracteres");
-                console.log("Primeros 200 caracteres:", data.substring(0, 200));
 
                 // Intenta varios métodos para extraer el JSON
                 let jsonData;
@@ -239,20 +203,16 @@
                 const jsonMatch = data.match(/var json_FESplataformas_0\s*=\s*(\{[\s\S]*?\});/);
 
                 if (jsonMatch && jsonMatch[1]) {
-                    console.log("✅ JSON encontrado usando método 1 (patrón var)");
                     jsonData = parseJSONString(jsonMatch[1]);
                 }
                 // Método 2: Buscar solo el objeto JSON (más flexible)
                 else if (data.trim().startsWith('{') && data.trim().endsWith('}')) {
-                    console.log("✅ El archivo parece ser un objeto JSON directo");
                     jsonData = parseJSONString(data);
                 }
                 // Método 3: Buscar cualquier objeto JSON en el archivo
                 else {
-                    console.log("⚠️ Intentando método 3: buscar cualquier objeto JSON");
                     const allJsonMatches = data.match(/\{[\s\S]*?\}(?=\s*(?:;|$))/g);
                     if (allJsonMatches && allJsonMatches.length > 0) {
-                        console.log("Encontrados", allJsonMatches.length, "posibles objetos JSON");
                         // Tomar el más largo (probablemente el correcto)
                         const longestMatch = allJsonMatches.reduce((a, b) => a.length > b.length ? a : b);
                         jsonData = parseJSONString(longestMatch);
@@ -260,17 +220,13 @@
                 }
 
                 if (jsonData) {
-                    console.log("✅ Datos procesados correctamente");
-                    console.log("Número de países (features):", jsonData.features ? jsonData.features.length : "No tiene features");
                     processData(jsonData.features || []);
                     initializePage();
                 } else {
-                    console.error('❌ No se pudo extraer JSON del archivo');
                     showError('Formato de archivo incorrecto. Asegúrate de que el archivo contiene un objeto JSON válido.');
                 }
             })
             .catch(error => {
-                console.error('❌ Error al cargar el archivo:', error);
                 showError(`Error al cargar el archivo de datos: ${error.message}`);
             });
 
@@ -295,8 +251,6 @@
         }
 
         function processData(features) {
-            console.log("Procesando", features.length, "países...");
-
             countriesData = features.map((feature, index) => {
                 const props = feature.properties;
 
@@ -325,8 +279,6 @@
                 // Añadir zona al conjunto de zonas únicas
                 if (props.ZONA) {
                     zones.add(props.ZONA);
-                } else {
-                    console.warn(`País ${props.COUNTRY} no tiene ZONA definida`);
                 }
 
                 const countryData = {
@@ -343,19 +295,14 @@
                     allProperties: props
                 };
 
-                console.log(`Procesado: ${countryData.name} (${centralesCount} centrales)`);
                 return countryData;
             });
 
             // Ordenar los países alfabéticamente al cargar (A-Z)
             countriesData.sort((a, b) => a.name.localeCompare(b.name));
-
-            console.log("Procesamiento completado. Total países:", countriesData.length);
-            console.log("Zonas encontradas:", Array.from(zones));
         }
 
         function initializePage() {
-            console.log("Inicializando página...");
 
             // Establecer el año actual en el footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -375,8 +322,6 @@
                 zoneFilter.appendChild(option);
             });
 
-            console.log("Filtros de zona creados:", zones.size, "zonas");
-
             // Generar estadísticas por zona
             // generateZoneStats();
 
@@ -389,7 +334,6 @@
             document.getElementById('sort-filter').addEventListener('change', applyFilters);
             document.getElementById('reset-filters').addEventListener('click', resetFilters);
 
-            console.log("Página inicializada correctamente");
         }
 
         function generateZoneStats() {

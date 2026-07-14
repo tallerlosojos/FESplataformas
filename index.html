@@ -329,12 +329,6 @@
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js"
         crossorigin="anonymous"></script>
 
-    <!-- P5js -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/2.0.5/p5.min.js"
-        integrity="sha512-jOTg6ikYiHx1LvbSOucnvZi4shXbaovZ91+rfViIiUFLgAJK+k1oQtGEaLvDB8rsZwEfUksTgmhrxdvEDykuzQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- Código de inicialización  -->
     <script>
         (function () {
@@ -502,6 +496,30 @@
                 L.control.locate({ locateOptions: { maxZoom: 19 } }).addTo(map);
             }
 
+            // ---------- DATOS DE LEGISLACIÓN ----------
+            let legislacionData = null;
+
+            function renderLegislacionHTML(countryName) {
+                if (!legislacionData || !legislacionData[countryName] || legislacionData[countryName].length === 0) {
+                    return '<div class="leg-section"><h6 class="section-header">Legislaci\u00f3n</h6><p>No disponible</p></div>';
+                }
+                let html = '<div class="leg-section"><h6 class="section-header">Legislaci\u00f3n</h6><div class="leg-table">';
+                legislacionData[countryName].forEach(entry => {
+                    html += `
+                        <div class="leg-entry">
+                            <strong>${entry.tipo} ${entry.norma}</strong>
+                        </div>`;
+                });
+                html += '</div></div>';
+                return html;
+            }
+
+            // Cargar legislación
+            fetch('./data/legislacion.json')
+                .then(r => r.json())
+                .then(d => { legislacionData = d; })
+                .catch(() => { legislacionData = {}; });
+
             // ---------- FIX PARA ENLACES ROTOS / ESCAPADOS ----------
             function linkifySafe(value) {
                 if (value == null || value === '') return '';
@@ -579,6 +597,7 @@
                             <tr id='cell-zona'><td colspan="2">${linkifySafe(feature.properties['ZONA'])}</td></tr>
                             <tr id='cell-indicador'><td colspan="2">${linkifySafe(feature.properties['INDICADOR'])}</td></tr>
                             <tr id='cell-descripcion'><td colspan="2">${linkifySafe(feature.properties['DESCRIPCION'])}</td></tr>
+                            <tr class="section-header"><td colspan="2"><h6 class="section-header">Centrales Sindicales</h6></td></tr>
                             <tr id='cell-central1'><td colspan="2">${linkifySafe(feature.properties['CENTRAL1'])}</td></tr>
                             <tr id='cell-central2'><td colspan="2">${linkifySafe(feature.properties['CENTRAL2'])}</td></tr>
                             <tr id='cell-central3'><td colspan="2">${linkifySafe(feature.properties['CENTRAL3'])}</td></tr>
@@ -586,10 +605,7 @@
                             <tr id='cell-central5'><td colspan="2">${linkifySafe(feature.properties['CENTRAL5'])}</td></tr>
                             <tr id='cell-central6'><td colspan="2">${linkifySafe(feature.properties['CENTRAL6'])}</td></tr>
                             <tr id='cell-central7'><td colspan="2">${linkifySafe(feature.properties['CENTRAL7'])}</td></tr>
-                            <tr id='cell-legislacion'><td colspan="2">${linkifySafe(feature.properties['LEGISLACION'])}</td></tr>
-                            <tr id='cell-otros'><td colspan="2">${linkifySafe(feature.properties['OTROS'])}</td></tr>
-                             <tr id='cell-urlpais'><td colspan="2">${linkifySafe(feature.properties['URLPAIS'])}</td></tr>
-                        </table>
+                         </table>
                     `;
                     const content = removeEmptyRowsFromPopupContent(popupContent, feature);
 
@@ -621,7 +637,11 @@
                         const headerHtml = `<h1 class="sidebar-header">${linkifySafe(feature.properties['COUNTRY'] || 'Información')}<span class="sidebar-close"><i class="fa fa-caret-left" aria-hidden="true"></i></span></h1>`;
 
                         // Colocar contenido (respetando anchors ya creados)
-                        paneEl.innerHTML = headerHtml + '<div class="sidebar-content">' + content + '</div>';
+                        const legislacionHTML = renderLegislacionHTML(feature.properties['COUNTRY']);
+                        const repositorioLink = feature.properties['URLPAIS']
+                            ? '<div style="margin-top:1rem;text-align:right;">' + linkifySafe(feature.properties['URLPAIS']) + '</div>'
+                            : '';
+                        paneEl.innerHTML = headerHtml + '<div class="sidebar-content">' + content + legislacionHTML + repositorioLink + '</div>';
 
                         // Marcar el panel como activo y abrir el sidebar (quitamos "collapsed")
                         document.querySelectorAll('.sidebar-pane').forEach(p => p.classList.remove('active'));

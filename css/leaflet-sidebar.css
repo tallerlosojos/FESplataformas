@@ -317,28 +317,8 @@ table #cell-otros, table #cell-legislacion, table #cell-central1, table #cell-ce
 table #cell-otros, table #cell-legislacion, table #cell-central7{
 margin-bottom: 1.5rem;
 }
-table #cell-central1:before{
-content: "Centrales Sindicales";
-  font-size: 0.8rem;
-  display: inline-block;
-  margin-bottom: 1rem;
-  border: 1px dotted #969696;
-  padding: 0.5rem 1rem;
-  text-transform: uppercase;
-  font-weight: 600;
-}
 table #cell-entrevistas td:before{
   content: "Entrevistas ";
-  display: block;
-  font-size: 0.8rem;
-  margin-bottom: 1rem;
-  border: 1px dotted #969696;
-  padding: 0.5rem 1rem;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-table #cell-legislacion td:before{
-  content: "Legislación ";
   display: block;
   font-size: 0.8rem;
   margin-bottom: 1rem;
@@ -356,6 +336,18 @@ table #cell-otros td:before{
   padding: 0.5rem 1rem;
   text-transform: uppercase;
   font-weight: 600;
+}
+
+
+h6.section-header {
+  border: 1px dotted black;
+display: inline-block;
+  padding: 10px 20px;
+
+  margin-bottom: 30px;
+  font-size: .8rem;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 table #cell-urlpais{
 display: block;

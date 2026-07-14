@@ -1,9 +1,11 @@
 {
+  "name": "FESplataformas",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "live": "live-server"
+  },
   "dependencies": {
-    "live-server": "^1.2.2",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "live": "live-server"
-    }
+    "live-server": "^1.2.2"
   }
 }
