@@ -22,7 +22,7 @@
         <div class="grid-container">
             <div class="grid-x grid-padding-x align-middle">
                 <div class="cell auto">
-                    <h1 class="h3">Plataformas Sindicales</h1>
+                    <h1 class="h3">FES Plataformas</h1>
                     <!-- <p class="subheader">Detalles del país</p> -->
                 </div>
                 <div class="cell shrink">
@@ -64,47 +64,40 @@
         // Datos de legislación (se carga aparte)
         let legislacionData = null;
         
-        // Cargar datos del país
+        // Cargar datos del país y legislación en paralelo
         if (countryId) {
-            loadCountryData(countryId);
+            Promise.all([
+                fetch('./data/legislacion.json').then(r => r.json()).catch(() => ({})),
+                loadCountryDataRaw(countryId)
+            ]).then(([legData, countryFeature]) => {
+                legislacionData = legData;
+                countryFeature ? displayCountry(countryFeature) : showError('País no encontrado');
+            }).catch(() => showError('Error al cargar datos'));
         } else {
             showError('No se especificó un país para mostrar');
         }
         
-        // Cargar legislación en paralelo
-        fetch('./data/legislacion.json')
-            .then(r => r.json())
-            .then(d => { legislacionData = d; })
-            .catch(() => { legislacionData = {}; });
-        
-                function loadCountryData(countryId) {
-            
-            fetch('./data/FESplataformas_0.js')
+        function loadCountryDataRaw(countryId) {
+            return fetch('./data/FESplataformas_0.js')
                 .then(response => {
                     if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
                     return response.text();
                 })
                 .then(data => {
-                    // Extracción robusta del objeto JS
                     const jsonMatch = data.match(/var json_FESplataformas_0 = (\{[\s\S]*?\});/);
-                    
                     if (jsonMatch && jsonMatch[1]) {
                         try {
-                            // Usamos new Function para procesar el objeto JS de forma segura y directa
                             const jsonData = new Function(`return ${jsonMatch[1]}`)();
-                            
-                            const countryFeature = jsonData.features.find(feature => {
+                            return jsonData.features.find(feature => {
                                 const name = feature.properties.COUNTRY;
                                 return name && name.toLowerCase().replace(/\s+/g, '-') === countryId;
                             });
-                            
-                            countryFeature ? displayCountry(countryFeature) : showError('País no encontrado');
                         } catch (e) {
-                            showError('Error al procesar la base de datos');
+                            throw new Error('Error al procesar la base de datos');
                         }
                     }
-                })
-                .catch(error => showError('Error al cargar archivo: ' + error.message));
+                    throw new Error('Formato de datos no reconocido');
+                });
         }
         
         function displayCountry(feature) {

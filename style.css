@@ -377,6 +377,7 @@ footer {
 }
 .page-viewer .viewer-header{
   margin-bottom: 2rem;
+  background: silver;
 }
 .page-viewer .viewer-description .callout{
   background: none;
