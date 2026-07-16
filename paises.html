@@ -61,7 +61,7 @@
                         <li><b>Co3 – Cono Sur-Sur</b>: Uruguay, Bolivia, Perú, Argentina y Chile.</li>
                     </ol>
 
-                    <p>En total fueron <b>22 países</b> los investigados, los cuales contaban con un total de 76 centrales
+                    <p>En total fueron <b>22 países</b> los investigados, los cuales contaban con un total de <b>92 centrales</b>
                         sindicales activas.
                     </p>
                 </div>
@@ -73,13 +73,13 @@
         <section class="callout callout-filter margin-bottom-2">
             <h4><i class="fas fa-filter"></i> Filtros de Búsqueda</h4>
             <div class="grid-x grid-margin-x">
-                <div class="cell medium-4">
+                <div class="cell medium-3">
                     <label for="zone-filter"><i class="fas fa-globe-americas"></i> Zona Geográfica</label>
                     <select id="zone-filter" class="filter-select">
                         <option value="all">Todas las zonas</option>
                     </select>
                 </div>
-                <div class="cell medium-4">
+                <div class="cell medium-3">
                     <label for="central-filter"><i class="fas fa-users"></i> Centrales por país</label>
                     <select id="central-filter" class="filter-select">
                         <option value="all">Cualquier número de centrales</option>
@@ -89,13 +89,25 @@
                         <option value="4">4 o más centrales</option>
                     </select>
                 </div>
-                <div class="cell medium-4">
+                <div class="cell medium-3">
+                    <label for="legislacion-filter"><i class="fas fa-gavel"></i> Legislación por país</label>
+                    <select id="legislacion-filter" class="filter-select">
+                        <option value="all">Cualquier cantidad</option>
+                        <option value="0">Sin legislación</option>
+                        <option value="1">1 ley</option>
+                        <option value="2">2 leyes</option>
+                        <option value="3">3 o más leyes</option>
+                    </select>
+                </div>
+                <div class="cell medium-3">
                     <label for="sort-filter"><i class="fas fa-sort-amount-down"></i> Ordenar por</label>
                     <select id="sort-filter" class="filter-select">
                         <option value="name-asc" selected>Nombre (A-Z)</option>
                         <option value="name-desc">Nombre (Z-A)</option>
                         <option value="centrales-desc">Más centrales primero</option>
                         <option value="centrales-asc">Menos centrales primero</option>
+                        <option value="legislacion-desc">Más leyes primero</option>
+                        <option value="legislacion-asc">Menos leyes primero</option>
                     </select>
                 </div>
             </div>
@@ -143,11 +155,13 @@
         let zones = new Set();
 
         // Cargar datos desde archivos separados
+        let legislacionData = {};
         Promise.all([
             fetch('./data/paises-geo.json').then(r => r.json()),
-            fetch('./data/paises-props.json').then(r => r.json())
-        ]).then(([geo, props]) => {
-            // Combinar geometrías con propiedades
+            fetch('./data/paises-props.json').then(r => r.json()),
+            fetch('./data/legislacion.json').then(r => r.json()).catch(() => ({}))
+        ]).then(([geo, props, legis]) => {
+            legislacionData = legis;
             const jsonData = {
                 ...geo,
                 features: geo.features.map(f => ({
@@ -155,7 +169,7 @@
                     properties: { ...f.properties, ...props[f.properties.COUNTRY] }
                 }))
             };
-            processData(jsonData.features || []);
+            processData(jsonData.features || [], legislacionData);
             initializePage();
         })
             .catch(error => {
@@ -181,9 +195,10 @@
             document.getElementById('total-countries').innerHTML = `<strong>Error</strong>`;
         }
 
-        function processData(features) {
+        function processData(features, legislacionData) {
             countriesData = features.map((feature, index) => {
                 const props = feature.properties;
+                const countryName = props.COUNTRY || '';
 
                 // Contar centrales no nulas
                 const centralesCount = [
@@ -207,18 +222,23 @@
                     props.CENTRAL7
                 ].filter(central => central && central.trim() !== '');
 
+                // Contar legislaciones
+                const countryLegis = legislacionData[countryName];
+                const legislacionCount = countryLegis ? countryLegis.length : 0;
+
                 // Añadir zona al conjunto de zonas únicas
                 if (props.ZONA) {
                     zones.add(props.ZONA);
                 }
 
                 const countryData = {
-                    id: props.COUNTRY ? props.COUNTRY.toLowerCase().replace(/\s+/g, '-') : `pais-${index}`,
-                    name: props.COUNTRY || `País ${index + 1}`,
+                    id: countryName.toLowerCase().replace(/\s+/g, '-'),
+                    name: countryName || `País ${index + 1}`,
                     zone: props.ZONA || 'Sin zona',
                     description: props.DESCRIPCION || '',
                     centralesCount: centralesCount,
                     centralesList: centralesList,
+                    legislacionCount: legislacionCount,
                     entrevistas: props.ENTREVISTAS || '',
                     legislacion: props.LEGISLACION || '',
                     otros: props.OTROS || '',
@@ -262,6 +282,7 @@
             // Añadir event listeners a los filtros
             document.getElementById('zone-filter').addEventListener('change', applyFilters);
             document.getElementById('central-filter').addEventListener('change', applyFilters);
+            document.getElementById('legislacion-filter').addEventListener('change', applyFilters);
             document.getElementById('sort-filter').addEventListener('change', applyFilters);
             document.getElementById('reset-filters').addEventListener('click', resetFilters);
 
@@ -276,18 +297,21 @@
                 if (!statsByZone[country.zone]) {
                     statsByZone[country.zone] = {
                         count: 0,
-                        totalCentrales: 0
+                        totalCentrales: 0,
+                        totalLegislacion: 0
                     };
                 }
 
                 statsByZone[country.zone].count++;
                 statsByZone[country.zone].totalCentrales += country.centralesCount;
+                statsByZone[country.zone].totalLegislacion += country.legislacionCount;
             });
 
             // Generar HTML de estadísticas
             let statsHTML = '';
             Object.keys(statsByZone).forEach(zone => {
                 const avgCentrales = (statsByZone[zone].totalCentrales / statsByZone[zone].count).toFixed(1);
+                const avgLegislacion = (statsByZone[zone].totalLegislacion / statsByZone[zone].count).toFixed(1);
 
                 statsHTML += `
                     <div class="cell medium-4">
@@ -296,7 +320,8 @@
                             <p class="stat-label">Países en</p>
                             <p class="stat-zone"><strong>${zone}</strong></p>
                             <p class="small">
-                                <i class="fas fa-users"></i> ${avgCentrales} centrales/promedio
+                                <i class="fas fa-users"></i> ${avgCentrales} centrales/promedio<br>
+                                <i class="fas fa-gavel"></i> ${avgLegislacion} leyes/promedio
                             </p>
                         </div>
                     </div>
@@ -309,6 +334,7 @@
         function applyFilters() {
             const selectedZone = document.getElementById('zone-filter').value;
             const selectedCentralFilter = document.getElementById('central-filter').value;
+            const selectedLegislacionFilter = document.getElementById('legislacion-filter').value;
             const sortOption = document.getElementById('sort-filter').value;
 
             // Filtrar países
@@ -331,6 +357,19 @@
                     }
                 }
 
+                // Filtrar por cantidad de legislación
+                if (selectedLegislacionFilter !== 'all') {
+                    const legisFilterValue = parseInt(selectedLegislacionFilter);
+
+                    if (legisFilterValue === 3) {
+                        // 3 o más leyes
+                        if (country.legislacionCount < 3) return false;
+                    } else {
+                        // Número exacto de leyes
+                        if (country.legislacionCount !== legisFilterValue) return false;
+                    }
+                }
+
                 return true;
             });
 
@@ -345,6 +384,10 @@
                         return b.centralesCount - a.centralesCount;
                     case 'centrales-asc':
                         return a.centralesCount - b.centralesCount;
+                    case 'legislacion-desc':
+                        return b.legislacionCount - a.legislacionCount;
+                    case 'legislacion-asc':
+                        return a.legislacionCount - b.legislacionCount;
                     default:
                         return a.name.localeCompare(b.name); // Orden alfabético por defecto
                 }
@@ -415,9 +458,15 @@
                                     <i class="fas fa-users"></i>
                                     <strong>${country.centralesCount}</strong> central(es) sindical(es)
                                 </p>
+                                
                                 <ul class="no-bullet paises-centrales">
                                     ${centralesHTML}
                                 </ul>
+                                <hr/>
+                                <p class="card-centrales-nro">
+                                    <i class="fas fa-gavel"></i>
+                                    <strong>${country.legislacionCount}</strong> ley(es) registrada(s)
+                                </p>
                             </div>
                             <div class="card-section card-paises-footer card-section-footer">
                                 <div class="button-group ">
@@ -437,6 +486,7 @@
         function resetFilters() {
             document.getElementById('zone-filter').value = 'all';
             document.getElementById('central-filter').value = 'all';
+            document.getElementById('legislacion-filter').value = 'all';
             document.getElementById('sort-filter').value = 'name-asc'; // Restablecer a orden alfabético A-Z
             applyFilters();
         }
