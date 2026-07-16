@@ -311,7 +311,7 @@
     <script src="js/leaflet.photon.js"></script>
 
     <!-- Datos (locales) -->
-    <script src="data/FESplataformas_0.js"></script>
+    <script src="data/load-paises.js"></script>
 
     <!-- jQuery antes de Foundation (Foundation usa jQuery) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -506,8 +506,8 @@
                 return tmp.innerHTML;
             }
 
-            // Manejo y renderizado de la capa geojson (si existe la variable generada por qgis2web)
-            if (typeof json_FESplataformas_0 !== 'undefined') {
+            // Manejo y renderizado de la capa geojson (cuando se carguen los datos)
+            window.addEventListener('paisesLoaded', function initPaises() {
                 // Crear pane específico para control de z-index y mezcla
                 map.createPane('pane_FESplataformas_0');
                 const pane = map.getPane('pane_FESplataformas_0');
@@ -689,7 +689,9 @@
 
                 // Ajustar vista a bounds de capas añadidas
                 setBounds();
-            }
+
+                window.removeEventListener('paisesLoaded', initPaises);
+            });
 
             // Inicializar Foundation (si jQuery + Foundation están cargados)
             if (window.jQuery && typeof jQuery.fn.foundation === 'function') {

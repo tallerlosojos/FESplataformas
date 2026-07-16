@@ -78,26 +78,17 @@
         }
         
         function loadCountryDataRaw(countryId) {
-            return fetch('./data/FESplataformas_0.js')
-                .then(response => {
-                    if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
-                    return response.text();
-                })
-                .then(data => {
-                    const jsonMatch = data.match(/var json_FESplataformas_0 = (\{[\s\S]*?\});/);
-                    if (jsonMatch && jsonMatch[1]) {
-                        try {
-                            const jsonData = new Function(`return ${jsonMatch[1]}`)();
-                            return jsonData.features.find(feature => {
-                                const name = feature.properties.COUNTRY;
-                                return name && name.toLowerCase().replace(/\s+/g, '-') === countryId;
-                            });
-                        } catch (e) {
-                            throw new Error('Error al procesar la base de datos');
-                        }
-                    }
-                    throw new Error('Formato de datos no reconocido');
+            return Promise.all([
+                fetch('./data/paises-geo.json').then(r => r.json()),
+                fetch('./data/paises-props.json').then(r => r.json())
+            ]).then(([geo, props]) => {
+                const feature = geo.features.find(f => {
+                    const name = f.properties.COUNTRY;
+                    return name && name.toLowerCase().replace(/\s+/g, '-') === countryId;
                 });
+                if (!feature) return null;
+                return { ...feature, properties: { ...feature.properties, ...props[feature.properties.COUNTRY] } };
+            });
         }
         
         function displayCountry(feature) {

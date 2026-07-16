@@ -142,92 +142,24 @@
         let countriesData = [];
         let zones = new Set();
 
-        // Función para parsear strings JSON de manera robusta
-        function parseJSONString(jsonString) {
-
-            try {
-                // Limpieza básica
-                let cleaned = jsonString
-                    .replace(/[ \t\r\n]+/g, ' ') // Normalizar espacios
-                    .replace(/[“”]/g, '"')       // Reemplazar comillas curvadas
-                    .replace(/‘’/g, "'")         // Reemplazar apóstrofes curvados
-
-                // Intentar parsear directamente
-                return JSON.parse(cleaned);
-            } catch (parseError) {
-
-                // Intentar arreglar problemas comunes
-                try {
-                    // Método alternativo: usar eval con seguridad
-                    const jsonData = (new Function('return ' + jsonString + ';'))();
-
-                    return jsonData;
-                } catch (evalError) {
-                    // Intentar un parseo manual simple para encontrar el problema
-                    try {
-                        // Buscar y reemplazar caracteres problemáticos
-                        const sanitized = jsonString
-                            .replace(/\\'/g, "'")
-                            .replace(/\\"/g, '"')
-                            .replace(/\\n/g, '\n')
-                            .replace(/\\r/g, '\r')
-                            .replace(/\\t/g, '\t');
-
-                        return JSON.parse(sanitized);
-                    } catch (finalError) {
-                        return null;
-                    }
-                }
-            }
-        }
-
-        // Cargar datos desde el archivo externo
-        fetch('./data/FESplataformas_0.js')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                // Verificar si el archivo es HTML accidentalmente
-                if (data.includes('<html') || data.includes('<!DOCTYPE')) {
-                    showError('El archivo cargado parece ser una página HTML. Verifica que estás cargando el archivo JS correcto.');
-                    return;
-                }
-
-                // Intenta varios métodos para extraer el JSON
-                let jsonData;
-
-                // Método 1: Buscar el patrón var json_FESplataformas_0 = {...}
-                const jsonMatch = data.match(/var json_FESplataformas_0\s*=\s*(\{[\s\S]*?\});/);
-
-                if (jsonMatch && jsonMatch[1]) {
-                    jsonData = parseJSONString(jsonMatch[1]);
-                }
-                // Método 2: Buscar solo el objeto JSON (más flexible)
-                else if (data.trim().startsWith('{') && data.trim().endsWith('}')) {
-                    jsonData = parseJSONString(data);
-                }
-                // Método 3: Buscar cualquier objeto JSON en el archivo
-                else {
-                    const allJsonMatches = data.match(/\{[\s\S]*?\}(?=\s*(?:;|$))/g);
-                    if (allJsonMatches && allJsonMatches.length > 0) {
-                        // Tomar el más largo (probablemente el correcto)
-                        const longestMatch = allJsonMatches.reduce((a, b) => a.length > b.length ? a : b);
-                        jsonData = parseJSONString(longestMatch);
-                    }
-                }
-
-                if (jsonData) {
-                    processData(jsonData.features || []);
-                    initializePage();
-                } else {
-                    showError('Formato de archivo incorrecto. Asegúrate de que el archivo contiene un objeto JSON válido.');
-                }
-            })
+        // Cargar datos desde archivos separados
+        Promise.all([
+            fetch('./data/paises-geo.json').then(r => r.json()),
+            fetch('./data/paises-props.json').then(r => r.json())
+        ]).then(([geo, props]) => {
+            // Combinar geometrías con propiedades
+            const jsonData = {
+                ...geo,
+                features: geo.features.map(f => ({
+                    ...f,
+                    properties: { ...f.properties, ...props[f.properties.COUNTRY] }
+                }))
+            };
+            processData(jsonData.features || []);
+            initializePage();
+        })
             .catch(error => {
-                showError(`Error al cargar el archivo de datos: ${error.message}`);
+                showError(`Error al cargar datos: ${error.message}`);
             });
 
         // Función para mostrar errores en la página
@@ -239,10 +171,9 @@
                         <p>${message}</p>
                         <p class="small">
                             <strong>Solución alternativa:</strong><br>
-                            1. Abre el archivo FESplataformas_0.js en un editor de texto<br>
-                            2. Guarda como UTF-8 sin BOM<br>
-                            3. Reemplaza todas las comillas curvadas por rectas<br>
-                            4. Verifica que el archivo no sea HTML
+                            1. Verifica que los archivos data/paises-geo.json y data/paises-props.json existan<br>
+                            2. Asegúrate de que ambos sean JSON válidos (sin errores de sintaxis)<br>
+                            3. Comprueba que los nombres de país coincidan en ambos archivos
                         </p>
                     </div>
                 </div>

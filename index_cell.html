@@ -164,7 +164,7 @@
     <script src="js/leaflet.photon.js"></script>
 
     <!-- Datos y control del sidebar (locales) -->
-    <script src="data/FESplataformas_0.js"></script>
+    <script src="data/load-paises.js"></script>
     <script src="js/leaflet-sidebar.js"></script>
 
     <!-- jQuery antes de Foundation (Foundation usa jQuery) -->
@@ -269,9 +269,10 @@
             }
         }
 
-        // Llama a la función cuando el DOM esté completamente cargado
-        document.addEventListener('DOMContentLoaded', (event) => {
+        // Llama a la función cuando el DOM esté cargado y los datos disponibles
+        window.addEventListener('paisesLoaded', function initCell() {
             displayCountryNames();
+            window.removeEventListener('paisesLoaded', initCell);
         });
 
 

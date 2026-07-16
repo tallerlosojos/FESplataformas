@@ -345,7 +345,7 @@
       "enlace2": ""
     }
   ],
-  "México": [
+    "México": [
     {
       "enlace": "https://dof.gob.mx/nota_detalle.php?codigo=5746132&fecha=24%2F12%2F2024",
       "norma": "Decreto DOF del 24/12/2024",
@@ -361,6 +361,62 @@
       "estado": "Publicadas y aplicadas en fase piloto; resultados en evaluación oficial.",
       "alcance": "Reglas para la incorporación de personas trabajadoras de plataformas al seguro social.",
       "enlace2": "https://www.imss.gob.mx/sites/all/statics/plataformas/downloads/Reglas_IMSS.pdf"
+    }
+  ],
+  "Puerto Rico": [
+    {
+      "enlace": "https://bvirtualogp.pr.gov/ogp/Bvirtual/leyesreferencia/PDF/2/0075-2017.pdf",
+      "norma": "Ley 75-2017",
+      "tipo": "Ley territorial sectorial",
+      "estado": "Sancionada y vigente",
+      "alcance": "Regula las empresas y conductores de plataformas de transporte, pero no reconoce una relación laboral.",
+      "enlace2": "https://bvirtualogp.pr.gov/ogp/Bvirtual/leyesreferencia/PDF/DTOP/109-1962.pdf"
+    },
+    {
+      "enlace": "https://sutra.oslpr.org/legisladores/M-927-AL",
+      "norma": "P. de la C. 906",
+      "tipo": "Proyecto de Ley",
+      "estado": "Radicado el 7 de octubre de 2025; en trámite y sin sanción localizada.",
+      "alcance": "Proyecto de 2025 para proteger a trabajadores gig en Puerto Rico; aún no ha sido aprobado y volvió a comisión en abril de 2026.",
+      "enlace2": ""
+    }
+  ],
+  "Cuba": [
+    {
+      "enlace": "https://www.gacetaoficial.gob.cu/es/decreto-ley-90-de-2024-de-consejo-de-estado",
+      "norma": "Decretos-Ley 90/2024 y 92/2024",
+      "tipo": "Decretos-ley generales",
+      "estado": "Vigentes como marco general; el Decreto-Ley 90/2024 fue modificado por el Decreto-Ley 113/2025.",
+      "alcance": "Regulan el trabajo por cuenta propia y su seguridad social, pero no específicamente el trabajo en plataformas digitales.",
+      "enlace2": ""
+    },
+    {
+      "enlace": "https://www.gacetaoficial.gob.cu/es/resolucion-140-de-2024-de-ministerio-del-transporte",
+      "norma": "Resoluci\u00f3n 140/2024 del Ministerio del Transporte",
+      "tipo": "Resoluci\u00f3n sectorial de transporte (NO DE PLATAFORMA)",
+      "estado": "Vigente como regulaci\u00f3n sectorial de transporte; no regula espec\u00edficamente el trabajo en plataformas.",
+      "alcance": "Regula las licencias de transporte, pero no espec\u00edficamente las plataformas digitales.",
+      "enlace2": "https://www.mitrans.gob.cu/noticias/lnstrucci\u00f3n-no-i-para-el-otorgamiento-de-licencia-de-operaci\u00f3n-de-transporte-las-personas"
+    }
+  ],
+  "Belice": [
+    {
+      "enlace": "https://www.ruraltransformation.gov.bz/docs/35/Cap_230_Motor_Vehicles_and_Road_Traffic_Act.pdf",
+      "norma": "Motor Vehicles and Road Traffic Act, Cap. 230",
+      "tipo": "Ley general de transporte (NO DE PLATAFORMA)",
+      "estado": "Marco general vigente, con modificaciones posteriores; no se localiz\u00f3 una regulaci\u00f3n espec\u00edfica de plataformas.",
+      "alcance": "Regula el transporte remunerado, pero no espec\u00edficamente las plataformas digitales ni la relaci\u00f3n laboral con los conductores.",
+      "enlace2": ""
+    }
+  ],
+  "Hait\u00ed": [
+    {
+      "enlace": "https://natlex.ilo.org/dyn/natlex2/natlex2/files/download/135/HTI-135.pdf",
+      "norma": "Sin norma espec\u00edfica localizada; marco general: Code du travail",
+      "tipo": "B\u00fasqueda de registro",
+      "estado": "No se localiz\u00f3 una ley o proyecto oficial espec\u00edfico en la revisi\u00f3n realizada.",
+      "alcance": "El C\u00f3digo del Trabajo sirve como marco general, pero no regula espec\u00edficamente el trabajo en plataformas digitales.",
+      "enlace2": ""
     }
   ]
 }
